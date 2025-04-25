@@ -1,0 +1,1947 @@
+@ =============================================================================
+@ Library Name : Extension Pack HP
+@ Author       : Cristiano Fraga G. Nunes
+@ Version      : 1.0
+@ Date         : 16/04/2025
+@ Language     : HP UserRPL (HP 49 series calculators)
+@ Encoding     : RPL character set (no translation)
+@ Description  : Extension Pack HP is a library developed for HP 49 series
+@ calculators, including the HP 50g, HP 49g+, HP 49g, and HP 48GII. It brings
+@ features commonly found in other calculators to the HP 49 series, helping to
+@ fill functional gaps left by the original firmware.
+@ =============================================================================
+
+@ -----------------------------------------------------------------------------
+@ How to Compile and Test the Library
+@ -----------------------------------------------------------------------------
+@ 1. Enable RPL Mode.
+@ 2. Attach the development library using the command: 256 ATTACH
+@ 3. Place this directory in the calculator.
+@ 4. Change to this new directory.
+@ 5. Create the library using the command: CRLIB
+@ 6. The library will now be on the stack.
+@ 7. Store it in port 0 (IRAM) using: 0 STO
+@
+@ To install the library permanently, store it in port 2 (FLASH).
+
+@ -----------------------------------------------------------------------------
+@ HPUserEdit metadata
+@ -----------------------------------------------------------------------------
+@ The following metadata is used by the HPUserEdit to store the object in the
+@ calculator.
+@
+@ %NAME%=MYLIB
+
+@ -----------------------------------------------------------------------------
+@ Directory Definition
+@ -----------------------------------------------------------------------------
+@ This is the directory object containing all variables needed to build the
+@ library.
+DIR
+
+  @ ---------------------------------------------------------------------------
+  @ #XXX Special variables
+  @ These variables are used for CRLIB command for building the library.
+  @ ---------------------------------------------------------------------------
+
+  @ The $ROMID variable must contain the library number or your library.
+  @ This number must be in the range 769 to 1791.
+  @ # NOTE Variable: $ROMID
+  $ROMID 1723
+
+  @ # NOTE Variable: $CONFIG
+  $CONFIG 1
+
+  @ The $TITLE variable must contain a character string defining the title of
+  @ the library. This string must be less than 256 characters long. The first
+  @ five characters will be used for the name that is shown in the library
+  @ menu.
+  @ # NOTE Variable: $TITLE
+  $TITLE "Extension Pack HP v1.0"
+
+  @ The $VISIBLE variable contains a list of all the variables in the current
+  @ directory that you want to have visible in the library menu.
+  @ # NOTE Variable: $VISIBLE
+  $VISIBLE {
+    EXTPK
+    RESET
+    RMODE
+  }
+
+  @ The $HIDDEN variable contains a list of all the variables in the current
+  @ directory that you want to have invisible in the library. They are
+  @ generally subprograms of your application.
+  @ # NOTE Variable: $HIDDEN
+  $HIDDEN {
+    AppFinanceDepreciationDB
+    AppFinanceDepreciationSL
+    AppFinanceDepreciationSOYD
+    AppFinanceIRR
+    AppFinanceNPV
+    AppMenuCombinatorics
+    AppMenuEquations
+    AppMenuFinance
+    AppMenuLinearAlgebra
+    AppMenuProgram
+    AppStatDistContBeta
+    AppStatDistContCauchy
+    AppStatDistContChi
+    AppStatDistContExponential
+    AppStatDistContFDistribution
+    AppStatDistContGamma
+    AppStatDistContNormal
+    AppStatDistContTStudent
+    AppStatDistContUniform
+    AppStatDistContWeibull
+    AppStatDistDiscBernoulli
+    AppStatDistDiscBinomial
+    AppStatDistDiscBinomialNeg
+    AppStatDistDiscGeometric
+    AppStatDistDiscHipergeometric
+    AppStatDistDiscPoisson
+    AppStatDistDiscUniform
+    AppStatDistInvBinomial
+    AppStatDistInvCauchy
+    AppStatDistInvChi
+    AppStatDistInvExponential
+    AppStatDistInvFDistribution
+    AppStatDistInvNormal
+    AppStatDistInvPoisson
+    AppStatDistInvTStudent
+    AppStatDistInvUniform
+    AppStatDistInvWeibull
+    AppTimeDateAdd
+    AppTimeDateDifference
+    ChooseFinanceDepreciation
+    ChooseFinanceMenu
+    ChooseMainMenu
+    ChooseShortcutMenus
+    ChooseStatDist
+    ChooseStatDistCont
+    ChooseStatDistDisc
+    ChooseStatDistInv
+    ChooseSystemTools
+    ChooseTimeMenu
+    ExtProgram
+    UtilDateAddDate
+    UtilDateAddYear
+    UtilDateFromStack
+    UtilDateToStack
+    UtilDateToStr
+    UtilFactoryReset
+    UtilFactoryResetDefault
+    UtilFactoryResetRpn
+    UtilGuiChoose
+    UtilGuiInform
+    UtilPurgeHomeFiles
+    UtilValidateLessEqual
+    UtilValidateRange
+  }
+
+  @ The $EXTPRG variable contains the name of the extension program of the
+  @ library. This program must be either a visible or an hidden object of the
+  @ library. This can be used to customize built-in menus with your own
+  @ functions, as if they were part of the system. The calculator does not
+  @ provide every possible function in every area, but they let you customize
+  @ the built in menu in order to add your functions as if they were built in.
+  @ # NOTE Variable: $EXTPRG
+  $EXTPRG 'ExtProgram'
+
+  ExtProgram ´
+    @ #NOTE Function: ExtProgram
+    @ This is the Extension Program of the library.
+
+    @ The Extension Program is executed automatically
+    @ each time a system menu (e.g., statistics, finance) is displayed.
+    @
+    @ Example:
+    @ When you call the "APPS menu", the calculator put on the stack the list
+    @ of this menu:
+    @ {
+    @   { "1. Plot functions..." ´ Action ª }
+    @   { "2. I/O functions..." ´ Action ª }
+    @    ...
+    @ } 0
+    @ The last number 0 is the "message number".
+    @
+    @ Each "message number" has a specific meaning as described below:
+    @ 0 APPS menu
+    @ 1 Main Statistics menu
+    @ 2 Hypothesis statistics menu
+    @ 3 Confidence interval statistics menu
+    @ 4 Finance menu
+    @ 5 Numeric solver menu
+    @ 6 Time menu
+
+    @ These commented commands bellow dump the stack to help debug.
+    @DUP
+    @'ExNum' STO
+    @SWAP
+    @DUP
+    @'ExLst' STO
+    @SWAP
+    @KILL
+
+    DUP R~SB
+
+    ç Opt
+    ´
+      CASE
+
+        @ Add a new menu entry if the "APPS menu" is active.
+        Opt 0. == THEN
+          SWAP
+
+          DUP { "" } + SIZE
+          "System tools" + ´ ChooseSystemTools ª
+          2 çLIST 1 çLIST +
+
+          DUP { "" } + SIZE
+          "Shortcut menus" + ´ ChooseShortcutMenus ª
+          2 çLIST 1 çLIST +
+
+          SWAP
+        END
+
+        @ Add a new menu entry if the "Main Statistics menu" is active.
+        Opt 1. == THEN
+          SWAP
+
+          DUP { "" } + SIZE
+          "Prob. distributions" + ´ ChooseStatDist ª
+          2 çLIST 1 çLIST +
+
+          SWAP
+        END
+
+        @ Add Finance functions if "Finance menu" is active.
+        Opt 4. == THEN
+          ""
+          {
+            { "1.Time Value of Money" .0 }
+            { "2.Net Present Value" ´ AppFinanceNPV ª }
+            { "3.Int. Rate of Return" ´ AppFinanceIRR ª }
+            { "3.Depreciation methods" ´ ChooseFinanceDepreciation ª }
+          }
+          1
+          CHOOSE
+
+          @ Exit if the user presses "Cancel".
+          NOT IF THEN
+            2 DROPN KILL
+          END
+
+          DUP
+          TYPE 0. == IF THEN
+            @ If is selected "1.Time Value of Money",
+            @ clear temp data on the stack and continue.
+            DROP
+          ELSE
+            @ Otherwise, evaluate the selected program.
+            3 ROLLD 2 DROPN
+            EVAL
+            KILL
+          END
+
+        END
+
+        @ Add a new menu entry if the "Time menu" is active.
+        Opt 6. == THEN
+          SWAP
+
+          DUP { "" } + SIZE
+          "Date add/subtract" + ´ AppTimeDateAdd ª
+          2 çLIST 1 çLIST +
+
+          DUP { "" } + SIZE
+          "Date difference" + ´ AppTimeDateDifference ª
+          2 çLIST 1 çLIST +
+
+          SWAP
+        END
+
+      END
+    ª
+  ª
+
+  @ ---------------------------------------------------------------------------
+  @ #XXX Choose menus
+  @ These functions are used to display custom menus.
+  @ ---------------------------------------------------------------------------
+
+  ChooseMainMenu ´
+    @ #NOTE Choose: ChooseMainMenu
+    @ Displays a unified menu with all features provided by the Extension Pack
+    @ HP, offering a convenient shortcut for quick access.
+
+    "Extension Pack HP"
+    {
+      { "1.Finance" 1. }
+      { "2.Time" 2. }
+      { "3.Prob. distributions" 3. }
+      { "4.System tools" 4. }
+      { "5.Shortcut menus" 5. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN ChooseFinanceMenu END
+        Opt 2. == THEN ChooseTimeMenu END
+        Opt 3. == THEN ChooseStatDist END
+        Opt 4. == THEN ChooseSystemTools END
+        Opt 5. == THEN ChooseShortcutMenus END
+      END
+    ª
+  ª
+
+  ChooseFinanceDepreciation ´
+    @ #NOTE Choose: ChooseFinanceDepreciation
+
+    "Depreciation methods"
+    {
+      { "1.Straight-Line" 1. }
+      { "2.Sum-of-Years-Digits" 2. }
+      { "3.Declining-Balance" 3. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppFinanceDepreciationSL END
+        Opt 2. == THEN AppFinanceDepreciationSOYD END
+        Opt 3. == THEN AppFinanceDepreciationDB END
+      END
+    ª
+  ª
+
+  ChooseFinanceMenu ´
+    @ #NOTE Choose: ChooseFinanceMenu
+
+    "Finance"
+    {
+      { "1.Net Present Value" 1. }
+      { "2.Int. Rate of Return" 2. }
+      { "3.Depreciation methods" 3. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppFinanceNPV END
+        Opt 2. == THEN AppFinanceIRR END
+        Opt 3. == THEN ChooseFinanceDepreciation END
+      END
+    ª
+  ª
+
+  ChooseTimeMenu ´
+    @ #NOTE Choose: ChooseTimeMenu
+
+    "Time"
+    {
+      { "1.Date add/subtract" 1. }
+      { "2.Date difference" 2. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppTimeDateAdd END
+        Opt 2. == THEN AppTimeDateDifference END
+      END
+    ª
+  ª
+
+  ChooseStatDist ´
+    @ #NOTE Choose: ChooseStatDist
+
+    "Prob. distributions"
+    {
+      { "1.Discrete" 1. }
+      { "2.Continuous" 2. }
+      { "3.Inverse" 3. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN ChooseStatDistDisc END
+        Opt 2. == THEN ChooseStatDistCont END
+        Opt 3. == THEN ChooseStatDistInv END
+      END
+    ª
+  ª
+
+  ChooseStatDistDisc ´
+    @ #NOTE Choose: ChooseStatDistDisc
+
+    "Discrete distributions"
+    {
+      { "1.Binomial" 1. }
+      { "2.Poisson" 2. }
+      { "3.Bernoulli" 3. }
+      { "4.Uniform" 4. }
+      { "5.Neg. Binomial" 5. }
+      { "6.Geometric" 6. }
+      { "7.Hipergeometric" 7. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppStatDistDiscBinomial END
+        Opt 2. == THEN AppStatDistDiscPoisson END
+        Opt 3. == THEN AppStatDistDiscBernoulli END
+        Opt 4. == THEN AppStatDistDiscUniform END
+        Opt 5. == THEN AppStatDistDiscBinomialNeg END
+        Opt 6. == THEN AppStatDistDiscGeometric END
+        Opt 7. == THEN AppStatDistDiscHipergeometric END
+      END
+    ª
+  ª
+
+  ChooseStatDistCont ´
+    @ #NOTE Choose: ChooseStatDistCont
+
+    "Continuous distributions"
+    {
+      { "1.Normal" 1. }
+      { "2.T-Student" 2. }
+      { "3.Chi≤ (Pearson)" 3. }
+      { "4.Exponential" 4. }
+      { "5.Uniform" 5. }
+      { "6.Gamma" 6. }
+      { "7.Beta" 7. }
+      { "8.Weibull" 8. }
+      { "9.Cauchy-Lorentz" 9. }
+      { "10.F-distribution" 10. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppStatDistContNormal END
+        Opt 2. == THEN AppStatDistContTStudent END
+        Opt 3. == THEN AppStatDistContChi END
+        Opt 4. == THEN AppStatDistContExponential END
+        Opt 5. == THEN AppStatDistContUniform END
+        Opt 6. == THEN AppStatDistContGamma END
+        Opt 7. == THEN AppStatDistContBeta END
+        Opt 8. == THEN AppStatDistContWeibull END
+        Opt 9. == THEN AppStatDistContCauchy END
+        Opt 10. == THEN AppStatDistContFDistribution END
+      END
+    ª
+  ª
+
+  ChooseStatDistInv ´
+    @ #NOTE Choose: ChooseStatDistInv
+
+    "Inverse"
+    {
+      { "1.Binomial" 1. }
+      { "2.Poisson" 2. }
+      { "3.Normal" 3. }
+      { "4.T-Student" 4. }
+      { "5.Chi≤ (Pearson)" 5. }
+      { "6.Exponential" 6. }
+      { "7.Uniform (continous)" 7. }
+      { "8.Weibull" 8. }
+      { "9.Cauchy-Lorentz" 9. }
+      { "10.F-distribution" 10. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppStatDistInvBinomial END
+        Opt 2. == THEN AppStatDistInvPoisson END
+        Opt 3. == THEN AppStatDistInvNormal END
+        Opt 4. == THEN AppStatDistInvTStudent END
+        Opt 5. == THEN AppStatDistInvChi END
+        Opt 6. == THEN AppStatDistInvExponential END
+        Opt 7. == THEN AppStatDistInvUniform END
+        Opt 8. == THEN AppStatDistInvWeibull END
+        Opt 9. == THEN AppStatDistInvCauchy END
+        Opt 10. == THEN AppStatDistInvFDistribution END
+      END
+    ª
+  ª
+
+  ChooseSystemTools ´
+    @ #NOTE Choose: ChooseSystemTools
+    @ This function displays a menu with "System tools".
+
+    "System tools"
+    {
+      { "1.Purge all HOME files" 1. }
+      { "2.Factory reset" 2. }
+      { "3.Factory reset (RPN)" 3. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN UtilPurgeHomeFiles END
+        Opt 2. == THEN UtilFactoryResetDefault END
+        Opt 3. == THEN UtilFactoryResetRpn END
+      END
+    ª
+  ª
+
+  ChooseShortcutMenus ´
+    @ #NOTE Choose: ChooseShortcutMenus
+
+    "Shortcut menus"
+    {
+      { "1.Equations menu" 1. }
+      { "2.Linear Algebra menu" 2. }
+      { "3.Combinatorics menu" 3. }
+      { "4.Finance menu" 4. }
+      { "5.Program menu" 5. }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1. == THEN AppMenuEquations END
+        Opt 2. == THEN AppMenuLinearAlgebra END
+        Opt 3. == THEN AppMenuCombinatorics END
+        Opt 4. == THEN AppMenuFinance END
+        Opt 5. == THEN AppMenuProgram END
+      END
+    ª
+  ª
+
+  @ ---------------------------------------------------------------------------
+  @ #XXX Apps
+  @ These functions are self-contained apps with graphical user interfaces.
+  @ ---------------------------------------------------------------------------
+
+  AppFinanceIRR ´
+    @ #NOTE App: AppFinanceIRR
+    @ This function calculates the Internal Rate of Return (IRR) of a cash
+    @ flow.
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "INTERNAL RATE OF RETURN (IRR)"
+    @ INFORM 'Field definitions'.
+    {
+      { "C:" "Enter cash flow" 3 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
+    1
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store inputs in variables to allow re-use and editing by the user.
+    DUP
+    'C' STO
+
+    @ Calculates the IRR.
+    ç C
+    ´
+      @ Purge 'irr' in case it already exists, to allow symbolic computation.
+      'irr' PURGE
+
+      @ Saves the current status of the flags, and the current directory path.
+      PUSH
+
+      @ System flag: enable approximate mode.
+      -105 SF
+
+      "´ "
+      @ Initialize the accumulator in the stack.
+      0
+      @ Loop: for t = 1 to 'C.size'.
+      1
+      C SIZE OBJç DROP
+      FOR t
+        C t GET    @ Get value of C[t].
+        1 'irr' +  @ Calculates (1+r).
+        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
+        +          @ Add to the accumulator.
+      NEXT
+
+      0 =
+      + " ª" + STRç
+
+      @ Solve the equation where NPV = 0.
+      @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
+      'irr' .5 ROOT
+
+      @ Restores the flags and current directory
+      POP
+
+      @ Convert the result to percentage.
+      100 * çNUM
+      "IRR" çTAG
+    ª
+  ª
+
+  AppFinanceDepreciationDB ´
+    @ #NOTE App: AppFinanceDepreciationDB
+
+    "DECLINING-BALANCE (DB)"
+    {
+      { "SBV:" "Starting book value" }
+      { "SAL:" "Salvage value" }
+      { "L:" "Asset's useful life expectancy" }
+    }
+    { 1 0 }
+    { }
+    { 10000 1000 4 }
+    UtilGuiInform
+
+    ç SBV SAL L
+    ´
+      @ The columns of the output table are:
+      @ - 1 Period number (j)
+      @ - 2 Depreciation expense during period j (DPN)
+      @ - 3 Remaining depreciable value at end of period j (RDV)
+
+      'èj' 'èDepr' 'èValue'
+      0 0 SBV
+      { 2 3 } çARRY
+
+      SBV 'RDV' STO
+
+      @ Calculates the declining-balance rate (double declining balance).
+      2 L /
+
+      ç RATE
+      ´
+        1 L FOR j
+          @ Calculate depreciation for the period.
+          RDV RATE * çNUM 'DPN' STO
+
+          @ Ensure RDV doesn't fall below SAL.
+          RDV DPN - SAL < IF THEN
+            RDV SAL - çNUM 'DPN' STO
+          END
+
+          RDV DPN - çNUM 'RDV' STO
+
+          @ Add the line to the output table.
+          j DPN 2 RND RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
+
+          @ If the RDV is equal to SAL, stop the loop.
+          RDV SAL 0.001 + < IF THEN
+            @ Workaround to break the FOR loop.
+            L 'j' STO
+          END
+        NEXT
+      ª
+    ª
+    'RDV' PURGE
+    'DPN' PURGE
+  ª
+
+  AppFinanceDepreciationSL ´
+    @ #NOTE App: AppFinanceDepreciationSL
+
+    "STRAIGHT-LINE (SL)"
+    {
+      { "SBV:" "Starting book value" }
+      { "SAL:" "Salvage value" }
+      { "L:" "Asset's useful life expectancy" }
+    }
+    { 1 0 }
+    { }
+    { 10000 1000 4 }
+    UtilGuiInform
+
+    ç SBV SAL L
+    ´
+      @ The columns of the output table are:
+      @ - 1 Period number (j)
+      @ - 2 Depreciation expense during period j (DPN)
+      @ - 3 Remaining depreciable value at end of period j (RDV)
+
+      'èj' 'èDepr' 'èValue'
+      0 0 SBV
+      { 2 3 } çARRY
+
+      SBV 'RDV' STO
+
+      @ Calculates the constant DPN.
+      SBV SAL - L / çNUM
+
+      ç DPN
+      ´
+        1 L FOR j
+          @ Calculates the RDV.
+          RDV DPN - çNUM
+          'RDV' STO
+
+          @ Add the line to the output table.
+          j DPN 2 RND RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
+        NEXT
+      ª
+    ª
+    'RDV' PURGE
+  ª
+
+  AppFinanceDepreciationSOYD ´
+    @ #NOTE App: AppFinanceDepreciationSOYD
+
+    "SUM-OF-THE-YEARS-DIGITS"
+    {
+      { "SBV:" "Starting book value" }
+      { "SAL:" "Salvage value" }
+      { "L:" "Asset's useful life expectancy" }
+    }
+    { 1 0 }
+    { }
+    { 10000 1000 4 }
+    UtilGuiInform
+
+    ç SBV SAL L
+    ´
+      @ The columns of the output table are:
+      @ - 1 Period number (j)
+      @ - 2 Depreciation expense during period j (DPN)
+      @ - 3 Remaining depreciable value at end of period j (RDV)
+
+      'èj' 'èDepr' 'èValue'
+      0 0 SBV
+      { 2 3 } çARRY
+
+      SBV 'RDV' STO
+
+      @ Calculates the sum-of-years-digits.
+      L FLOOR 1 + L FLOOR L FP 2 * + * 2 /
+
+      @ Total depreciation.
+      SBV SAL -
+
+      ç SOYD DEP
+      ´
+        1 L FOR j
+          @ Depreciation for year j.
+          L j - 1 + SOYD / DEP * çNUM
+
+          @ Calculates the RDV.
+          DUP RDV SWAP - çNUM 'RDV' STO
+
+          @ Add the line to the output table.
+          j SWAP  2 RND RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
+        NEXT
+      ª
+    ª
+    'RDV' PURGE
+  ª
+
+  AppFinanceNPV ´
+    @ #NOTE App: AppFinanceNPV
+    @ This function calculates the Net Present Value (NPV) of a cash flow
+    @ series.
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "NET PRESENT VALUE (NPV)"
+    @ INFORM 'Field definitions'.
+    {
+      { "C:" "Enter cash flow" 3 }
+      { "r:" "Enter interest rate (%)" 0 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
+    'r' VTYPE IF 0 == THEN r ELSE 5 END
+    2
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store inputs in variables to allow re-use and editing by the user.
+    2 DUPN
+    'r' STO
+    'C' STO
+
+    @ Convert percentage rate to decimal
+    100 /
+
+    @ Calculates the NPV.
+    ç C r
+    ´
+      @ Initialize the accumulator in the stack.
+      0
+
+      @ Loop: for t = 1 to 'C.size'.
+      1
+      C SIZE OBJç DROP
+      FOR t
+        C t GET    @ Get value of C[t].
+        1 r +      @ Calculates (1+r).
+        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
+        +          @ Add to the accumulator.
+      NEXT
+
+      çNUM
+      "NPV" çTAG
+    ª
+  ª
+
+  AppMenuCombinatorics ´
+    @ #NOTE App: AppMenuCombinatorics
+    @ This function displays a custom menu with various mathematical functions
+    @ for combinatorics.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      { "VIEW" ´ DUP SCROLL ª }
+      COMB
+      PERM
+      !
+      @ Options - Part 2.
+      RMODE
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuEquations ´
+    @ #NOTE App: AppMenuEquations
+    @ This function displays a custom menu with various mathematical functions
+    @ for equations.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      { "VIEW" ´ DUP SCROLL ª }
+      PLOT
+      FACTOR
+      SIMPLIFY
+      PARTFRAC
+      @ Options - Part 2.
+      ISOL
+      SOLVEVX
+      FROOTS
+      RREF
+      çQ
+      RMODE
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuFinance ´
+    @ #NOTE App: AppMenuFinance
+    @ This function displays a custom menu with various mathematical functions
+    @ for finance.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      { "VIEW" ´ DUP SCROLL ª }
+      %T
+      %CH
+      %
+      RMODE
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuLinearAlgebra ´
+    @ #NOTE App: AppMenuLinearAlgebra
+    @ This function displays a custom menu with various mathematical functions
+    @ for algebra.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      { "VIEW" ´ DUP SCROLL ª }
+      DET
+      TRAN
+      INV
+      EGV
+      @ Options - Part 2.
+      RREF
+      RMODE
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuProgram ´
+    @ #NOTE App: AppMenuProgram
+    @ This function displays a custom menu with various programming functions.
+
+    @ Define the menu.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      OBJç
+      çARRY
+      çLIST
+      çSTR
+      SIZE
+      @ Options - Part 2.
+      DUP
+      DROP
+      SWAP
+      LOCAL
+      EVAL
+      MSGBOX
+      @ Options - Part 3.
+      GET
+      PUT
+      SUB
+      REPL
+      RMODE
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppStatDistDiscPoisson ´
+    @ # NOTE App: AppStatDistDiscPoisson
+
+    "Poisson X~P(ñ)"
+    {
+      { "ñ:" "Lambda (expected value)" }
+      { "x:" "Number of events per interval" }
+    }
+    { 1 0 }
+    { }
+    { 1 1 }
+    UtilGuiInform
+
+    ç ñ x
+    ´
+      'EXP(-ñ)*ñ^x/x!' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,EXP(-ñ)*ñ^j/j!)' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscBinomial ´
+    @ # NOTE App: AppStatDistDiscBinomial
+
+    "Binomial X~B(n,p)"
+    {
+      { "n:" "Number of trials" }
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Number of successes in n trials" }
+    }
+    { 1 0 }
+    { }
+    { 5 .5 1 }
+    UtilGuiInform
+
+    ç n p x
+    ´
+      @ Input validations.
+      x n "x" "n" UtilValidateLessEqual
+
+      'COMB(n,x)*p^x*(1.-p)^(n-x)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,COMB(n,j)*p^j*(1.-p)^(n-j))' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscHipergeometric ´
+    @ # NOTE App: AppStatDistDiscHipergeometric
+
+    "Hypergeometric X~H(N,K,n)"
+    {
+      { "N:" "Population size" }
+      { "K:" "Num. of successes in population" }
+      { "n:" "Sample size" }
+      { "x:" "Num. of successes in sample" }
+    }
+    { 1 0 }
+    { }
+    { 10 6 4 2 }
+    UtilGuiInform
+
+    ç N K n x
+    ´
+      @ Input validations.
+      n N "n" "N" UtilValidateLessEqual
+      x K "x" "K" UtilValidateLessEqual
+
+      'COMB(K,x)*COMB(N-K,n-x)/COMB(N,n)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,COMB(K,j)*COMB(N-K,n-j)/COMB(N,n))' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscBernoulli ´
+    @ # NOTE App: AppStatDistDiscBernoulli
+
+    "Bernoulli X~Be(p)"
+    {
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Success (1) or failure (0)" }
+    }
+    { 1 0 }
+    { }
+    { .5 1 }
+    UtilGuiInform
+
+    ç p x
+    ´
+      'p^x*(1-p)^(1-x)' EVAL çNUM
+      "P(x=" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscBinomialNeg ´
+    @ # NOTE App: AppStatDistDiscBinomialNeg
+
+    "Neg. Binomial X~B*(r,p)"
+    {
+      { "r:" "Number of successes" }
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Trials of the r-th success" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 1 }
+    UtilGuiInform
+
+    ç r p x
+    ´
+      'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscGeometric ´
+    @ # NOTE App: AppStatDistDiscGeometric
+
+    "Geometric X~G(p)"
+    {
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Trials until first success" }
+    }
+    { 1 0 }
+    { }
+    { .5 10 }
+    UtilGuiInform
+
+    ç p x
+    ´
+      'p*(1-p)^(x-1)' EVAL çNUM
+      "P(x=" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscUniform ´
+    @ # NOTE App: AppStatDistDiscUniform
+
+    "Uniform (discrete) X~U(n)"
+    {
+      { "n:" "Number total of objects" }
+      { "x:" "Number of successes" }
+    }
+    { 1 0 }
+    { }
+    { 1 1 }
+    UtilGuiInform
+
+    ç n x
+    ´
+      '(1/n)^x' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContNormal ´
+    @#NOTE App: AppStatDistContNormal
+
+    "Normal X~N(µ,ò)"
+    {
+      { "µ:" "Mean" }
+      { "ò:" "Standard deviation" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç µ ò x
+    ´
+      µ ò 2. ^ çNUM x UTPN 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContTStudent ´
+    @#NOTE App: AppStatDistContTStudent
+
+    "T-Student X~T(ë)"
+    {
+      { "ë:" "Degrees of freedom" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 5 .5 }
+    UtilGuiInform
+
+    ç v x
+    ´
+      v x UTPT 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContChi ´
+    @#NOTE App: AppStatDistContChi
+
+    "Chi≤ X~X≤(ë)"
+    {
+      { "ë:" "Degrees of freedom" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 .5 }
+    UtilGuiInform
+
+    ç v x
+    ´
+      v x UTPC 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContExponential ´
+    @#NOTE App: AppStatDistContExponential
+
+    "Exponential X~Exp(ﬂ)"
+    {
+      { "ﬂ:" "ﬂ is the time" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 }
+    UtilGuiInform
+
+    ç ﬂ x
+    ´
+      '1-EXP(-x/ﬂ)' EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContUniform ´
+    @#NOTE App: AppStatDistContUniform
+
+    "Uniform X~U(å,ﬂ)"
+    {
+      { "å:" "Lower bound" }
+      { "ﬂ:" "Upper bound" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç a b x
+    ´
+      a x â x b < AND IF THEN
+        '(x-a)/(b-a)' EVAL çNUM
+        "P(Xâ" x + ")" + çTAG
+      ELSE
+        x a < IF THEN
+          0
+          "P(Xâ" x + ")" + çTAG
+        ELSE
+          1
+          "P(Xâ" x + ")" + çTAG
+        END
+      END
+    ª
+  ª
+
+  AppStatDistContGamma ´
+    @#NOTE App: AppStatDistContGamma
+
+    "Gamma X~G(å,ﬂ)"
+    {
+      { "å:" "Parameter å" }
+      { "ﬂ:" "Parameter ﬂ" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 1 .5 }
+    UtilGuiInform
+
+    ç å ﬂ x
+    ´
+      'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContBeta ´
+    @#NOTE App: AppStatDistContBeta
+
+    "Beta X~B(å,ﬂ)"
+    {
+      { "å:" "Parameter å" }
+      { "ﬂ:" "Parameter ﬂ" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 2 .5 }
+    UtilGuiInform
+
+    ç å ﬂ x
+    ´
+      'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
+      EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContWeibull ´
+    @#NOTE App: AppStatDistContWeibull
+
+    "Weibull X~W(å,ﬂ)"
+    {
+      { "å:" "Parameter å" }
+      { "ﬂ:" "ﬂ, if you have ñ ç ﬂ=ñ" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 1 .5 }
+    UtilGuiInform
+
+    ç a b x
+    ´
+      '1-EXP(-(x/b)^a)' EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContCauchy ´
+    @#NOTE App: AppStatDistContCauchy
+
+    "Cauchy-Lorentz X~C(X0,ë)"
+    {
+      { "X0:" "Peak of the distribution" }
+      { "ë:" "Half-width" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç X0 ë x
+    ´
+      '1/á*ATAN((x-X0)/ë)+1/2' EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContFDistribution ´
+    @#NOTE App: AppStatDistContFDistribution
+
+    "F-distribution X~F(ën,ëd)"
+    {
+      { "ën:" "Degrees of freedom (numerator)" }
+      { "ëd:" "Degrees of freedom (denominator)" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 10 10 1 }
+    UtilGuiInform
+
+    ç n d x
+    ´
+      n d x UTPF 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvNormal ´
+    @#NOTE App: AppStatDistInvNormal
+
+    "Normal X~N(µ,ò;p(x))"
+    {
+      { "µ:" "Mean" }
+      { "ò:" "Standard deviation" }
+      { "p(x):" "Cumulative probability" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 0 }
+    UtilGuiInform
+
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç µ ò p tail
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " µ + " " + ò 2 ^ çNUM + " x UTPN " + p + " - ª" + STRç
+      'x' 2. ROOT
+
+      tail 0 == IF THEN
+        "N(" µ çQ + "," + ò çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "N(" µ çQ + "," + ò çQ + ";" + p + ")" + çTAG
+      END
+
+      'x' PURGE
+    ª
+  ª
+
+  AppStatDistInvChi ´
+    @#NOTE App: AppStatDistInvChi
+
+    "Chi≤ X~X≤(ë;p(x))"
+    {
+      { "ë:" "Degrees of freedom" }
+      { "p(x):" "Cumulative probability" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
+    }
+    { 1 0 }
+    { }
+    { 2 .5 0 }
+    UtilGuiInform
+
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç v p tail
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " v + " chi UTPC " + p + " - ª" + STRç
+      'chi' 2. ROOT
+
+      tail 0 == IF THEN
+        "X≤(" v çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "X≤(" v çQ + ";" + p + ")" + çTAG
+      END
+
+      'chi' PURGE
+    ª
+  ª
+
+  AppStatDistInvTStudent ´
+    @#NOTE App: AppStatDistInvTStudent
+
+    "T-Student X~T(ë;p(x))"
+    {
+      { "ë:" "Degrees of freedom" }
+      { "p(x):" "Cumulative probability" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
+    }
+    { 1 0 }
+    { }
+    { 5 .5 0 }
+    UtilGuiInform
+
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç v p tail
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " v + " t UTPT " + p + " - ª" + STRç
+      't' 2. ROOT
+
+      tail 0 == IF THEN
+        "T(" v çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "T(" v çQ + ";" + p + ")" + çTAG
+      END
+
+      't' PURGE
+    ª
+  ª
+
+  AppStatDistInvPoisson ´
+    @#NOTE App: AppStatDistInvPoisson
+
+    "Poisson X~P(ñ;p(x))"
+    {
+      { "ñ:" "Lambda (expected value)" }
+      { "p(x):" "Probability" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 }
+    UtilGuiInform
+
+    ç ñ p
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      'EXP(ñ)*p=ñ^x/x!' EVAL
+      'x' 1. ROOT
+      çNUM 0 RND
+
+      "ó(" ñ + ";" + p + ")" + çTAG
+
+      'x' PURGE
+    ª
+  ª
+
+  AppStatDistInvBinomial ´
+    @#NOTE App: AppStatDistInvBinomial
+
+    "Binomial X~B(n,p;p(x))"
+    {
+      { "n:" "Number of trials" }
+      { "p:" "Prob. of success on a trial" }
+      { "p(x):" "Probability" }
+    }
+    { 1 0 }
+    {
+    }
+    { 5 .5 .5 }
+    UtilGuiInform
+
+    ç n p b
+    ´
+      @ Input validations.
+      b 0 1 "p(x)" UtilValidateRange
+
+      '(p/(1-p))^x/(x!*(n-x)!)=b/((1-p)^n*n!)' EVAL
+      'x' 1. ROOT
+      çNUM 0 RND
+
+      "B(" n çQ + "," + p + ";" + b + ")" + çTAG
+
+      'x' PURGE
+    ª
+  ª
+
+  AppStatDistInvUniform ´
+    @#NOTE App: AppStatDistInvUniform
+
+    "Uniform X~U(å,ﬂ;p(x))"
+    {
+      { "å:" "Lower bound" }
+      { "ﬂ:" "Upper bound" }
+      { "p(x):" "Cum. probability (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç a b p
+    ´
+      @ Input validations.
+      b 0 1 "p(x)" UtilValidateRange
+
+      a p b a - * +
+      "U(" a + "," + b + ";" + p + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvExponential ´
+    @#NOTE App: AppStatDistInvExponential
+
+    "Exponential X~Exp(ﬂ;p(x))"
+    {
+      { "ﬂ:" "ﬂ, if you have ñ ç ﬂ=1/ñ" }
+      { "p(x):" "Cum. probability (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 }
+    UtilGuiInform
+
+    ç b p
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      b 1 p - LN * NEG çNUM
+      "Exp(" b + ";" + p + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvWeibull ´
+    @#NOTE App: AppStatDistInvWeibull
+
+    "Weibull X~W(å,ﬂ)"
+    {
+      { "å:" "Parameter å" }
+      { "ﬂ:" "ﬂ, if you have ñ ç ﬂ=1/ñ" }
+      { "p(x):" "Cum. probability (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 1 .5 }
+    UtilGuiInform
+
+    ç a b p
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      1 p - LN NEG LN a / EXP b / çNUM
+      "W(" a + "," + b + ";" + p + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvCauchy ´
+    @#NOTE App: AppStatDistInvCauchy
+
+    "Cauchy-Lorentz X~C(X0,ë;p(x))"
+    {
+      { "X0:" "Peak of the distribution" }
+      { "ë:" "Half-width" }
+      { "p(x):" "Cum. probability (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç x g p
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      x g á p 1 2 / - * TAN * + çNUM
+      "C(" x + "," + g + ";" + p + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvFDistribution ´
+    @#NOTE App: AppStatDistInvFDistribution
+
+    "F-distribution X~F(ën,ëd;p(x))"
+    {
+      { "ën:" "Degrees of freedom (numerator)" }
+      { "ëd:" "Degrees of freedom (denominator)" }
+      { "p(x):" "Cumulative probability" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
+    }
+    { 1 0 }
+    { }
+    { 10 10 .5 0 }
+    UtilGuiInform
+
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç n d p tail
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " n + " " + d çNUM + " f UTPF " + p + " - ª" + STRç
+      'f' 2. ROOT
+
+      tail 0 == IF THEN
+        "F(" n çQ + "," + d çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "F(" n çQ + "," + d çQ + ";" + p + ")" + çTAG
+      END
+
+      'f' PURGE
+    ª
+  ª
+
+  AppTimeDateAdd ´
+    @#NOTE App: AppTimeDateAdd
+
+    PUSH
+    @ System flag: date format to DD.MMYYYY.
+    -42 SF
+
+    "DATE ADD/SUBTRACT"
+    {
+      { "D:" "Start day" }
+      { "M:" "Start month" }
+      { "Y:" "Start year" }
+      { "D+" "Num. of days to add/subtract" }
+      { "M+" "Num. of months to add/subtract" }
+      { "Y+" "Num. of years to add/subtract" }
+      { "Rep:" "Times to repeat the operation" }
+    }
+    { 3 0 }
+    { }
+    DATE UtilDateToStack 0 0 0 1 7 çLIST @ Retrieve the current date.
+    UtilGuiInform
+
+    ç d m y ad am ay rep
+    ´
+      @ Input validations.
+      d 1 31 "start day" UtilValidateRange
+      m 1 12 "start month" UtilValidateRange
+      y 1582 9999 "start year" UtilValidateRange
+
+      @ Print the start date.
+      d m y UtilDateFromStack UtilDateToStr "D0" çTAG
+
+      1 rep FOR r
+        @ Calculate the new date.
+        d m y ad r * am r * ay r * UtilDateAddDate
+
+        @ Print the 'r' date.
+        UtilDateToStr
+        "D" r + çTAG
+      NEXT
+    ª
+
+    POP
+  ª
+
+  AppTimeDateDifference ´
+    @#NOTE App: AppTimeDateDifference
+
+    PUSH
+    @ System flag: date format to DD.MMYYYY.
+    -42 SF
+
+    "DATE DIFFERENCE"
+    {
+      { "D:" "Start day" }
+      { "M:" "Start month" }
+      { "Y:" "Start year" }
+      { "D:" "End day" }
+      { "M:" "End month" }
+      { "Y:" "End year" }
+    }
+    { 3 0 }
+    { }
+    DATE UtilDateToStack          @ Retrieve the current date.
+    DATE 10 DATE+ UtilDateToStack @ Retrieve the current date (+ 10 days).
+    6 çLIST
+    UtilGuiInform
+
+    ç sd sm sy ed em ey
+    ´
+      @ Input validations.
+      sd 1 31 "start day" UtilValidateRange
+      sm 1 12 "start month" UtilValidateRange
+      sy 1582 9999 "start year" UtilValidateRange
+      ed 1 31 "end day" UtilValidateRange
+      em 1 12 "end month" UtilValidateRange
+      ey 1582 9999 "end year" UtilValidateRange
+
+      sd sm sy UtilDateFromStack
+      ed em ey UtilDateFromStack
+
+      DDAYS çQ
+      "Days" çTAG
+    ª
+
+    POP
+  ª
+
+  @ ---------------------------------------------------------------------------
+  @ #XXX Util functions
+  @ These functions are used internally by the Apps.
+  @ ---------------------------------------------------------------------------
+
+  UtilDateAddDate ´
+    @#NOTE Function: UtilDateAddDate
+
+    ç d m y ad am ay
+    ´
+      @ Convert the input start date to DATE format (DD.MMYYYY).
+      d m y UtilDateFromStack
+
+      @ Shift the date by 10 days to avoid month-boundary bugs in calculations.
+      d 27 > IF THEN
+        -10 DATE+
+      END
+
+      @  Add/subtract years.
+      ay UtilDateAddYear
+
+      @ Add months to the start date.
+      am 0 > IF THEN
+        @ Check for overflow (month + am > 12).
+        am 12 MOD m + 12 > IF THEN
+          m 100 / -                       @ Remove the month part.
+          am 12 MOD m + 12 - 100 / +      @ Add the correct month.
+          1 UtilDateAddYear               @ Add 1 year of overflow.
+        ELSE
+          am 12 MOD 100 / +               @ Simple month addition.
+        END
+
+        @ Add necessary years.
+        am 12 / FLOOR UtilDateAddYear
+      END
+
+      @ Subtract months to the start date.
+      am 0 < IF THEN
+        @ Check for underflow (month - am < 1).
+        am 12 -1 * MOD m + 1 < IF THEN
+          m 100 / -                       @ Remove the month part.
+          am 12 -1 * MOD m + 12 + 100 / + @ Add the correct month.
+          -1 UtilDateAddYear              @ Subtract 1 year of underflow.
+        ELSE
+          am 12 -1 * MOD 100 / +          @ Simple month subtraction.
+        END
+
+        @ Subtract necessary years.
+        am -1 * 12 / FLOOR -1 * UtilDateAddYear
+      END
+
+      @ Revert the 10 day shift.
+      d 27 > IF THEN
+        10 DATE+
+      END
+
+      @ Add/subtract days.
+      ad DATE+
+    ª
+  ª
+
+  UtilDateAddYear ´
+    @#NOTE Function: UtilDateAddYear
+
+    ç dt y
+    ´
+        dt y 1000000 / + çNUM
+    ª
+  ª
+
+  UtilDateFromStack ´
+    @#NOTE Function: UtilDateFromStack
+
+    ç d m y
+    ´
+      @ Convert the input start date to DATE format (DD.MMYYYY).
+      d "." + m 10 < IF THEN "0" + END m + y + OBJç
+    ª
+  ª
+
+  UtilDateToStack ´
+    @#NOTE Function: UtilDateToStack
+
+    ç dt
+    ´
+      @ Day.
+      dt FLOOR çQ
+
+      @ Month.
+      dt FP 100 *
+      DUP FLOOR çQ
+
+      @ Year.
+      SWAP FP 10000  * çQ
+    ª
+  ª
+
+  UtilDateToStr ´
+    @#NOTE Function: UtilDateToStr
+    @ This function converts the date into string format "DOW DD/MM/YYYY".
+
+    ç dt
+    ´
+      dt UtilDateToStack
+      ç d m y
+      ´
+        dt 0 TSTR 1 6 SUB "/" +
+        dt 0 TSTR 8 9 SUB "/" + +
+        y +
+      ª
+    ª
+  ª
+
+  UtilFactoryReset ´
+    @ #NOTE Function: UtilFactoryReset
+    @ This function restores the calculator to its factory settings.
+
+    @ Clear the user keys.
+    { } STOKEYS
+
+    UtilPurgeHomeFiles
+
+    @ Restore CAS variables from the "CASDIR".
+    CASCFG
+
+    @ Clear the stack.
+    CLEAR
+
+    AppMenuEquations
+  ª
+
+  UtilFactoryResetDefault ´
+    @ #NOTE Function: UtilFactoryResetDefault
+    @ This function restores the calculator to its factory settings.
+
+    @ Restore default flags.
+    {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
+
+    @ Set the FONT8 (default).
+    FONT8 çFONT
+
+    UtilFactoryReset
+  ª
+
+  UtilFactoryResetRpn ´
+    @ #NOTE Function: UtilFactoryResetRpn
+    @ This function restores the calculator to its factory settings in RPN
+    @ mode.
+
+    @ Restore my custom flags.
+    @-56 SF Disable Error Beep.
+    @-95 CF Set RPN mode.
+    {# 80000204010FF0h # 0h # 8000000002000000h # 0h} STOF
+
+    @ Set the FONT6.
+    FONT6 çFONT
+
+    UtilFactoryReset
+  ª
+
+  UtilGuiChoose ´
+    @ #NOTE Function: UtilGuiChoose
+
+    1
+    CHOOSE
+
+    @ Exit if the user presses "Cancel".
+    NOT IF THEN KILL END
+  ª
+
+  UtilGuiInform ´
+    @ #NOTE Function: UtilGuiInform
+
+    INFORM
+
+    @ Exit if the user presses "Cancel".
+    NOT IF THEN KILL END
+
+    @ Extract the values from the list.
+    EVAL
+  ª
+
+  UtilPurgeHomeFiles ´
+    @ #NOTE Function: UtilPurgeHomeFiles
+    @ This function purges all files in the HOME directory.
+
+    HOME
+
+    @ Purge all directories.
+    15 TVARS
+    PGDIR
+
+    @ Purge all variables.
+    VARS
+    PURGE
+  ª
+
+  UtilValidateLessEqual ´
+    @ #NOTE Function: UtilValidateLessEqual
+
+    ç a b aLabel bLabel
+    ´
+      b a < IF THEN
+        "Error: '" aLabel + "' must be less than or equal to '" + bLabel + "'."
+        + DOERR
+      END
+    ª
+  ª
+
+  UtilValidateRange ´
+    @ #NOTE Function: UtilValidateRange
+
+    ç x a b xLabel
+    ´
+      x a < x b > OR IF THEN
+        "Error: '" xLabel + "' must be between " + a + " and " + b + "." +
+        DOERR
+      END
+    ª
+  ª
+
+  @ ---------------------------------------------------------------------------
+  @ #XXX Visible functions
+  @ These functions are visible in the library menu.
+  @ ---------------------------------------------------------------------------
+
+  EXTPK ´
+    @ #NOTE Function (Visible): EXTPK
+
+    ChooseMainMenu
+  ª
+
+  RESET ´
+    @ #NOTE Function (Visible): RESET
+
+    UtilFactoryResetRpn
+  ª
+
+  RMODE ´
+    @ #NOTE Function (Visible): RMODE
+    @ This function resets the calculator modes to default.
+
+    RAD       @ Set "Radians" mode.
+    RECT      @ Set "Rectangular" mode.
+    HEX       @ Set "HEX" mode.
+    -103 CF   @ Set "Real" mode.
+    -105 CF   @ Set "Exact" mode.
+  ª
+
+END

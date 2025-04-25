@@ -1,0 +1,26 @@
+@ This auxiliary program is used to build the library from the source code.
+@ It is used to build the library from the source code and tests.
+
+@ %NAME%=LIBMK
+@ %DIR%=
+
+«
+  @ Set RPN mode.
+  -95 CF
+
+  CLEAR
+
+  HOME
+
+  @ Attach the development library.
+  256 ATTACH
+
+  @ Change the directory to the library folder.
+  MYLIB
+
+  @ Create/Build the library.
+  CRLIB
+
+  @ Store the library in port 0 (IRAM).
+  0 STO
+»
