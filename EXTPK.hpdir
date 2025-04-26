@@ -82,7 +82,6 @@ DIR
     AppMenuEquations
     AppMenuFinance
     AppMenuLinearAlgebra
-    AppMenuProgram
     AppStatDistContBeta
     AppStatDistContCauchy
     AppStatDistContChi
@@ -508,7 +507,6 @@ DIR
       { "2.Linear Algebra menu" 2. }
       { "3.Combinatorics menu" 3. }
       { "4.Finance menu" 4. }
-      { "5.Program menu" 5. }
     }
     UtilGuiChoose
 
@@ -519,7 +517,6 @@ DIR
         Opt 2. == THEN AppMenuLinearAlgebra END
         Opt 3. == THEN AppMenuCombinatorics END
         Opt 4. == THEN AppMenuFinance END
-        Opt 5. == THEN AppMenuProgram END
       END
     ª
   ª
@@ -892,38 +889,6 @@ DIR
       EGV
       @ Options - Part 2.
       RREF
-      RMODE
-    }
-
-    @ Define and display the Custom Menu.
-    MENU
-  ª
-
-  AppMenuProgram ´
-    @ #NOTE App: AppMenuProgram
-    @ This function displays a custom menu with various programming functions.
-
-    @ Define the menu.
-    {
-      @ Options - Part 1.
-      { "EDIT" EDITB }
-      OBJç
-      çARRY
-      çLIST
-      çSTR
-      SIZE
-      @ Options - Part 2.
-      DUP
-      DROP
-      SWAP
-      LOCAL
-      EVAL
-      MSGBOX
-      @ Options - Part 3.
-      GET
-      PUT
-      SUB
-      REPL
       RMODE
     }
 

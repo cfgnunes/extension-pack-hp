@@ -69,7 +69,6 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Linear Algebra menu
     - Combinatorics menu
     - Finance menu
-    - Program menu
 
 ### Other commands
 
