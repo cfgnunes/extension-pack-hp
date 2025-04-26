@@ -1,5 +1,6 @@
 @ This auxiliary program builds the library from the source "EXTPK.hpdir" using
-@ only the calculator. It can also be used in conjunction with HPUserEdit.
+@ only the calculator. It can also be used in conjunction with the applications
+@ HPUserEdit or EMU48.
 
 @ %NAME%=LIBMK
 
@@ -11,11 +12,25 @@
   @ If it's a string (type 2), assume it's a serialized directory,
   @ convert it to a directory object, and store it as "MYLIB".
   :0:EXTPK.hpdir EVAL DUP TYPE 2 == IF THEN
-    'MYLIB' PGDIR
     STRç
+    'MYLIB' PGDIR
     'MYLIB' STO
   ELSE
     DROP
+      @ Attempt to load the source code from the stack as a string:
+      @ Check if the stack is not empty.
+      DEPTH 0 == NOT IF THEN
+        @ Check if there is a string (type 2) on stack.
+        DUP TYPE 2 == IF THEN
+          @ Convert the string to an object and check
+          @ if it is a directory object (type 15).
+          DUP STRç TYPE 15 == IF THEN
+            STRç
+            'MYLIB' PGDIR
+            'MYLIB' STO
+          END
+        END
+      END
   END
 
   @ Check if the "MYLIB" directory exists and validate the library ID.
