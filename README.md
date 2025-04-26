@@ -77,3 +77,11 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `EXTPK` - Extension Pack HP Command Menu: Displays a unified menu with all features provided by the Extension Pack HP, offering a convenient shortcut for quick access.
 - `RESET` - Reset Command: Restores the calculator to its factory settings in RPN mode.
 - `RMODE` - Reset Mode Command: Resets the calculator modes to default (Radians, Rectangular, HEX, Real, Exact).
+
+## Contributing
+
+If you spot a bug or want to improve the code or even improve the content, you can do the following:
+
+- [Open an issue](https://github.com/cfgnunes/extension-pack-hp/issues/new)
+  describing the bug or feature idea;
+- Fork the project, make changes, and submit a pull request.
