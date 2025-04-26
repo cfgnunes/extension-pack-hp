@@ -1,26 +1,46 @@
-@ This auxiliary program is used to build the library from the source code.
-@ It is used to build the library from the source code and tests.
+@ This auxiliary program builds the library from the source "EXTPK.hpdir" using
+@ only the calculator. It can also be used in conjunction with HPUserEdit.
 
 @ %NAME%=LIBMK
-@ %DIR%=
 
 ´
-  @ Set RPN mode.
-  -95 CF
-
-  CLEAR
-
+  @ Ensure we're starting in the HOME directory.
   HOME
+
+  @ Attempt to load "EXTPK.hpdir" from the HOME directory.
+  @ If it's a string (type 2), assume it's a serialized directory,
+  @ convert it to a directory object, and store it as "MYLIB".
+  :0:EXTPK.hpdir EVAL DUP TYPE 2 == IF THEN
+    'MYLIB' PGDIR
+    STRç
+    'MYLIB' STO
+  ELSE
+    DROP
+  END
+
+  @ Check if the "MYLIB" directory exists and validate the library ID.
+  MYLIB PATH SIZE 2 == IF THEN
+    $ROMID 1723 == NOT IF THEN
+      "The library in 'MYLIB' directory does not have the expected ID: 1723!"
+      DOERR
+    END
+  ELSE
+    DROP
+    "The directory 'MYLIB' was not found!" DOERR
+  END
+
+  @ Remove the library from port 0 (IRAM), if present.
+  :0:1723 DUP DETACH PURGE
 
   @ Attach the development library.
   256 ATTACH
 
-  @ Change the directory to the library folder.
-  MYLIB
-
-  @ Create/Build the library.
+  @ Create the library object from the directory.
   CRLIB
 
-  @ Store the library in port 0 (IRAM).
+  @ Store the compiled library into port 0 (IRAM).
   0 STO
+
+  @ Attach the final version of the library for use.
+  :0:1723 ATTACH
 ª

@@ -1,19 +1,20 @@
-@ This auxiliary program remove temporary files and the library.
+@ This auxiliary program remove temporary directory and the library.
 
 @ %NAME%=LIBRM
-@ %DIR%=
 
 «
-  @ Set RPN mode.
-  -95 CF
-
-  CLEAR
-
+  @ Ensure we're starting in the HOME directory.
   HOME
 
   @ Purge 'MYLIB' directory.
   'MYLIB' PGDIR
 
-  @ Remove the library from port 0 (IRAM).
-  :0:1723 PURGE
+  @ Remove the library from port 0 (IRAM), if present.
+  :0:1723 DUP DETACH PURGE
+
+  @ Remove the library from port port 1 (ERAM), if present.
+  :1:1723 DUP DETACH PURGE
+
+  @ Remove the library from port port 2 (FLASH), if present.
+  :2:1723 DUP DETACH PURGE
 »
