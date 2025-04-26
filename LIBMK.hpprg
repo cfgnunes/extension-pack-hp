@@ -8,6 +8,18 @@
   @ Ensure we're starting in the HOME directory.
   HOME
 
+  @ Remove the library from port 0 (IRAM), if present.
+  :0:1723 DUP DETACH PURGE
+
+  @ Remove the library from port port 1 (ERAM), if present.
+  :1:1723 DUP DETACH PURGE
+
+  @ Remove the library from port port 2 (FLASH), if present.
+  :2:1723 DUP DETACH PURGE
+
+  @ Attach the development library.
+  256 ATTACH
+
   @ Attempt to load the source code from the stack as a string:
   @ Check if the stack is not empty.
   DEPTH 0 == NOT IF THEN
@@ -15,8 +27,8 @@
     DUP TYPE 2 == IF THEN
       @ Convert the string to an object and check
       @ if it is a directory object (type 15).
-      DUP STRç TYPE 15 == IF THEN
-        STRç
+      DUP OBJç TYPE 15 == IF THEN
+        OBJç
         'MYLIB' PGDIR
         'MYLIB' STO
       END
@@ -33,18 +45,6 @@
     DROP
     "The directory 'MYLIB' was not found!" DOERR
   END
-
-  @ Remove the library from port 0 (IRAM), if present.
-  :0:1723 DUP DETACH PURGE
-
-  @ Remove the library from port port 1 (ERAM), if present.
-  :1:1723 DUP DETACH PURGE
-
-  @ Remove the library from port port 2 (FLASH), if present.
-  :2:1723 DUP DETACH PURGE
-
-  @ Attach the development library.
-  256 ATTACH
 
   @ Create the library object from the directory.
   CRLIB
