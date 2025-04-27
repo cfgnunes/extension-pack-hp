@@ -231,7 +231,7 @@ DIR
           END
 
           DUP
-          TYPE 0 == IF THEN
+          TYPE 28 == IF THEN
             @ If is selected "1.Time Value of Money",
             @ clear temp data on the stack and continue.
             DROP
