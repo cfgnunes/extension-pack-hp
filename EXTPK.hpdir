@@ -68,8 +68,8 @@ DIR
     EXTPK
     RESET
     DSTAT
-    RMODE
     %TILE
+    RMODE
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
