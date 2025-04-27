@@ -191,12 +191,12 @@ DIR
         Opt 0 == THEN
           SWAP
 
-          DUP { "" } + SIZE
-          "System tools" + « ChooseSystemTools »
+          DUP { "" } + SIZE Q
+          ".System tools" + « ChooseSystemTools »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE
-          "Shortcut menus" + « ChooseShortcutMenus »
+          DUP { "" } + SIZE Q
+          ".Shortcut menus" + « ChooseShortcutMenus »
           2 LIST 1 LIST +
 
           SWAP
@@ -206,8 +206,8 @@ DIR
         Opt 1 == THEN
           SWAP
 
-          DUP { "" } + SIZE
-          "Prob. distributions" + « ChooseStatDist »
+          DUP { "" } + SIZE Q
+          ".Prob. distributions" + « ChooseStatDist »
           2 LIST 1 LIST +
 
           SWAP
@@ -248,12 +248,12 @@ DIR
         Opt 6 == THEN
           SWAP
 
-          DUP { "" } + SIZE
-          "Date add/subtract" + « AppTimeDateAdd »
+          DUP { "" } + SIZE Q
+          ".Date add/subtract" + « AppTimeDateAdd »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE
-          "Date difference" + « AppTimeDateDifference »
+          DUP { "" } + SIZE Q
+          ".Date difference" + « AppTimeDateDifference »
           2 LIST 1 LIST +
 
           SWAP
