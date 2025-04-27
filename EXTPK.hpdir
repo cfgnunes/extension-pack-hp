@@ -220,7 +220,7 @@ DIR
             { "1.Time Value of Money" 1 }
             { "2.Net Present Value" « AppFinanceNPV » }
             { "3.Int. Rate of Return" « AppFinanceIRR » }
-            { "3.Depreciation methods" « ChooseFinanceDepreciation » }
+            { "4.Depreciation methods" « ChooseFinanceDepreciation » }
           }
           1
           CHOOSE
