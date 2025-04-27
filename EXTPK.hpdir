@@ -1813,7 +1813,7 @@ DIR
     @ Restore my custom flags.
     @-56 SF Disable Error Beep.
     @-95 CF Set RPN mode.
-    {# 80000204010FF0h # 0h # 8000000002000000h # 0h} STOF
+    {# 80000204010FF0h # 0h # 8010000002000000h # 0h} STOF
 
     @ Set the FONT6.
     FONT6 çFONT
