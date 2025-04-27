@@ -126,12 +126,14 @@ DIR
     ChooseSystemTools
     ChooseTimeMenu
     ExtProgram
+    UtilArrayListDecompose
+    UtilArrayListToDAT
+    UtilArrayListToList
     UtilDateAddDate
     UtilDateAddYear
     UtilDateFromStack
     UtilDateToStack
     UtilDateToStr
-    UtilDATFromArrayList
     UtilFactoryReset
     UtilFactoryResetDefault
     UtilFactoryResetRpn
@@ -905,7 +907,7 @@ DIR
   AppStatDescriptiveStatistics ´
     @ # NOTE App: AppStatDescriptiveStatistics
 
-    UtilDATFromArrayList
+    UtilArrayListToDAT
 
     MEAN "µ" çTAG
     PSDEV "ò" çTAG
@@ -1688,6 +1690,63 @@ DIR
   @ These functions are used internally by the Apps.
   @ ---------------------------------------------------------------------------
 
+  UtilArrayListDecompose ´
+    @#NOTE Function: UtilArrayListDecompose
+    @ This function decomposes (squash) an array or list.
+
+    ç v
+    ´
+      CASE
+
+        @ Decompose a list (type 5).
+        v TYPE 5 == THEN
+          v OBJç
+          EVAL
+        END
+
+        @ Decompose an array (type 3 or 29).
+        v TYPE 3 == v TYPE 29 == OR THEN
+          v OBJç
+
+          DUP SIZE 1 == IF THEN
+            EVAL
+          ELSE
+            úLIST
+          END
+        END
+
+        "Error: The argument must be an array or a list!" DOERR
+    END
+    ª
+  ª
+
+  UtilArrayListToList ´
+    @#NOTE Function: UtilArrayListToDAT
+    @ This function converts an array or list to list.
+
+    UtilArrayListDecompose
+
+    @ Convert the data on the stack into a list.
+    çLIST
+  ª
+
+  UtilArrayListToDAT ´
+    @#NOTE Function: UtilArrayListToDAT
+    @ This function converts an array or list to the DAT matrix. This matrix
+    @ contains the data used by the Statistics applications.
+
+    UtilArrayListDecompose
+
+    @ Convert the data on the stack into a matrix with one column.
+    1 2 çLIST çARRY
+
+    @ Store it on the system variable 'ÖDAT'.
+    'ÖDAT' STO
+
+    @ Set the independent-variable column of the 'ÖDAT'.
+    1 XCOL
+  ª
+
   UtilDateAddDate ´
     @#NOTE Function: UtilDateAddDate
 
@@ -1793,45 +1852,6 @@ DIR
         dt 0 TSTR 8 9 SUB "/" + +
         y +
       ª
-    ª
-  ª
-
-  UtilDATFromArrayList ´
-    @#NOTE Function: UtilDATFromArrayList
-    @ This function converts an array or list to the DAT matrix. This matrix
-    @ contains the data used by the Statistics applications.
-
-    ç v
-    ´
-      @ Check if the input it is an array (type 29) or a list (type 5).
-      v TYPE 29 == NOT
-      v TYPE 5 == NOT
-      AND
-      IF THEN
-        "Error: The argument must be an array or a list!" DOERR
-      END
-
-      @ Decompose the matrix/array/list.
-      v OBJç
-
-      @ The the index is a list, multiply the values.
-      DUP TYPE 5 == IF THEN
-        DUP SIZE 1 == IF THEN
-          EVAL
-        ELSE
-          úLIST
-        END
-      END
-
-      @ Convert the data on the stack into a matrix with one column.
-      1 2 çLIST
-      çARRY
-
-      @ Store it on the system variable 'ÖDAT'.
-      'ÖDAT' STO
-
-      @ Set the independent-variable column of the 'ÖDAT'.
-      1 XCOL
     ª
   ª
 
