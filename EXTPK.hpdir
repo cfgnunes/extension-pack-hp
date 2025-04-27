@@ -1797,7 +1797,7 @@ DIR
     @ This function restores the calculator to its factory settings.
 
     @ Restore default flags.
-    {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
+    {# 204010FF0h # 0h # 8010000042000000h # 0h} STOF
 
     @ Set the FONT8 (default).
     FONT8 çFONT
