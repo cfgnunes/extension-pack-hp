@@ -2,7 +2,7 @@
 @ only the calculator. It can also be used in conjunction with the applications
 @ HPUserEdit or EMU48.
 
-@ %NAME%=LIBMK
+@ %NAME%=MAKE
 
 «
   @ Ensure we're starting in the HOME directory.
