@@ -1,6 +1,6 @@
 # Extension Pack HP
 
-Extension Pack HP is a library developed for HP 49 series calculators, including the HP 50g, HP 49g+, HP 49g, and HP 48GII. It brings features commonly found in other calculators, such as the HP 12c and Casio fx-991LA CW, to the HP 49 series, helping to fill functional gaps left by the original firmware.
+Extension Pack HP is a library developed for HP 49 series calculators, including the HP 50g, HP 49g+, HP 49g, and HP 48GII. It brings features commonly found in other calculators, such as the HP 12c and modern Casio calculators, to the HP 49 series, helping to fill functional gaps left by the original firmware.
 
 The library adds new features to the Finance, Time, and Statistics menus, including NPV, IRR, depreciation methods, probability distributions, and date operations. It also provides system tools, shortcut menus, and global commands for easier access and management.
 
