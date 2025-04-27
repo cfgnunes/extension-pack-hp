@@ -504,7 +504,7 @@ DIR
     "Shortcut menus"
     {
       { "1.Equations menu" 1 }
-      { "2.Linear Algebra menu" 2 }
+      { "2.Linear algebra menu" 2 }
       { "3.Combinatorics menu" 3 }
       { "4.Finance menu" 4 }
     }

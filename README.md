@@ -66,7 +66,7 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Factory reset (RPN mode)
 - **Shortcut Menus**
     - Equations menu
-    - Linear Algebra menu
+    - Linear algebra menu
     - Combinatorics menu
     - Finance menu
 
