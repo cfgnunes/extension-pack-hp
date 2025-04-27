@@ -1285,7 +1285,7 @@ DIR
     {
       { "µ:" "Mean" }
       { "˜:" "Standard deviation" }
-      { "p(x):" "Cumulative probability" }
+      { "p(x):" "Cumulative probability (area)" }
       { "Tail:" "0 left (lower), 1 right (upper)" }
     }
     { 1 0 }
@@ -1320,7 +1320,7 @@ DIR
     "Chi² X~X²(‘;p(x))"
     {
       { "‘:" "Degrees of freedom" }
-      { "p(x):" "Cumulative probability" }
+      { "p(x):" "Cumulative probability (area)" }
       { "Tail:" "0 left (lower), 1 right (upper)" }
     }
     { 1 0 }
@@ -1355,7 +1355,7 @@ DIR
     "T-Student X~T(‘;p(x))"
     {
       { "‘:" "Degrees of freedom" }
-      { "p(x):" "Cumulative probability" }
+      { "p(x):" "Cumulative probability (area)" }
       { "Tail:" "0 left (lower), 1 right (upper)" }
     }
     { 1 0 }
@@ -1544,7 +1544,7 @@ DIR
     {
       { "‘n:" "Degrees of freedom (numerator)" }
       { "‘d:" "Degrees of freedom (denominator)" }
-      { "p(x):" "Cumulative probability" }
+      { "p(x):" "Cumulative probability (area)" }
       { "Tail:" "0 left (lower), 1 right (upper)" }
     }
     { 1 0 }
