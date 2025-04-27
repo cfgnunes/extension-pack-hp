@@ -816,6 +816,7 @@ DIR
       PERM
       !
       @ Options - Part 2.
+      çQ
       RMODE
     }
 
@@ -842,7 +843,6 @@ DIR
       ISOL
       SOLVEVX
       FROOTS
-      RREF
       çQ
       RMODE
     }
@@ -886,9 +886,10 @@ DIR
       DET
       TRAN
       INV
-      EGV
-      @ Options - Part 2.
       RREF
+      @ Options - Part 2.
+      EGV
+      çQ
       RMODE
     }
 
