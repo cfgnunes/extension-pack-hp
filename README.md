@@ -74,9 +74,11 @@ Adds new features under the APPS menu (key: `APPS`) with:
 
 Adds new global commands, allowing access from anywhere in the calculator:
 
-- `EXTPK` - Extension Pack HP Command Menu: Displays a unified menu with all features provided by the Extension Pack HP, offering a convenient shortcut for quick access.
-- `RESET` - Reset Command: Restores the calculator to its factory settings in RPN mode.
-- `RMODE` - Reset Mode Command: Resets the calculator modes to default (Radians, Rectangular, HEX, Real, Exact).
+- `EXTPK` - Extension Pack HP Command Menu: Opens a centralized menu listing all features from the Extension Pack HP, providing a quick and convenient shortcut for easy access.
+- `RESET` - Reset Command: Restores the calculator to its factory default settings, specifically in RPN mode.
+- `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
+- `%TILE` - Percentile Command: Calculates the value corresponding to a specified percentile within an array or list.
+- `RMODE` - Reset Mode Command: Resets the calculator's modes to their default settings (Radians, Rectangular, HEX, Real, Exact).
 
 ## Contributing
 
