@@ -188,7 +188,7 @@ DIR
       CASE
 
         @ Add a new menu entry if the "APPS menu" is active.
-        Opt 0. == THEN
+        Opt 0 == THEN
           SWAP
 
           DUP { "" } + SIZE
@@ -203,7 +203,7 @@ DIR
         END
 
         @ Add a new menu entry if the "Main Statistics menu" is active.
-        Opt 1. == THEN
+        Opt 1 == THEN
           SWAP
 
           DUP { "" } + SIZE
@@ -214,10 +214,10 @@ DIR
         END
 
         @ Add Finance functions if "Finance menu" is active.
-        Opt 4. == THEN
+        Opt 4 == THEN
           ""
           {
-            { "1.Time Value of Money" .0 }
+            { "1.Time Value of Money" 1 }
             { "2.Net Present Value" ´ AppFinanceNPV ª }
             { "3.Int. Rate of Return" ´ AppFinanceIRR ª }
             { "3.Depreciation methods" ´ ChooseFinanceDepreciation ª }
@@ -231,7 +231,7 @@ DIR
           END
 
           DUP
-          TYPE 0. == IF THEN
+          TYPE 0 == IF THEN
             @ If is selected "1.Time Value of Money",
             @ clear temp data on the stack and continue.
             DROP
@@ -245,7 +245,7 @@ DIR
         END
 
         @ Add a new menu entry if the "Time menu" is active.
-        Opt 6. == THEN
+        Opt 6 == THEN
           SWAP
 
           DUP { "" } + SIZE
@@ -275,22 +275,22 @@ DIR
 
     "Extension Pack HP"
     {
-      { "1.Finance" 1. }
-      { "2.Time" 2. }
-      { "3.Prob. distributions" 3. }
-      { "4.System tools" 4. }
-      { "5.Shortcut menus" 5. }
+      { "1.Finance" 1 }
+      { "2.Time" 2 }
+      { "3.Prob. distributions" 3 }
+      { "4.System tools" 4 }
+      { "5.Shortcut menus" 5 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN ChooseFinanceMenu END
-        Opt 2. == THEN ChooseTimeMenu END
-        Opt 3. == THEN ChooseStatDist END
-        Opt 4. == THEN ChooseSystemTools END
-        Opt 5. == THEN ChooseShortcutMenus END
+        Opt 1 == THEN ChooseFinanceMenu END
+        Opt 2 == THEN ChooseTimeMenu END
+        Opt 3 == THEN ChooseStatDist END
+        Opt 4 == THEN ChooseSystemTools END
+        Opt 5 == THEN ChooseShortcutMenus END
       END
     ª
   ª
@@ -300,18 +300,18 @@ DIR
 
     "Depreciation methods"
     {
-      { "1.Straight-Line" 1. }
-      { "2.Sum-of-Years-Digits" 2. }
-      { "3.Declining-Balance" 3. }
+      { "1.Straight-Line" 1 }
+      { "2.Sum-of-Years-Digits" 2 }
+      { "3.Declining-Balance" 3 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppFinanceDepreciationSL END
-        Opt 2. == THEN AppFinanceDepreciationSOYD END
-        Opt 3. == THEN AppFinanceDepreciationDB END
+        Opt 1 == THEN AppFinanceDepreciationSL END
+        Opt 2 == THEN AppFinanceDepreciationSOYD END
+        Opt 3 == THEN AppFinanceDepreciationDB END
       END
     ª
   ª
@@ -321,18 +321,18 @@ DIR
 
     "Finance"
     {
-      { "1.Net Present Value" 1. }
-      { "2.Int. Rate of Return" 2. }
-      { "3.Depreciation methods" 3. }
+      { "1.Net Present Value" 1 }
+      { "2.Int. Rate of Return" 2 }
+      { "3.Depreciation methods" 3 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppFinanceNPV END
-        Opt 2. == THEN AppFinanceIRR END
-        Opt 3. == THEN ChooseFinanceDepreciation END
+        Opt 1 == THEN AppFinanceNPV END
+        Opt 2 == THEN AppFinanceIRR END
+        Opt 3 == THEN ChooseFinanceDepreciation END
       END
     ª
   ª
@@ -342,16 +342,16 @@ DIR
 
     "Time"
     {
-      { "1.Date add/subtract" 1. }
-      { "2.Date difference" 2. }
+      { "1.Date add/subtract" 1 }
+      { "2.Date difference" 2 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppTimeDateAdd END
-        Opt 2. == THEN AppTimeDateDifference END
+        Opt 1 == THEN AppTimeDateAdd END
+        Opt 2 == THEN AppTimeDateDifference END
       END
     ª
   ª
@@ -361,18 +361,18 @@ DIR
 
     "Prob. distributions"
     {
-      { "1.Discrete" 1. }
-      { "2.Continuous" 2. }
-      { "3.Inverse" 3. }
+      { "1.Discrete" 1 }
+      { "2.Continuous" 2 }
+      { "3.Inverse" 3 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN ChooseStatDistDisc END
-        Opt 2. == THEN ChooseStatDistCont END
-        Opt 3. == THEN ChooseStatDistInv END
+        Opt 1 == THEN ChooseStatDistDisc END
+        Opt 2 == THEN ChooseStatDistCont END
+        Opt 3 == THEN ChooseStatDistInv END
       END
     ª
   ª
@@ -382,26 +382,26 @@ DIR
 
     "Discrete distributions"
     {
-      { "1.Binomial" 1. }
-      { "2.Poisson" 2. }
-      { "3.Bernoulli" 3. }
-      { "4.Uniform" 4. }
-      { "5.Neg. Binomial" 5. }
-      { "6.Geometric" 6. }
-      { "7.Hipergeometric" 7. }
+      { "1.Binomial" 1 }
+      { "2.Poisson" 2 }
+      { "3.Bernoulli" 3 }
+      { "4.Uniform" 4 }
+      { "5.Neg. Binomial" 5 }
+      { "6.Geometric" 6 }
+      { "7.Hipergeometric" 7 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppStatDistDiscBinomial END
-        Opt 2. == THEN AppStatDistDiscPoisson END
-        Opt 3. == THEN AppStatDistDiscBernoulli END
-        Opt 4. == THEN AppStatDistDiscUniform END
-        Opt 5. == THEN AppStatDistDiscBinomialNeg END
-        Opt 6. == THEN AppStatDistDiscGeometric END
-        Opt 7. == THEN AppStatDistDiscHipergeometric END
+        Opt 1 == THEN AppStatDistDiscBinomial END
+        Opt 2 == THEN AppStatDistDiscPoisson END
+        Opt 3 == THEN AppStatDistDiscBernoulli END
+        Opt 4 == THEN AppStatDistDiscUniform END
+        Opt 5 == THEN AppStatDistDiscBinomialNeg END
+        Opt 6 == THEN AppStatDistDiscGeometric END
+        Opt 7 == THEN AppStatDistDiscHipergeometric END
       END
     ª
   ª
@@ -411,32 +411,32 @@ DIR
 
     "Continuous distributions"
     {
-      { "1.Normal" 1. }
-      { "2.T-Student" 2. }
-      { "3.Chi≤ (Pearson)" 3. }
-      { "4.Exponential" 4. }
-      { "5.Uniform" 5. }
-      { "6.Gamma" 6. }
-      { "7.Beta" 7. }
-      { "8.Weibull" 8. }
-      { "9.Cauchy-Lorentz" 9. }
-      { "10.F-distribution" 10. }
+      { "1.Normal" 1 }
+      { "2.T-Student" 2 }
+      { "3.Chi≤ (Pearson)" 3 }
+      { "4.Exponential" 4 }
+      { "5.Uniform" 5 }
+      { "6.Gamma" 6 }
+      { "7.Beta" 7 }
+      { "8.Weibull" 8 }
+      { "9.Cauchy-Lorentz" 9 }
+      { "10.F-distribution" 10 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppStatDistContNormal END
-        Opt 2. == THEN AppStatDistContTStudent END
-        Opt 3. == THEN AppStatDistContChi END
-        Opt 4. == THEN AppStatDistContExponential END
-        Opt 5. == THEN AppStatDistContUniform END
-        Opt 6. == THEN AppStatDistContGamma END
-        Opt 7. == THEN AppStatDistContBeta END
-        Opt 8. == THEN AppStatDistContWeibull END
-        Opt 9. == THEN AppStatDistContCauchy END
-        Opt 10. == THEN AppStatDistContFDistribution END
+        Opt 1 == THEN AppStatDistContNormal END
+        Opt 2 == THEN AppStatDistContTStudent END
+        Opt 3 == THEN AppStatDistContChi END
+        Opt 4 == THEN AppStatDistContExponential END
+        Opt 5 == THEN AppStatDistContUniform END
+        Opt 6 == THEN AppStatDistContGamma END
+        Opt 7 == THEN AppStatDistContBeta END
+        Opt 8 == THEN AppStatDistContWeibull END
+        Opt 9 == THEN AppStatDistContCauchy END
+        Opt 10 == THEN AppStatDistContFDistribution END
       END
     ª
   ª
@@ -446,32 +446,32 @@ DIR
 
     "Inverse"
     {
-      { "1.Binomial" 1. }
-      { "2.Poisson" 2. }
-      { "3.Normal" 3. }
-      { "4.T-Student" 4. }
-      { "5.Chi≤ (Pearson)" 5. }
-      { "6.Exponential" 6. }
-      { "7.Uniform (continous)" 7. }
-      { "8.Weibull" 8. }
-      { "9.Cauchy-Lorentz" 9. }
-      { "10.F-distribution" 10. }
+      { "1.Binomial" 1 }
+      { "2.Poisson" 2 }
+      { "3.Normal" 3 }
+      { "4.T-Student" 4 }
+      { "5.Chi≤ (Pearson)" 5 }
+      { "6.Exponential" 6 }
+      { "7.Uniform (continous)" 7 }
+      { "8.Weibull" 8 }
+      { "9.Cauchy-Lorentz" 9 }
+      { "10.F-distribution" 10 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppStatDistInvBinomial END
-        Opt 2. == THEN AppStatDistInvPoisson END
-        Opt 3. == THEN AppStatDistInvNormal END
-        Opt 4. == THEN AppStatDistInvTStudent END
-        Opt 5. == THEN AppStatDistInvChi END
-        Opt 6. == THEN AppStatDistInvExponential END
-        Opt 7. == THEN AppStatDistInvUniform END
-        Opt 8. == THEN AppStatDistInvWeibull END
-        Opt 9. == THEN AppStatDistInvCauchy END
-        Opt 10. == THEN AppStatDistInvFDistribution END
+        Opt 1 == THEN AppStatDistInvBinomial END
+        Opt 2 == THEN AppStatDistInvPoisson END
+        Opt 3 == THEN AppStatDistInvNormal END
+        Opt 4 == THEN AppStatDistInvTStudent END
+        Opt 5 == THEN AppStatDistInvChi END
+        Opt 6 == THEN AppStatDistInvExponential END
+        Opt 7 == THEN AppStatDistInvUniform END
+        Opt 8 == THEN AppStatDistInvWeibull END
+        Opt 9 == THEN AppStatDistInvCauchy END
+        Opt 10 == THEN AppStatDistInvFDistribution END
       END
     ª
   ª
@@ -482,18 +482,18 @@ DIR
 
     "System tools"
     {
-      { "1.Purge all HOME files" 1. }
-      { "2.Factory reset" 2. }
-      { "3.Factory reset (RPN)" 3. }
+      { "1.Purge all HOME files" 1 }
+      { "2.Factory reset" 2 }
+      { "3.Factory reset (RPN)" 3 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN UtilPurgeHomeFiles END
-        Opt 2. == THEN UtilFactoryResetDefault END
-        Opt 3. == THEN UtilFactoryResetRpn END
+        Opt 1 == THEN UtilPurgeHomeFiles END
+        Opt 2 == THEN UtilFactoryResetDefault END
+        Opt 3 == THEN UtilFactoryResetRpn END
       END
     ª
   ª
@@ -503,20 +503,20 @@ DIR
 
     "Shortcut menus"
     {
-      { "1.Equations menu" 1. }
-      { "2.Linear Algebra menu" 2. }
-      { "3.Combinatorics menu" 3. }
-      { "4.Finance menu" 4. }
+      { "1.Equations menu" 1 }
+      { "2.Linear Algebra menu" 2 }
+      { "3.Combinatorics menu" 3 }
+      { "4.Finance menu" 4 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1. == THEN AppMenuEquations END
-        Opt 2. == THEN AppMenuLinearAlgebra END
-        Opt 3. == THEN AppMenuCombinatorics END
-        Opt 4. == THEN AppMenuFinance END
+        Opt 1 == THEN AppMenuEquations END
+        Opt 2 == THEN AppMenuLinearAlgebra END
+        Opt 3 == THEN AppMenuCombinatorics END
+        Opt 4 == THEN AppMenuFinance END
       END
     ª
   ª
