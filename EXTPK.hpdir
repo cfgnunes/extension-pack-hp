@@ -69,6 +69,7 @@ DIR
     RESET
     DSTAT
     RMODE
+    %TILE
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -113,6 +114,7 @@ DIR
     AppStatDistInvTStudent
     AppStatDistInvUniform
     AppStatDistInvWeibull
+    AppStatPercentile
     AppTimeDateAdd
     AppTimeDateDifference
     ChooseFinanceDepreciation
@@ -907,18 +909,25 @@ DIR
   AppStatDescriptiveStatistics ´
     @ # NOTE App: AppStatDescriptiveStatistics
 
-    UtilArrayListToDAT
+    ç v
+    ´
+      v UtilArrayListToDAT
 
-    MEAN "µ" çTAG
-    PSDEV "ò" çTAG
-    PVAR "ò≤" çTAG
-    SDEV "s" çTAG
-    VAR "s≤" çTAG
-    NÖ çQ "N" çTAG
-    MINÖ "Min" çTAG
-    MAXÖ "Max" çTAG
-    ÖX "ÖX" çTAG
-    ÖX2 "ÖX≤" çTAG
+      MEAN "µ" çTAG
+      PSDEV "ò" çTAG
+      PVAR "ò≤" çTAG
+      SDEV "s" çTAG
+      VAR "s≤" çTAG
+      NÖ çQ "N" çTAG
+      ÖX "ÖX" çTAG
+      ÖX2 "ÖX≤" çTAG
+      MINÖ "Min" çTAG
+      MAXÖ "Max" çTAG
+
+      v 25 AppStatPercentile "Q1" çTAG
+      v 50 AppStatPercentile "Median" çTAG
+      v 75 AppStatPercentile "Q3" çTAG
+    ª
   ª
 
   AppStatDistDiscPoisson ´
@@ -1537,6 +1546,30 @@ DIR
     ª
   ª
 
+  AppStatPercentile ´
+    @#NOTE App: AppStatPercentile
+
+    SWAP UtilArrayListToList
+
+    @ Inspired on the function "%TILE" from: "HP 50g / 49g+ / 48gII graphing
+    @ calculator, advanced user's reference manual".
+
+    SORT      @ Brings the list to level 1 and sorts it.
+    DUP SIZE  @ Copies the list, then finds its size.
+    1 + ROT % @Calculates the position of the specified percentile.
+    DUP2      @Makes a copy of the list and the percentile.
+    FLOOR     @Rounds the position to the lower integer.
+    1 MAX OVER SIZE MIN @Ensures it is between 1 and the size of the list.
+    GET       @ Gets the corresponding number.
+    ROT ROT   @ Moves the list to level 1.
+    CEIL      @ Rounds the position to the upper integer.
+    1 MAX OVER SIZE MIN @Ensures it is between 1 and the size of the list.
+    GET       @ Gets the corresponding number.
+    + 2 /     @ Calculates the average of the two numbers.
+
+    çNUM
+  ª
+
   AppStatDistInvCauchy ´
     @#NOTE App: AppStatDistInvCauchy
 
@@ -1995,6 +2028,12 @@ DIR
     @ #NOTE Function (Visible): DSTAT
 
     AppStatDescriptiveStatistics
+  ª
+
+  %TILE ´
+    @ #NOTE Function (Visible): %TILE
+
+    AppStatPercentile
   ª
 
 END
