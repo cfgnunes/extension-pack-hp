@@ -62,8 +62,8 @@ Adds new features under the APPS menu (key: `APPS`) with:
 
 - **System Tools**
     - Purge all HOME files
-    - Factory reset
-    - Factory reset (RPN mode)
+    - Reset system flags
+    - Reset system flags for RPN mode
 - **Shortcut Menus**
     - Equations menu
     - Linear algebra menu

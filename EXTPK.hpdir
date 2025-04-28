@@ -135,12 +135,12 @@ DIR
     UtilDateFromStack
     UtilDateToStack
     UtilDateToStr
-    UtilFactoryReset
-    UtilFactoryResetDefault
-    UtilFactoryResetRpn
     UtilGuiChoose
     UtilGuiInform
     UtilPurgeHomeFiles
+    UtilResetSystemFlags
+    UtilResetSystemFlagsDefault
+    UtilResetSystemFlagsRpn
     UtilValidateLessEqual
     UtilValidateRange
   }
@@ -491,8 +491,8 @@ DIR
     "System tools"
     {
       { "1.Purge all HOME files" 1 }
-      { "2.Factory reset" 2 }
-      { "3.Factory reset (RPN)" 3 }
+      { "2.Reset system flags" 2 }
+      { "3.Reset flags for RPN" 3 }
     }
     UtilGuiChoose
 
@@ -500,8 +500,8 @@ DIR
     ´
       CASE
         Opt 1 == THEN UtilPurgeHomeFiles END
-        Opt 2 == THEN UtilFactoryResetDefault END
-        Opt 3 == THEN UtilFactoryResetRpn END
+        Opt 2 == THEN UtilResetSystemFlagsDefault END
+        Opt 3 == THEN UtilResetSystemFlagsRpn END
       END
     ª
   ª
@@ -1883,53 +1883,6 @@ DIR
     ª
   ª
 
-  UtilFactoryReset ´
-    @ #NOTE Function: UtilFactoryReset
-    @ This function restores the calculator to its factory settings.
-
-    @ Clear the user keys.
-    { } STOKEYS
-
-    UtilPurgeHomeFiles
-
-    @ Restore CAS variables from the "CASDIR".
-    CASCFG
-
-    @ Clear the stack.
-    CLEAR
-
-    AppMenuEquations
-  ª
-
-  UtilFactoryResetDefault ´
-    @ #NOTE Function: UtilFactoryResetDefault
-    @ This function restores the calculator to its factory settings.
-
-    @ Restore default flags.
-    {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
-
-    @ Set the FONT8 (default).
-    FONT8 çFONT
-
-    UtilFactoryReset
-  ª
-
-  UtilFactoryResetRpn ´
-    @ #NOTE Function: UtilFactoryResetRpn
-    @ This function restores the calculator to its factory settings in RPN
-    @ mode.
-
-    @ Restore my custom flags.
-    @-56 SF Disable Error Beep.
-    @-95 CF Set RPN mode.
-    {# 80000204010FF0h # 0h # 8010000002000000h # 0h} STOF
-
-    @ Set the FONT6.
-    FONT6 çFONT
-
-    UtilFactoryReset
-  ª
-
   UtilGuiChoose ´
     @ #NOTE Function: UtilGuiChoose
 
@@ -1959,12 +1912,58 @@ DIR
     HOME
 
     @ Purge all directories.
-    15 TVARS
-    PGDIR
+    15 TVARS PGDIR
 
     @ Purge all variables.
-    VARS
-    PURGE
+    VARS PURGE
+
+    @ Restore CAS variables from the "CASDIR".
+    CASCFG
+  ª
+
+  UtilResetSystemFlags ´
+    @ #NOTE Function: UtilResetSystemFlags
+    @ This function restores the calculator to its factory settings.
+
+    HOME
+
+    @ Clear the user keys.
+    { } STOKEYS
+
+    @ Restore CAS variables from the "CASDIR".
+    'CASDIR' PGDIR
+    CASCFG
+
+    AppMenuEquations
+  ª
+
+  UtilResetSystemFlagsDefault ´
+    @ #NOTE Function: UtilResetSystemFlagsDefault
+    @ This function restores the calculator to its factory settings.
+
+    UtilResetSystemFlags
+
+    @ Restore default flags.
+    {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
+
+    @ Set the FONT8 (default).
+    FONT8 çFONT
+  ª
+
+  UtilResetSystemFlagsRpn ´
+    @ #NOTE Function: UtilResetSystemFlagsRpn
+    @ This function restores the calculator to its factory settings in RPN
+    @ mode.
+
+    UtilResetSystemFlags
+
+    @ Restore my custom flags.
+    @-56 SF Disable Error Beep.
+    @-95 CF Set RPN mode.
+    {# 80000204010FF0h # 0h # 8010000002000000h # 0h} STOF
+
+    @ Set the FONT6.
+    FONT6 çFONT
   ª
 
   UtilValidateLessEqual ´
@@ -2005,7 +2004,7 @@ DIR
   RESET ´
     @ #NOTE Function (Visible): RESET
 
-    UtilFactoryResetRpn
+    UtilResetSystemFlagsRpn
   ª
 
   DSTAT ´
