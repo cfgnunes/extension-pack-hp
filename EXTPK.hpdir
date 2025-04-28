@@ -727,8 +727,8 @@ DIR
     @ Calculates the IRR.
     ç C
     ´
-      @ Purge 'irr' in case it already exists, to allow symbolic computation.
-      'irr' PURGE
+      @ Purge '$IRR' in case it already exists, to allow symbolic computation.
+      '$IRR' PURGE
 
       @ Saves the current status of the flags, and the current directory path.
       PUSH
@@ -744,7 +744,7 @@ DIR
       C SIZE OBJç DROP
       FOR t
         C t GET    @ Get value of C[t].
-        1 'irr' +  @ Calculates (1+r).
+        1 '$IRR' +  @ Calculates (1+r).
         t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
         +          @ Add to the accumulator.
       NEXT
@@ -754,7 +754,7 @@ DIR
 
       @ Solve the equation where NPV = 0.
       @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
-      'irr' .5 ROOT
+      '$IRR' .5 ROOT
 
       @ Restores the flags and current directory
       POP
@@ -762,6 +762,8 @@ DIR
       @ Convert the result to percentage.
       100 * çNUM
       "IRR" çTAG
+
+      '$IRR' PURGE
     ª
   ª
 
@@ -1384,6 +1386,9 @@ DIR
       @ Input validations.
       b 0 1 "p(x)" UtilValidateRange
 
+      @ Purge '$x' in case it already exists, to allow symbolic computation.
+      '$x' PURGE
+
       '(p/(1-p))^$x/($x!*(n-$x)!)=b/((1-p)^n*n!)' EVAL
       '$x' 1. ROOT
       çNUM 0 RND
@@ -1439,6 +1444,9 @@ DIR
     ´
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
+
+      @ Purge '$chi' in case it already exists, to allow symbolic computation.
+      '$chi' PURGE
 
       "´ " v + " $chi UTPC " + p + " - ª" + STRç
       '$chi' 2. ROOT
@@ -1499,6 +1507,9 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Purge '$f' in case it already exists, to allow symbolic computation.
+      '$f' PURGE
+
       "´ " n + " " + d çNUM + " $f UTPF " + p + " - ª" + STRç
       '$f' 2. ROOT
 
@@ -1535,6 +1546,9 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Purge '$x' in case it already exists, to allow symbolic computation.
+      '$x' PURGE
+
       "´ " µ + " " + ò 2 ^ çNUM + " $x UTPN " + p + " - ª" + STRç
       '$x' 2. ROOT
 
@@ -1565,6 +1579,9 @@ DIR
     ´
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
+
+      @ Purge '$x' in case it already exists, to allow symbolic computation.
+      '$x' PURGE
 
       'EXP(ñ)*p=ñ^$x/$x!' EVAL
       '$x' 1. ROOT
@@ -1597,6 +1614,9 @@ DIR
     ´
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
+
+      @ Purge '$t' in case it already exists, to allow symbolic computation.
+      '$t' PURGE
 
       "´ " v + " $t UTPT " + p + " - ª" + STRç
       '$t' 2. ROOT
