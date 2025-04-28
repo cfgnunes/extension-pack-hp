@@ -981,7 +981,7 @@ DIR
     "SOLVE NONLINEAR SYSTEM"
     @ INFORM 'Field definitions'
     {
-      { "Eq:" "Enter list of equations" 5 }
+      { "Eq:" "Enter the list of equations" 5 }
     }
     @ INFORM 'Format' (col, tabs).
     { 1 0 }
@@ -994,18 +994,18 @@ DIR
     @ INFORM Section (End) ----------------------------------------------------
     UtilGuiInform
 
-    @ Store the list of equations.
+    @ Save the entered list of equations in a global variable 'EQ'.
     'EQ' STO
 
-    @ Store the names into a vector.
+    @ Extract the variable names from the equations and store them in '$NAMES'.
     EQ ÖLIST LNAME SWAP DROP '$NAMES' STO
 
-    @ Store the number of names.
+    @ Determine the number of variable names and store it in '$N'.
     $NAMES SIZE EVAL çQ '$N' STO
 
     @ INFORM Section (Begin) --------------------------------------------------
     @ INFORM 'Title'.
-    "INITIAL VALUES (GUESSES)"
+    "INITIAL GUESSES"
     @ INFORM 'Field definitions'
     1 $N FOR k
       { }
@@ -1025,20 +1025,24 @@ DIR
     @ INFORM Section (End) ----------------------------------------------------
     UtilGuiInform
 
-    @ Convert the guesses values into a vector.
+    @ Store the user's initial guesses in an array '$GUESSES'.
     $N çARRY '$GUESSES' STO
 
-
-    @ Solve the nonlinear system using the command 'MSLV'.
+    @ Call 'MSLV' to solve the nonlinear system:
+    @ - Pass the system of equations.
+    @ - Pass the variable names.
+    @ - Pass the user's initial guesses.
     EQ OBJç çARRY
     $NAMES
     $GUESSES
     MSLV
 
+    @ Store the resulting solutions in '$RESULTS'.
     SWAP DROP SWAP DROP
     '$RESULTS' STO
 
-    @ Put all results in the stack.
+    @ Push each solution onto the stack tagged with the
+    @  corresponding variable name.
     1 $N FOR k
       $RESULTS k GET
       $NAMES k GET
