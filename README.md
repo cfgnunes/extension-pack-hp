@@ -8,6 +8,12 @@ The library adds new features to the Finance, Time, and Statistics menus, includ
 
 ## Features
 
+### Numeric Solver Menu
+
+Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) with:
+
+- **Solve nonlinear system**
+
 ### Finance Menu
 
 Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:

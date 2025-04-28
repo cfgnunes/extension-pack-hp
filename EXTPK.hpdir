@@ -102,6 +102,7 @@ DIR
     AppMenuFinance
     AppMenuLinearAlgebra
     AppMenuStatistics
+    AppSolveNonLinearSystem
     AppStatDescriptiveStatistics
     AppStatDistContBeta
     AppStatDistContCauchy
@@ -258,6 +259,17 @@ DIR
             KILL
           END
 
+        END
+
+        @ Add a new menu entry if the "Numeric solver menu" is active.
+        Opt 5 == THEN
+          SWAP
+
+          DUP { "" } + SIZE çQ
+          ".Solve nonlinear sys" + ´ AppSolveNonLinearSystem ª
+          2 çLIST 1 çLIST +
+
+          SWAP
         END
 
         @ Add a new menu entry if the "Time menu" is active.
@@ -959,6 +971,85 @@ DIR
 
     @ Define and display the Custom Menu.
     MENU
+  ª
+
+  AppSolveNonLinearSystem ´
+    @ # NOTE App: AppSolveNonLinearSystem
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "SOLVE NONLINEAR SYSTEM"
+    @ INFORM 'Field definitions'
+    {
+      { "Eq:" "Enter list of equations" 5 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'EQ' VTYPE IF 5 == THEN EQ ELSE { 'X^2 + Y^2 = 25' 'EXP(X) + Y = 1' }  END
+    1
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store the list of equations.
+    'EQ' STO
+
+    @ Store the names into a vector.
+    EQ ÖLIST LNAME SWAP DROP '$NAMES' STO
+
+    @ Store the number of names.
+    $NAMES SIZE EVAL çQ '$N' STO
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "INITIAL VALUES (GUESSES)"
+    @ INFORM 'Field definitions'
+    1 $N FOR k
+      { }
+      $NAMES k GET  ":" + +
+      "" +
+    NEXT
+    $N çLIST
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    { }
+    1 $N FOR k
+      1.0 +
+    NEXT
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Convert the guesses values into a vector.
+    $N çARRY '$GUESSES' STO
+
+
+    @ Solve the nonlinear system using the command 'MSLV'.
+    EQ OBJç çARRY
+    $NAMES
+    $GUESSES
+    MSLV
+
+    SWAP DROP SWAP DROP
+    '$RESULTS' STO
+
+    @ Put all results in the stack.
+    1 $N FOR k
+      $RESULTS k GET
+      $NAMES k GET
+      çTAG
+    NEXT
+
+    @ Remove the temporary variables.
+    '$GUESSES' PURGE
+    '$N' PURGE
+    '$NAMES' PURGE
+    '$RESULTS' PURGE
   ª
 
   AppStatDescriptiveStatistics ´
