@@ -76,6 +76,22 @@ DIR
   @ generally subprograms of your application.
   @ # NOTE Variable: $HIDDEN
   $HIDDEN {
+    @ Special variables.
+    ExtProgram
+
+    @ Choose menus.
+    ChooseMainMenu
+    ChooseCustomMenus
+    ChooseFinanceDepreciation
+    ChooseFinanceMenu
+    ChooseStatDist
+    ChooseStatDistCont
+    ChooseStatDistDisc
+    ChooseStatDistInv
+    ChooseSystemTools
+    ChooseTimeMenu
+
+    @ Apps.
     AppFinanceDepreciationDB
     AppFinanceDepreciationSL
     AppFinanceDepreciationSOYD
@@ -117,17 +133,8 @@ DIR
     AppStatPercentile
     AppTimeDateAdd
     AppTimeDateDifference
-    ChooseCustomMenus
-    ChooseFinanceDepreciation
-    ChooseFinanceMenu
-    ChooseMainMenu
-    ChooseStatDist
-    ChooseStatDistCont
-    ChooseStatDistDisc
-    ChooseStatDistInv
-    ChooseSystemTools
-    ChooseTimeMenu
-    ExtProgram
+
+    @ Util functions.
     UtilArrayListDecompose
     UtilArrayListToDAT
     UtilArrayListToList
@@ -304,6 +311,31 @@ DIR
     ª
   ª
 
+  ChooseCustomMenus ´
+    @ #NOTE Choose: ChooseCustomMenus
+
+    "Custom menus"
+    {
+      { "1.Equations" 1 }
+      { "2.Linear algebra" 2 }
+      { "3.Combinatorics" 3 }
+      { "4.Statistics" 4 }
+      { "5.Finance" 5 }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1 == THEN AppMenuEquations END
+        Opt 2 == THEN AppMenuLinearAlgebra END
+        Opt 3 == THEN AppMenuCombinatorics END
+        Opt 4 == THEN AppMenuStatistics END
+        Opt 5 == THEN AppMenuFinance END
+      END
+    ª
+  ª
+
   ChooseFinanceDepreciation ´
     @ #NOTE Choose: ChooseFinanceDepreciation
 
@@ -346,25 +378,6 @@ DIR
     ª
   ª
 
-  ChooseTimeMenu ´
-    @ #NOTE Choose: ChooseTimeMenu
-
-    "Time"
-    {
-      { "1.Date add/subtract" 1 }
-      { "2.Date difference" 2 }
-    }
-    UtilGuiChoose
-
-    ç Opt
-    ´
-      CASE
-        Opt 1 == THEN AppTimeDateAdd END
-        Opt 2 == THEN AppTimeDateDifference END
-      END
-    ª
-  ª
-
   ChooseStatDist ´
     @ #NOTE Choose: ChooseStatDist
 
@@ -382,35 +395,6 @@ DIR
         Opt 1 == THEN ChooseStatDistDisc END
         Opt 2 == THEN ChooseStatDistCont END
         Opt 3 == THEN ChooseStatDistInv END
-      END
-    ª
-  ª
-
-  ChooseStatDistDisc ´
-    @ #NOTE Choose: ChooseStatDistDisc
-
-    "Discrete distributions"
-    {
-      { "1.Binomial" 1 }
-      { "2.Poisson" 2 }
-      { "3.Bernoulli" 3 }
-      { "4.Uniform" 4 }
-      { "5.Neg. Binomial" 5 }
-      { "6.Geometric" 6 }
-      { "7.Hipergeometric" 7 }
-    }
-    UtilGuiChoose
-
-    ç Opt
-    ´
-      CASE
-        Opt 1 == THEN AppStatDistDiscBinomial END
-        Opt 2 == THEN AppStatDistDiscPoisson END
-        Opt 3 == THEN AppStatDistDiscBernoulli END
-        Opt 4 == THEN AppStatDistDiscUniform END
-        Opt 5 == THEN AppStatDistDiscBinomialNeg END
-        Opt 6 == THEN AppStatDistDiscGeometric END
-        Opt 7 == THEN AppStatDistDiscHipergeometric END
       END
     ª
   ª
@@ -446,6 +430,35 @@ DIR
         Opt 8 == THEN AppStatDistContWeibull END
         Opt 9 == THEN AppStatDistContCauchy END
         Opt 10 == THEN AppStatDistContFDistribution END
+      END
+    ª
+  ª
+
+  ChooseStatDistDisc ´
+    @ #NOTE Choose: ChooseStatDistDisc
+
+    "Discrete distributions"
+    {
+      { "1.Binomial" 1 }
+      { "2.Poisson" 2 }
+      { "3.Bernoulli" 3 }
+      { "4.Uniform" 4 }
+      { "5.Neg. Binomial" 5 }
+      { "6.Geometric" 6 }
+      { "7.Hipergeometric" 7 }
+    }
+    UtilGuiChoose
+
+    ç Opt
+    ´
+      CASE
+        Opt 1 == THEN AppStatDistDiscBinomial END
+        Opt 2 == THEN AppStatDistDiscPoisson END
+        Opt 3 == THEN AppStatDistDiscBernoulli END
+        Opt 4 == THEN AppStatDistDiscUniform END
+        Opt 5 == THEN AppStatDistDiscBinomialNeg END
+        Opt 6 == THEN AppStatDistDiscGeometric END
+        Opt 7 == THEN AppStatDistDiscHipergeometric END
       END
     ª
   ª
@@ -507,27 +520,21 @@ DIR
     ª
   ª
 
-  ChooseCustomMenus ´
-    @ #NOTE Choose: ChooseCustomMenus
+  ChooseTimeMenu ´
+    @ #NOTE Choose: ChooseTimeMenu
 
-    "Custom menus"
+    "Time"
     {
-      { "1.Equations" 1 }
-      { "2.Linear algebra" 2 }
-      { "3.Combinatorics" 3 }
-      { "4.Statistics" 4 }
-      { "5.Finance" 5 }
+      { "1.Date add/subtract" 1 }
+      { "2.Date difference" 2 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1 == THEN AppMenuEquations END
-        Opt 2 == THEN AppMenuLinearAlgebra END
-        Opt 3 == THEN AppMenuCombinatorics END
-        Opt 4 == THEN AppMenuStatistics END
-        Opt 5 == THEN AppMenuFinance END
+        Opt 1 == THEN AppTimeDateAdd END
+        Opt 2 == THEN AppTimeDateDifference END
       END
     ª
   ª
@@ -536,74 +543,6 @@ DIR
   @ #XXX Apps
   @ These functions are self-contained apps with graphical user interfaces.
   @ ---------------------------------------------------------------------------
-
-  AppFinanceIRR ´
-    @ #NOTE App: AppFinanceIRR
-    @ This function calculates the Internal Rate of Return (IRR) of a cash
-    @ flow.
-
-    @ INFORM Section (Begin) --------------------------------------------------
-    @ INFORM 'Title'.
-    "INTERNAL RATE OF RETURN (IRR)"
-    @ INFORM 'Field definitions'.
-    {
-      { "C:" "Enter cash flow" 3 }
-    }
-    @ INFORM 'Format' (col, tabs).
-    { 1 0 }
-    @ INFORM 'Default values'.
-    { }
-    @ INFORM 'Initial values'.
-    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
-    1
-    çLIST
-    @ INFORM Section (End) ----------------------------------------------------
-    UtilGuiInform
-
-    @ Store inputs in variables to allow re-use and editing by the user.
-    DUP
-    'C' STO
-
-    @ Calculates the IRR.
-    ç C
-    ´
-      @ Purge 'irr' in case it already exists, to allow symbolic computation.
-      'irr' PURGE
-
-      @ Saves the current status of the flags, and the current directory path.
-      PUSH
-
-      @ System flag: enable approximate mode.
-      -105 SF
-
-      "´ "
-      @ Initialize the accumulator in the stack.
-      0
-      @ Loop: for t = 1 to 'C.size'.
-      1
-      C SIZE OBJç DROP
-      FOR t
-        C t GET    @ Get value of C[t].
-        1 'irr' +  @ Calculates (1+r).
-        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
-        +          @ Add to the accumulator.
-      NEXT
-
-      0 =
-      + " ª" + STRç
-
-      @ Solve the equation where NPV = 0.
-      @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
-      'irr' .5 ROOT
-
-      @ Restores the flags and current directory
-      POP
-
-      @ Convert the result to percentage.
-      100 * çNUM
-      "IRR" çTAG
-    ª
-  ª
 
   AppFinanceDepreciationDB ´
     @ #NOTE App: AppFinanceDepreciationDB
@@ -756,6 +695,74 @@ DIR
       ª
     ª
     '$RDV' PURGE
+  ª
+
+  AppFinanceIRR ´
+    @ #NOTE App: AppFinanceIRR
+    @ This function calculates the Internal Rate of Return (IRR) of a cash
+    @ flow.
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "INTERNAL RATE OF RETURN (IRR)"
+    @ INFORM 'Field definitions'.
+    {
+      { "C:" "Enter cash flow" 3 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
+    1
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store inputs in variables to allow re-use and editing by the user.
+    DUP
+    'C' STO
+
+    @ Calculates the IRR.
+    ç C
+    ´
+      @ Purge 'irr' in case it already exists, to allow symbolic computation.
+      'irr' PURGE
+
+      @ Saves the current status of the flags, and the current directory path.
+      PUSH
+
+      @ System flag: enable approximate mode.
+      -105 SF
+
+      "´ "
+      @ Initialize the accumulator in the stack.
+      0
+      @ Loop: for t = 1 to 'C.size'.
+      1
+      C SIZE OBJç DROP
+      FOR t
+        C t GET    @ Get value of C[t].
+        1 'irr' +  @ Calculates (1+r).
+        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
+        +          @ Add to the accumulator.
+      NEXT
+
+      0 =
+      + " ª" + STRç
+
+      @ Solve the equation where NPV = 0.
+      @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
+      'irr' .5 ROOT
+
+      @ Restores the flags and current directory
+      POP
+
+      @ Convert the result to percentage.
+      100 * çNUM
+      "IRR" çTAG
+    ª
   ª
 
   AppFinanceNPV ´
@@ -976,176 +983,35 @@ DIR
     ª
   ª
 
-  AppStatDistDiscPoisson ´
-    @ # NOTE App: AppStatDistDiscPoisson
+  AppStatDistContBeta ´
+    @#NOTE App: AppStatDistContBeta
 
-    "Poisson X~P(ñ)"
+    "Beta X~B(å,ﬂ)"
     {
-      { "ñ:" "Lambda (expected value)" }
-      { "x:" "Number of events per interval" }
+      { "å:" "Parameter å" }
+      { "ﬂ:" "Parameter ﬂ" }
+      { "x:" "x value for P(Xâx) (left tail)" }
     }
     { 1 0 }
     { }
-    { 1 1 }
+    { 2 2 .5 }
     UtilGuiInform
 
-    ç ñ x
+    ç å ﬂ x
     ´
-      'EXP(-ñ)*ñ^x/x!' EVAL çNUM
-      "P(x=" x çQ + ")" + çTAG
-
-      @ Additionally calculate the CDF value.
-      'Ö(j=0,x,EXP(-ñ)*ñ^j/j!)' EVAL çNUM
-      "P(xâ" x çQ + ")" + çTAG
+      'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
+      EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
     ª
   ª
 
-  AppStatDistDiscBinomial ´
-    @ # NOTE App: AppStatDistDiscBinomial
+  AppStatDistContCauchy ´
+    @#NOTE App: AppStatDistContCauchy
 
-    "Binomial X~B(n,p)"
+    "Cauchy-Lorentz X~C(X0,ë)"
     {
-      { "n:" "Number of trials" }
-      { "p:" "Prob. of success on a trial" }
-      { "x:" "Number of successes in n trials" }
-    }
-    { 1 0 }
-    { }
-    { 5 .5 1 }
-    UtilGuiInform
-
-    ç n p x
-    ´
-      @ Input validations.
-      x n "x" "n" UtilValidateLessEqual
-
-      'COMB(n,x)*p^x*(1.-p)^(n-x)' EVAL çNUM
-      "P(x=" x çQ + ")" + çTAG
-
-      @ Additionally calculate the CDF value.
-      'Ö(j=0,x,COMB(n,j)*p^j*(1.-p)^(n-j))' EVAL çNUM
-      "P(xâ" x çQ + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistDiscHipergeometric ´
-    @ # NOTE App: AppStatDistDiscHipergeometric
-
-    "Hypergeometric X~H(N,K,n)"
-    {
-      { "N:" "Population size" }
-      { "K:" "Num. of successes in population" }
-      { "n:" "Sample size" }
-      { "x:" "Num. of successes in sample" }
-    }
-    { 1 0 }
-    { }
-    { 10 6 4 2 }
-    UtilGuiInform
-
-    ç N K n x
-    ´
-      @ Input validations.
-      n N "n" "N" UtilValidateLessEqual
-      x K "x" "K" UtilValidateLessEqual
-
-      'COMB(K,x)*COMB(N-K,n-x)/COMB(N,n)' EVAL çNUM
-      "P(x=" x çQ + ")" + çTAG
-
-      @ Additionally calculate the CDF value.
-      'Ö(j=0,x,COMB(K,j)*COMB(N-K,n-j)/COMB(N,n))' EVAL çNUM
-      "P(xâ" x çQ + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistDiscBernoulli ´
-    @ # NOTE App: AppStatDistDiscBernoulli
-
-    "Bernoulli X~Be(p)"
-    {
-      { "p:" "Prob. of success on a trial" }
-      { "x:" "Success (1) or failure (0)" }
-    }
-    { 1 0 }
-    { }
-    { .5 1 }
-    UtilGuiInform
-
-    ç p x
-    ´
-      'p^x*(1-p)^(1-x)' EVAL çNUM
-      "P(x=" x + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistDiscBinomialNeg ´
-    @ # NOTE App: AppStatDistDiscBinomialNeg
-
-    "Neg. Binomial X~B*(r,p)"
-    {
-      { "r:" "Number of successes" }
-      { "p:" "Prob. of success on a trial" }
-      { "x:" "Trials of the r-th success" }
-    }
-    { 1 0 }
-    { }
-    { 1 .5 1 }
-    UtilGuiInform
-
-    ç r p x
-    ´
-      'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' EVAL çNUM
-      "P(x=" x çQ + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistDiscGeometric ´
-    @ # NOTE App: AppStatDistDiscGeometric
-
-    "Geometric X~G(p)"
-    {
-      { "p:" "Prob. of success on a trial" }
-      { "x:" "Trials until first success" }
-    }
-    { 1 0 }
-    { }
-    { .5 10 }
-    UtilGuiInform
-
-    ç p x
-    ´
-      'p*(1-p)^(x-1)' EVAL çNUM
-      "P(x=" x + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistDiscUniform ´
-    @ # NOTE App: AppStatDistDiscUniform
-
-    "Uniform (discrete) X~U(n)"
-    {
-      { "n:" "Number total of objects" }
-      { "x:" "Number of successes" }
-    }
-    { 1 0 }
-    { }
-    { 1 1 }
-    UtilGuiInform
-
-    ç n x
-    ´
-      '(1/n)^x' EVAL çNUM
-      "P(x=" x çQ + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistContNormal ´
-    @#NOTE App: AppStatDistContNormal
-
-    "Normal X~N(µ,ò)"
-    {
-      { "µ:" "Mean" }
-      { "ò:" "Standard deviation" }
+      { "X0:" "Peak of the distribution" }
+      { "ë:" "Half-width" }
       { "x:" "x value for P(Xâx) (left tail)" }
     }
     { 1 0 }
@@ -1153,29 +1019,9 @@ DIR
     { 0 1 .5 }
     UtilGuiInform
 
-    ç µ ò x
+    ç X0 ë x
     ´
-      µ ò 2. ^ çNUM x UTPN 1. SWAP -
-      "P(Xâ" x + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistContTStudent ´
-    @#NOTE App: AppStatDistContTStudent
-
-    "T-Student X~T(ë)"
-    {
-      { "ë:" "Degrees of freedom" }
-      { "x:" "x value for P(Xâx) (left tail)" }
-    }
-    { 1 0 }
-    { }
-    { 5 .5 }
-    UtilGuiInform
-
-    ç v x
-    ´
-      v x UTPT 1. SWAP -
+      '1/á*ATAN((x-X0)/ë)+1/2' EVAL çNUM
       "P(Xâ" x + ")" + çTAG
     ª
   ª
@@ -1220,6 +1066,89 @@ DIR
     ª
   ª
 
+  AppStatDistContFDistribution ´
+    @#NOTE App: AppStatDistContFDistribution
+
+    "F-distribution X~F(ën,ëd)"
+    {
+      { "ën:" "Degrees of freedom (numerator)" }
+      { "ëd:" "Degrees of freedom (denominator)" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 10 10 1 }
+    UtilGuiInform
+
+    ç n d x
+    ´
+      n d x UTPF 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContGamma ´
+    @#NOTE App: AppStatDistContGamma
+
+    "Gamma X~G(å,ﬂ)"
+    {
+      { "å:" "Parameter å" }
+      { "ﬂ:" "Parameter ﬂ" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 2 1 .5 }
+    UtilGuiInform
+
+    ç å ﬂ x
+    ´
+      'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' EVAL çNUM
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContNormal ´
+    @#NOTE App: AppStatDistContNormal
+
+    "Normal X~N(µ,ò)"
+    {
+      { "µ:" "Mean" }
+      { "ò:" "Standard deviation" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 0 1 .5 }
+    UtilGuiInform
+
+    ç µ ò x
+    ´
+      µ ò 2. ^ çNUM x UTPN 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistContTStudent ´
+    @#NOTE App: AppStatDistContTStudent
+
+    "T-Student X~T(ë)"
+    {
+      { "ë:" "Degrees of freedom" }
+      { "x:" "x value for P(Xâx) (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 5 .5 }
+    UtilGuiInform
+
+    ç v x
+    ´
+      v x UTPT 1. SWAP -
+      "P(Xâ" x + ")" + çTAG
+    ª
+  ª
+
   AppStatDistContUniform ´
     @#NOTE App: AppStatDistContUniform
 
@@ -1251,49 +1180,6 @@ DIR
     ª
   ª
 
-  AppStatDistContGamma ´
-    @#NOTE App: AppStatDistContGamma
-
-    "Gamma X~G(å,ﬂ)"
-    {
-      { "å:" "Parameter å" }
-      { "ﬂ:" "Parameter ﬂ" }
-      { "x:" "x value for P(Xâx) (left tail)" }
-    }
-    { 1 0 }
-    { }
-    { 2 1 .5 }
-    UtilGuiInform
-
-    ç å ﬂ x
-    ´
-      'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' EVAL çNUM
-      "P(Xâ" x + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistContBeta ´
-    @#NOTE App: AppStatDistContBeta
-
-    "Beta X~B(å,ﬂ)"
-    {
-      { "å:" "Parameter å" }
-      { "ﬂ:" "Parameter ﬂ" }
-      { "x:" "x value for P(Xâx) (left tail)" }
-    }
-    { 1 0 }
-    { }
-    { 2 2 .5 }
-    UtilGuiInform
-
-    ç å ﬂ x
-    ´
-      'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
-      EVAL çNUM
-      "P(Xâ" x + ")" + çTAG
-    ª
-  ª
-
   AppStatDistContWeibull ´
     @#NOTE App: AppStatDistContWeibull
 
@@ -1315,45 +1201,314 @@ DIR
     ª
   ª
 
-  AppStatDistContCauchy ´
-    @#NOTE App: AppStatDistContCauchy
+  AppStatDistDiscBernoulli ´
+    @ # NOTE App: AppStatDistDiscBernoulli
 
-    "Cauchy-Lorentz X~C(X0,ë)"
+    "Bernoulli X~Be(p)"
+    {
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Success (1) or failure (0)" }
+    }
+    { 1 0 }
+    { }
+    { .5 1 }
+    UtilGuiInform
+
+    ç p x
+    ´
+      'p^x*(1-p)^(1-x)' EVAL çNUM
+      "P(x=" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscBinomial ´
+    @ # NOTE App: AppStatDistDiscBinomial
+
+    "Binomial X~B(n,p)"
+    {
+      { "n:" "Number of trials" }
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Number of successes in n trials" }
+    }
+    { 1 0 }
+    { }
+    { 5 .5 1 }
+    UtilGuiInform
+
+    ç n p x
+    ´
+      @ Input validations.
+      x n "x" "n" UtilValidateLessEqual
+
+      'COMB(n,x)*p^x*(1.-p)^(n-x)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,COMB(n,j)*p^j*(1.-p)^(n-j))' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscBinomialNeg ´
+    @ # NOTE App: AppStatDistDiscBinomialNeg
+
+    "Neg. Binomial X~B*(r,p)"
+    {
+      { "r:" "Number of successes" }
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Trials of the r-th success" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 1 }
+    UtilGuiInform
+
+    ç r p x
+    ´
+      'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscGeometric ´
+    @ # NOTE App: AppStatDistDiscGeometric
+
+    "Geometric X~G(p)"
+    {
+      { "p:" "Prob. of success on a trial" }
+      { "x:" "Trials until first success" }
+    }
+    { 1 0 }
+    { }
+    { .5 10 }
+    UtilGuiInform
+
+    ç p x
+    ´
+      'p*(1-p)^(x-1)' EVAL çNUM
+      "P(x=" x + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscHipergeometric ´
+    @ # NOTE App: AppStatDistDiscHipergeometric
+
+    "Hypergeometric X~H(N,K,n)"
+    {
+      { "N:" "Population size" }
+      { "K:" "Num. of successes in population" }
+      { "n:" "Sample size" }
+      { "x:" "Num. of successes in sample" }
+    }
+    { 1 0 }
+    { }
+    { 10 6 4 2 }
+    UtilGuiInform
+
+    ç N K n x
+    ´
+      @ Input validations.
+      n N "n" "N" UtilValidateLessEqual
+      x K "x" "K" UtilValidateLessEqual
+
+      'COMB(K,x)*COMB(N-K,n-x)/COMB(N,n)' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,COMB(K,j)*COMB(N-K,n-j)/COMB(N,n))' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscPoisson ´
+    @ # NOTE App: AppStatDistDiscPoisson
+
+    "Poisson X~P(ñ)"
+    {
+      { "ñ:" "Lambda (expected value)" }
+      { "x:" "Number of events per interval" }
+    }
+    { 1 0 }
+    { }
+    { 1 1 }
+    UtilGuiInform
+
+    ç ñ x
+    ´
+      'EXP(-ñ)*ñ^x/x!' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      @ Additionally calculate the CDF value.
+      'Ö(j=0,x,EXP(-ñ)*ñ^j/j!)' EVAL çNUM
+      "P(xâ" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistDiscUniform ´
+    @ # NOTE App: AppStatDistDiscUniform
+
+    "Uniform (discrete) X~U(n)"
+    {
+      { "n:" "Number total of objects" }
+      { "x:" "Number of successes" }
+    }
+    { 1 0 }
+    { }
+    { 1 1 }
+    UtilGuiInform
+
+    ç n x
+    ´
+      '(1/n)^x' EVAL çNUM
+      "P(x=" x çQ + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvBinomial ´
+    @#NOTE App: AppStatDistInvBinomial
+
+    "Binomial X~B(n,p;p(x))"
+    {
+      { "n:" "Number of trials" }
+      { "p:" "Prob. of success on a trial" }
+      { "p(x):" "Probability" }
+    }
+    { 1 0 }
+    {
+    }
+    { 5 .5 .5 }
+    UtilGuiInform
+
+    ç n p b
+    ´
+      @ Input validations.
+      b 0 1 "p(x)" UtilValidateRange
+
+      '(p/(1-p))^$x/($x!*(n-$x)!)=b/((1-p)^n*n!)' EVAL
+      '$x' 1. ROOT
+      çNUM 0 RND
+
+      "B(" n çQ + "," + p + ";" + b + ")" + çTAG
+
+      '$x' PURGE
+    ª
+  ª
+
+  AppStatDistInvCauchy ´
+    @#NOTE App: AppStatDistInvCauchy
+
+    "Cauchy-Lorentz X~C(X0,ë;p(x))"
     {
       { "X0:" "Peak of the distribution" }
       { "ë:" "Half-width" }
-      { "x:" "x value for P(Xâx) (left tail)" }
+      { "p(x):" "Cum. probability (left tail)" }
     }
     { 1 0 }
     { }
     { 0 1 .5 }
     UtilGuiInform
 
-    ç X0 ë x
+    ç x g p
     ´
-      '1/á*ATAN((x-X0)/ë)+1/2' EVAL çNUM
-      "P(Xâ" x + ")" + çTAG
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      x g á p 1 2 / - * TAN * + çNUM
+      "C(" x + "," + g + ";" + p + ")" + çTAG
     ª
   ª
 
-  AppStatDistContFDistribution ´
-    @#NOTE App: AppStatDistContFDistribution
+  AppStatDistInvChi ´
+    @#NOTE App: AppStatDistInvChi
 
-    "F-distribution X~F(ën,ëd)"
+    "Chi≤ X~X≤(ë;p(x))"
     {
-      { "ën:" "Degrees of freedom (numerator)" }
-      { "ëd:" "Degrees of freedom (denominator)" }
-      { "x:" "x value for P(Xâx) (left tail)" }
+      { "ë:" "Degrees of freedom" }
+      { "p(x):" "Cumulative probability (area)" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
     }
     { 1 0 }
     { }
-    { 10 10 1 }
+    { 2 .5 0 }
     UtilGuiInform
 
-    ç n d x
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç v p tail
     ´
-      n d x UTPF 1. SWAP -
-      "P(Xâ" x + ")" + çTAG
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " v + " $chi UTPC " + p + " - ª" + STRç
+      '$chi' 2. ROOT
+
+      tail 0 == IF THEN
+        "X≤(" v çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "X≤(" v çQ + ";" + p + ")" + çTAG
+      END
+
+      '$chi' PURGE
+    ª
+  ª
+
+  AppStatDistInvExponential ´
+    @#NOTE App: AppStatDistInvExponential
+
+    "Exponential X~Exp(ﬂ;p(x))"
+    {
+      { "ﬂ:" "ﬂ, if you have ñ ç ﬂ=1/ñ" }
+      { "p(x):" "Cum. probability (left tail)" }
+    }
+    { 1 0 }
+    { }
+    { 1 .5 }
+    UtilGuiInform
+
+    ç b p
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      b 1 p - LN * NEG çNUM
+      "Exp(" b + ";" + p + ")" + çTAG
+    ª
+  ª
+
+  AppStatDistInvFDistribution ´
+    @#NOTE App: AppStatDistInvFDistribution
+
+    "F-distribution X~F(ën,ëd;p(x))"
+    {
+      { "ën:" "Degrees of freedom (numerator)" }
+      { "ëd:" "Degrees of freedom (denominator)" }
+      { "p(x):" "Cumulative probability (area)" }
+      { "Tail:" "0 left (lower), 1 right (upper)" }
+    }
+    { 1 0 }
+    { }
+    { 10 10 .5 0 }
+    UtilGuiInform
+
+    @ Tail type: 0 left (lower), 1 right (upper).
+    0 == IF THEN 1 SWAP - 0 ELSE 1 END
+
+    ç n d p tail
+    ´
+      @ Input validations.
+      p 0 1 "p(x)" UtilValidateRange
+
+      "´ " n + " " + d çNUM + " $f UTPF " + p + " - ª" + STRç
+      '$f' 2. ROOT
+
+      tail 0 == IF THEN
+        "F(" n çQ + "," + d çQ + ";" + 1 p - + ")" + çTAG
+      ELSE
+        "F(" n çQ + "," + d çQ + ";" + p + ")" + çTAG
+      END
+
+      '$f' PURGE
     ª
   ª
 
@@ -1393,38 +1548,31 @@ DIR
     ª
   ª
 
-  AppStatDistInvChi ´
-    @#NOTE App: AppStatDistInvChi
+  AppStatDistInvPoisson ´
+    @#NOTE App: AppStatDistInvPoisson
 
-    "Chi≤ X~X≤(ë;p(x))"
+    "Poisson X~P(ñ;p(x))"
     {
-      { "ë:" "Degrees of freedom" }
-      { "p(x):" "Cumulative probability (area)" }
-      { "Tail:" "0 left (lower), 1 right (upper)" }
+      { "ñ:" "Lambda (expected value)" }
+      { "p(x):" "Probability" }
     }
     { 1 0 }
     { }
-    { 2 .5 0 }
+    { 1 .5 }
     UtilGuiInform
 
-    @ Tail type: 0 left (lower), 1 right (upper).
-    0 == IF THEN 1 SWAP - 0 ELSE 1 END
-
-    ç v p tail
+    ç ñ p
     ´
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      "´ " v + " $chi UTPC " + p + " - ª" + STRç
-      '$chi' 2. ROOT
+      'EXP(ñ)*p=ñ^$x/$x!' EVAL
+      '$x' 1. ROOT
+      çNUM 0 RND
 
-      tail 0 == IF THEN
-        "X≤(" v çQ + ";" + 1 p - + ")" + çTAG
-      ELSE
-        "X≤(" v çQ + ";" + p + ")" + çTAG
-      END
+      "ó(" ñ + ";" + p + ")" + çTAG
 
-      '$chi' PURGE
+      '$x' PURGE
     ª
   ª
 
@@ -1463,64 +1611,6 @@ DIR
     ª
   ª
 
-  AppStatDistInvPoisson ´
-    @#NOTE App: AppStatDistInvPoisson
-
-    "Poisson X~P(ñ;p(x))"
-    {
-      { "ñ:" "Lambda (expected value)" }
-      { "p(x):" "Probability" }
-    }
-    { 1 0 }
-    { }
-    { 1 .5 }
-    UtilGuiInform
-
-    ç ñ p
-    ´
-      @ Input validations.
-      p 0 1 "p(x)" UtilValidateRange
-
-      'EXP(ñ)*p=ñ^$x/$x!' EVAL
-      '$x' 1. ROOT
-      çNUM 0 RND
-
-      "ó(" ñ + ";" + p + ")" + çTAG
-
-      '$x' PURGE
-    ª
-  ª
-
-  AppStatDistInvBinomial ´
-    @#NOTE App: AppStatDistInvBinomial
-
-    "Binomial X~B(n,p;p(x))"
-    {
-      { "n:" "Number of trials" }
-      { "p:" "Prob. of success on a trial" }
-      { "p(x):" "Probability" }
-    }
-    { 1 0 }
-    {
-    }
-    { 5 .5 .5 }
-    UtilGuiInform
-
-    ç n p b
-    ´
-      @ Input validations.
-      b 0 1 "p(x)" UtilValidateRange
-
-      '(p/(1-p))^$x/($x!*(n-$x)!)=b/((1-p)^n*n!)' EVAL
-      '$x' 1. ROOT
-      çNUM 0 RND
-
-      "B(" n çQ + "," + p + ";" + b + ")" + çTAG
-
-      '$x' PURGE
-    ª
-  ª
-
   AppStatDistInvUniform ´
     @#NOTE App: AppStatDistInvUniform
 
@@ -1542,29 +1632,6 @@ DIR
 
       a p b a - * +
       "U(" a + "," + b + ";" + p + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistInvExponential ´
-    @#NOTE App: AppStatDistInvExponential
-
-    "Exponential X~Exp(ﬂ;p(x))"
-    {
-      { "ﬂ:" "ﬂ, if you have ñ ç ﬂ=1/ñ" }
-      { "p(x):" "Cum. probability (left tail)" }
-    }
-    { 1 0 }
-    { }
-    { 1 .5 }
-    UtilGuiInform
-
-    ç b p
-    ´
-      @ Input validations.
-      p 0 1 "p(x)" UtilValidateRange
-
-      b 1 p - LN * NEG çNUM
-      "Exp(" b + ";" + p + ")" + çTAG
     ª
   ª
 
@@ -1614,66 +1681,6 @@ DIR
     + 2 /     @ Calculates the average of the two numbers.
 
     çNUM
-  ª
-
-  AppStatDistInvCauchy ´
-    @#NOTE App: AppStatDistInvCauchy
-
-    "Cauchy-Lorentz X~C(X0,ë;p(x))"
-    {
-      { "X0:" "Peak of the distribution" }
-      { "ë:" "Half-width" }
-      { "p(x):" "Cum. probability (left tail)" }
-    }
-    { 1 0 }
-    { }
-    { 0 1 .5 }
-    UtilGuiInform
-
-    ç x g p
-    ´
-      @ Input validations.
-      p 0 1 "p(x)" UtilValidateRange
-
-      x g á p 1 2 / - * TAN * + çNUM
-      "C(" x + "," + g + ";" + p + ")" + çTAG
-    ª
-  ª
-
-  AppStatDistInvFDistribution ´
-    @#NOTE App: AppStatDistInvFDistribution
-
-    "F-distribution X~F(ën,ëd;p(x))"
-    {
-      { "ën:" "Degrees of freedom (numerator)" }
-      { "ëd:" "Degrees of freedom (denominator)" }
-      { "p(x):" "Cumulative probability (area)" }
-      { "Tail:" "0 left (lower), 1 right (upper)" }
-    }
-    { 1 0 }
-    { }
-    { 10 10 .5 0 }
-    UtilGuiInform
-
-    @ Tail type: 0 left (lower), 1 right (upper).
-    0 == IF THEN 1 SWAP - 0 ELSE 1 END
-
-    ç n d p tail
-    ´
-      @ Input validations.
-      p 0 1 "p(x)" UtilValidateRange
-
-      "´ " n + " " + d çNUM + " $f UTPF " + p + " - ª" + STRç
-      '$f' 2. ROOT
-
-      tail 0 == IF THEN
-        "F(" n çQ + "," + d çQ + ";" + 1 p - + ")" + çTAG
-      ELSE
-        "F(" n çQ + "," + d çQ + ";" + p + ")" + çTAG
-      END
-
-      '$f' PURGE
-    ª
   ª
 
   AppTimeDateAdd ´
@@ -1799,16 +1806,6 @@ DIR
     ª
   ª
 
-  UtilArrayListToList ´
-    @#NOTE Function: UtilArrayListToDAT
-    @ This function converts an array or list to list.
-
-    UtilArrayListDecompose
-
-    @ Convert the data on the stack into a list.
-    çLIST
-  ª
-
   UtilArrayListToDAT ´
     @#NOTE Function: UtilArrayListToDAT
     @ This function converts an array or list to the DAT matrix. This matrix
@@ -1824,6 +1821,16 @@ DIR
 
     @ Set the independent-variable column of the 'ÖDAT'.
     1 XCOL
+  ª
+
+  UtilArrayListToList ´
+    @#NOTE Function: UtilArrayListToDAT
+    @ This function converts an array or list to list.
+
+    UtilArrayListDecompose
+
+    @ Convert the data on the stack into a list.
+    çLIST
   ª
 
   UtilDateAddDate ´
