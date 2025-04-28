@@ -85,6 +85,7 @@ DIR
     AppMenuEquations
     AppMenuFinance
     AppMenuLinearAlgebra
+    AppMenuStatistics
     AppStatDescriptiveStatistics
     AppStatDistContBeta
     AppStatDistContCauchy
@@ -116,10 +117,10 @@ DIR
     AppStatPercentile
     AppTimeDateAdd
     AppTimeDateDifference
+    ChooseCustomMenus
     ChooseFinanceDepreciation
     ChooseFinanceMenu
     ChooseMainMenu
-    ChooseShortcutMenus
     ChooseStatDist
     ChooseStatDistCont
     ChooseStatDistDisc
@@ -204,7 +205,7 @@ DIR
           2 çLIST 1 çLIST +
 
           DUP { "" } + SIZE çQ
-          ".Shortcut menus" + ´ ChooseShortcutMenus ª
+          ".Custom menus" + ´ ChooseCustomMenus ª
           2 çLIST 1 çLIST +
 
           SWAP
@@ -298,7 +299,7 @@ DIR
         Opt 2 == THEN ChooseTimeMenu END
         Opt 3 == THEN ChooseStatDist END
         Opt 4 == THEN ChooseSystemTools END
-        Opt 5 == THEN ChooseShortcutMenus END
+        Opt 5 == THEN ChooseCustomMenus END
       END
     ª
   ª
@@ -506,15 +507,16 @@ DIR
     ª
   ª
 
-  ChooseShortcutMenus ´
-    @ #NOTE Choose: ChooseShortcutMenus
+  ChooseCustomMenus ´
+    @ #NOTE Choose: ChooseCustomMenus
 
-    "Shortcut menus"
+    "Custom menus"
     {
-      { "1.Equations menu" 1 }
-      { "2.Linear algebra menu" 2 }
-      { "3.Combinatorics menu" 3 }
-      { "4.Finance menu" 4 }
+      { "1.Equations" 1 }
+      { "2.Linear algebra" 2 }
+      { "3.Combinatorics" 3 }
+      { "4.Statistics" 4 }
+      { "5.Finance" 5 }
     }
     UtilGuiChoose
 
@@ -524,7 +526,8 @@ DIR
         Opt 1 == THEN AppMenuEquations END
         Opt 2 == THEN AppMenuLinearAlgebra END
         Opt 3 == THEN AppMenuCombinatorics END
-        Opt 4 == THEN AppMenuFinance END
+        Opt 4 == THEN AppMenuStatistics END
+        Opt 5 == THEN AppMenuFinance END
       END
     ª
   ª
@@ -823,8 +826,14 @@ DIR
       COMB
       PERM
       !
+      CLEAR
       @ Options - Part 2.
       çQ
+      { }
+      { }
+      { }
+      { }
+      { "MENUÜ" ´ ChooseCustomMenus ª }
     }
 
     @ Define and display the Custom Menu.
@@ -845,12 +854,14 @@ DIR
       PLOT
       FACTOR
       SIMPLIFY
-      PARTFRAC
+      CLEAR
       @ Options - Part 2.
+      PARTFRAC
       ISOL
       SOLVEVX
       FROOTS
       çQ
+      { "MENUÜ" ´ ChooseCustomMenus ª }
     }
 
     @ Define and display the Custom Menu.
@@ -871,6 +882,14 @@ DIR
       %T
       %CH
       %
+      CLEAR
+      @ Options - Part 2.
+      { }
+      { }
+      { }
+      { }
+      { }
+      { "MENUÜ" ´ ChooseCustomMenus ª }
     }
 
     @ Define and display the Custom Menu.
@@ -890,11 +909,43 @@ DIR
       { "VIEW" ´ DUP SCROLL ª }
       DET
       TRAN
-      INV
       RREF
+      CLEAR
       @ Options - Part 2.
+      INV
       EGV
       çQ
+      { }
+      { }
+      { "MENUÜ" ´ ChooseCustomMenus ª }
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuStatistics ´
+    @ #NOTE App: AppMenuStatistics
+    @ This function displays a custom menu with various mathematical functions
+    @ for statistics.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Part 1.
+      { "EDIT" EDITB }
+      { "VIEW" ´ DUP SCROLL ª }
+      DSTAT
+      %TILE
+      çQ
+      CLEAR
+      @ Options - Part 2.
+      { }
+      { }
+      { }
+      { }
+      { }
+      { "MENUÜ" ´ ChooseCustomMenus ª }
     }
 
     @ Define and display the Custom Menu.

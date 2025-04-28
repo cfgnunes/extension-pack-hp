@@ -60,15 +60,16 @@ Adds new applications to the Statistics menu (keys: `Right Shift` → `5`) with:
 
 Adds new features under the APPS menu (key: `APPS`) with:
 
-- **System Tools**
+- **System tools**
     - Purge all HOME files
     - Reset system flags
     - Reset system flags for RPN mode
-- **Shortcut Menus**
-    - Equations menu
-    - Linear algebra menu
-    - Combinatorics menu
-    - Finance menu
+- **Custom menus**
+    - Equations
+    - Linear algebra
+    - Combinatorics
+    - Statistics
+    - Finance
 
 ### Other commands
 
