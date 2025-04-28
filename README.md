@@ -4,6 +4,8 @@ Extension Pack HP is a library developed in User RPL for HP 49 series calculator
 
 The library adds new features to the Finance, Time, and Statistics menus, including NPV, IRR, depreciation methods, probability distributions, and date operations. It also provides system tools, custom menus, and global commands for easier access and management.
 
+![screenshot](screenshot.png)
+
 ## Features
 
 ### Finance Menu
