@@ -78,7 +78,6 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `RESET` - Reset Command: Restores the calculator to its factory default settings, specifically in RPN mode.
 - `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
 - `%TILE` - Percentile Command: Calculates the value corresponding to a specified percentile within an array or list.
-- `RMODE` - Reset Mode Command: Resets the calculator's modes to their default settings (Radians, Rectangular, HEX, Real, Exact).
 
 ## Contributing
 

@@ -69,7 +69,6 @@ DIR
     RESET
     DSTAT
     %TILE
-    RMODE
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -826,7 +825,6 @@ DIR
       !
       @ Options - Part 2.
       çQ
-      RMODE
     }
 
     @ Define and display the Custom Menu.
@@ -853,7 +851,6 @@ DIR
       SOLVEVX
       FROOTS
       çQ
-      RMODE
     }
 
     @ Define and display the Custom Menu.
@@ -874,7 +871,6 @@ DIR
       %T
       %CH
       %
-      RMODE
     }
 
     @ Define and display the Custom Menu.
@@ -899,7 +895,6 @@ DIR
       @ Options - Part 2.
       EGV
       çQ
-      RMODE
     }
 
     @ Define and display the Custom Menu.
@@ -2011,17 +2006,6 @@ DIR
     @ #NOTE Function (Visible): RESET
 
     UtilFactoryResetRpn
-  ª
-
-  RMODE ´
-    @ #NOTE Function (Visible): RMODE
-    @ This function resets the calculator modes to default.
-
-    RAD       @ Set "Radians" mode.
-    RECT      @ Set "Rectangular" mode.
-    HEX       @ Set "HEX" mode.
-    -103 CF   @ Set "Real" mode.
-    -105 CF   @ Set "Exact" mode.
   ª
 
   DSTAT ´
