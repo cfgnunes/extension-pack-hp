@@ -288,7 +288,7 @@ DIR
       { "2.Time" 2 }
       { "3.Prob. distributions" 3 }
       { "4.System tools" 4 }
-      { "5.Shortcut menus" 5 }
+      { "5.Custom menus" 5 }
     }
     UtilGuiChoose
 
