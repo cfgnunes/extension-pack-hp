@@ -1019,7 +1019,7 @@ DIR
     NEXT
     $N çLIST
     @ INFORM 'Format' (col, tabs).
-    { 1 0 }
+    { 2 0 }
     @ INFORM 'Default values'.
     { }
     @ INFORM 'Initial values'.
@@ -1128,7 +1128,7 @@ DIR
     NEXT
     $N çLIST
     @ INFORM 'Format' (col, tabs).
-    { 1 0 }
+    { 2 0 }
     @ INFORM 'Default values'.
     { }
     @ INFORM 'Initial values'.
