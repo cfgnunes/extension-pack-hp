@@ -841,14 +841,14 @@ DIR
     @ Put in the stack the "Custom Menu",
     @ to be displayed and stored as 'CST' file in Home.
     {
-      @ Options - Part 1.
+      @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       COMB
       PERM
       !
       CLEAR
-      @ Options - Part 2.
+      @ Options - Page 2.
       çQ
       { }
       { }
@@ -869,14 +869,14 @@ DIR
     @ Put in the stack the "Custom Menu",
     @ to be displayed and stored as 'CST' file in Home.
     {
-      @ Options - Part 1.
+      @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       PLOT
       FACTOR
       SIMPLIFY
       CLEAR
-      @ Options - Part 2.
+      @ Options - Page 2.
       PARTFRAC
       ISOL
       SOLVEVX
@@ -897,14 +897,14 @@ DIR
     @ Put in the stack the "Custom Menu",
     @ to be displayed and stored as 'CST' file in Home.
     {
-      @ Options - Part 1.
+      @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       %T
       %CH
       %
       CLEAR
-      @ Options - Part 2.
+      @ Options - Page 2.
       { }
       { }
       { }
@@ -925,14 +925,14 @@ DIR
     @ Put in the stack the "Custom Menu",
     @ to be displayed and stored as 'CST' file in Home.
     {
-      @ Options - Part 1.
+      @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       DET
       TRAN
       RREF
       CLEAR
-      @ Options - Part 2.
+      @ Options - Page 2.
       INV
       EGV
       çQ
@@ -953,14 +953,14 @@ DIR
     @ Put in the stack the "Custom Menu",
     @ to be displayed and stored as 'CST' file in Home.
     {
-      @ Options - Part 1.
+      @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       DSTAT
       %TILE
       çQ
       CLEAR
-      @ Options - Part 2.
+      @ Options - Page 2.
       { }
       { }
       { }
