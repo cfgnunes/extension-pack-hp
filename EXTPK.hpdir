@@ -303,22 +303,24 @@ DIR
 
     "Extension Pack HP"
     {
-      { "1.Finance" 1 }
-      { "2.Time" 2 }
-      { "3.Prob. distributions" 3 }
-      { "4.System tools" 4 }
-      { "5.Custom menus" 5 }
+      { "1.Solve nonlinear sys" 1 }
+      { "2.Finance" 2 }
+      { "3.Time" 3 }
+      { "4.Prob. distributions" 4 }
+      { "5.System tools" 5 }
+      { "6.Custom menus" 6 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1 == THEN ChooseFinanceMenu END
-        Opt 2 == THEN ChooseTimeMenu END
-        Opt 3 == THEN ChooseStatDist END
-        Opt 4 == THEN ChooseSystemTools END
-        Opt 5 == THEN ChooseCustomMenus END
+        Opt 1 == THEN AppSolveNonLinearSystem END
+        Opt 2 == THEN ChooseFinanceMenu END
+        Opt 3 == THEN ChooseTimeMenu END
+        Opt 4 == THEN ChooseStatDist END
+        Opt 5 == THEN ChooseSystemTools END
+        Opt 6 == THEN ChooseCustomMenus END
       END
     ª
   ª
