@@ -12,7 +12,6 @@ The library adds new features to the Finance, Time, and Statistics menus, includ
 
 Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) with:
 
-- **Solve multiple equations**
 - **Solve nonlinear system**
 
 ### Finance Menu

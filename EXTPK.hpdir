@@ -102,7 +102,6 @@ DIR
     AppMenuFinance
     AppMenuLinearAlgebra
     AppMenuStatistics
-    AppSolveMultipleEquations
     AppSolveNonLinearSystem
     AppStatDescriptiveStatistics
     AppStatDistContBeta
@@ -265,10 +264,6 @@ DIR
         @ Add a new menu entry if the "Numeric solver menu" is active.
         Opt 5 == THEN
           SWAP
-
-          DUP { "" } + SIZE çQ
-          ".Solve multiple eq" + ´ AppSolveMultipleEquations ª
-          2 çLIST 1 çLIST +
 
           DUP { "" } + SIZE çQ
           ".Solve nonlinear sys" + ´ AppSolveNonLinearSystem ª
@@ -976,115 +971,6 @@ DIR
 
     @ Define and display the Custom Menu.
     MENU
-  ª
-
-  AppSolveMultipleEquations ´
-    @ # NOTE App: AppSolveMultipleEquations
-
-    @ INFORM Section (Begin) --------------------------------------------------
-    @ INFORM 'Title'.
-    "SOLVE MULTIPLE EQUATIONS"
-    @ INFORM 'Field definitions'
-    {
-      { "Eq:" "Enter the list of equations" 5 }
-    }
-    @ INFORM 'Format' (col, tabs).
-    { 1 0 }
-    @ INFORM 'Default values'.
-    { }
-    @ INFORM 'Initial values'.
-    'EQ' VTYPE IF 5 == THEN EQ ELSE { 'V = R*I' 'P = V*I' }  END
-    1
-    çLIST
-    @ INFORM Section (End) ----------------------------------------------------
-    UtilGuiInform
-
-    @ Save the entered list of equations in a global variable 'EQ'.
-    'EQ' STO
-
-    @ Extract the variable names from the equations and store them in '$NAMES'.
-    EQ ÖLIST LNAME SWAP DROP '$NAMES' STO
-
-    @ Determine the number of variable names and store it in '$N'.
-    $NAMES SIZE EVAL çQ '$N' STO
-
-    @ INFORM Section (Begin) --------------------------------------------------
-    @ INFORM 'Title'.
-    "ENTER THE KNOWN VALUES"
-    @ INFORM 'Field definitions'
-    1 $N FOR k
-      { }
-      $NAMES k GET  ":" + +
-      "Leave blank to solve the value." +
-    NEXT
-    $N çLIST
-    @ INFORM 'Format' (col, tabs).
-    { 2 0 }
-    @ INFORM 'Default values'.
-    { }
-    @ INFORM 'Initial values'.
-    { }
-    1 $N FOR k
-      NOVAL +
-    NEXT
-    @ INFORM Section (End) ----------------------------------------------------
-    UtilGuiInform
-
-    @ Store the user's values in an list '$VALUES'.
-    $N çLIST '$VALUES' STO
-
-    { }
-    1 $N FOR k
-      $VALUES k GET NOVAL == IF THEN
-        $NAMES k GET +
-      ELSE
-        $VALUES k GET
-        $NAMES k GET
-        STO
-      END
-    NEXT
-    OBJç çARRY '$NAMES' STO
-
-    @ Determine the new number of variable names.
-    $NAMES SIZE EVAL çQ '$N' STO
-
-    @ Initial guesses array.
-    { }
-    1 $N FOR k
-      1.0 +
-    NEXT
-    OBJç çARRY '$GUESS' STO
-
-    @ Purge the variables to allow symbolic computation.
-    $NAMES OBJç EVAL çLIST PURGE
-
-    @ Call 'MSLV' to solve the nonlinear system:
-    @ - Pass the system of equations.
-    @ - Pass the variable names.
-    @ - Pass the user's initial guesses.
-    EQ OBJç çARRY
-    $NAMES
-    $GUESS
-    MSLV
-
-    @ Store the resulting solutions in '$RESULTS'.
-    SWAP DROP SWAP DROP
-    '$RESULTS' STO
-
-    @ Push each solution onto the stack tagged with the
-    @  corresponding variable name.
-    1 $N FOR k
-      $RESULTS k GET
-      $NAMES k GET
-      çTAG
-    NEXT
-
-    @ Remove the temporary variables.
-    '$GUESS' PURGE
-    '$N' PURGE
-    '$NAMES' PURGE
-    '$RESULTS' PURGE
-    '$VALUES' PURGE
   ª
 
   AppSolveNonLinearSystem ´
