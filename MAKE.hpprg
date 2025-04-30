@@ -53,8 +53,11 @@
   0 STO
 
   @ Attach the final version of the library for use.
-  :0:1723 ATTACH
+  @:0:1723 ATTACH
 
   @ Back to the HOME directory.
   HOME
+
+  @ Remove the directory 'MYLIB'.
+  'MYLIB' PGDIR
 »
