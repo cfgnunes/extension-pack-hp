@@ -63,21 +63,21 @@ Adds new applications to the Statistics menu (keys: `Right Shift` → `5`) with:
     - Inverse: Weibull
     - Inverse: Cauchy-Lorentz
     - Inverse: F-Distribution
+- **DSTAT**
 
 ### APPS Menu
 
 Adds new features under the APPS menu (key: `APPS`) with:
 
-- **System tools**
-    - Purge all HOME files
-    - Reset system flags
-    - Reset system flags for RPN mode
 - **Custom menus**
     - Equations
     - Matrix
     - Combinatorics
-    - Statistics
     - Finance
+- **System tools**
+    - Reset system flags
+    - Reset system flags for RPN mode
+    - Purge all HOME files
 
 ### Other commands
 
@@ -86,7 +86,6 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `EXTPK` - Extension Pack HP Command Menu: Opens a centralized menu listing all features from the Extension Pack HP, providing a quick and convenient shortcut for easy access.
 - `RESET` - Reset Command: Reset system flags and reinitializes the calculator for best use in RPN (Reverse Polish Notation) mode.
 - `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
-- `%TILE` - Percentile Command: Calculates the value corresponding to a specified percentile within an array or list.
 
 ## Contributing
 

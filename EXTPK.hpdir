@@ -70,7 +70,6 @@ DIR
     EXTPK
     RESET
     DSTAT
-    %TILE
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -103,7 +102,6 @@ DIR
     AppMenuEquations
     AppMenuFinance
     AppMenuMatrix
-    AppMenuStatistics
     AppSolveNonLinearSystem
     AppStatDescriptiveStatistics
     AppStatDistContBeta
@@ -212,11 +210,11 @@ DIR
           SWAP
 
           DUP { "" } + SIZE çQ
-          ".System tools" + ´ ChooseSystemTools ª
+          ".Custom menus" + ´ ChooseCustomMenus ª
           2 çLIST 1 çLIST +
 
           DUP { "" } + SIZE çQ
-          ".Custom menus" + ´ ChooseCustomMenus ª
+          ".System tools" + ´ ChooseSystemTools ª
           2 çLIST 1 çLIST +
 
           SWAP
@@ -228,6 +226,10 @@ DIR
 
           DUP { "" } + SIZE çQ
           ".Prob. distributions" + ´ ChooseStatDist ª
+          2 çLIST 1 çLIST +
+
+          DUP { "" } + SIZE çQ
+          ".DSTAT" + ´ DSTAT ª
           2 çLIST 1 çLIST +
 
           SWAP
@@ -336,8 +338,7 @@ DIR
       { "1.Equations" 1 }
       { "2.Matrix" 2 }
       { "3.Combinatorics" 3 }
-      { "4.Statistics" 4 }
-      { "5.Finance" 5 }
+      { "4.Finance" 4 }
     }
     UtilGuiChoose
 
@@ -347,8 +348,7 @@ DIR
         Opt 1 == THEN AppMenuEquations END
         Opt 2 == THEN AppMenuMatrix END
         Opt 3 == THEN AppMenuCombinatorics END
-        Opt 4 == THEN AppMenuStatistics END
-        Opt 5 == THEN AppMenuFinance END
+        Opt 4 == THEN AppMenuFinance END
       END
     ª
   ª
@@ -521,18 +521,18 @@ DIR
 
     "System tools"
     {
-      { "1.Purge all HOME files" 1 }
-      { "2.Reset system flags" 2 }
-      { "3.Reset flags for RPN" 3 }
+      { "1.Reset system flags" 1 }
+      { "2.Reset flags for RPN" 2 }
+      { "3.Purge all HOME files" 3 }
     }
     UtilGuiChoose
 
     ç Opt
     ´
       CASE
-        Opt 1 == THEN UtilPurgeHomeFiles END
-        Opt 2 == THEN UtilResetSystemFlagsDefault END
-        Opt 3 == THEN UtilResetSystemFlagsRpn END
+        Opt 1 == THEN UtilResetSystemFlagsDefault END
+        Opt 2 == THEN UtilResetSystemFlagsRpn END
+        Opt 3 == THEN UtilPurgeHomeFiles END
       END
     ª
   ª
@@ -753,21 +753,14 @@ DIR
       @ System flag: enable approximate mode.
       -105 SF
 
-      "´ "
-      @ Initialize the accumulator in the stack.
-      0
+      "'"
       @ Loop: for t = 1 to 'C.size'.
       1
       C SIZE OBJç DROP
       FOR t
-        C t GET    @ Get value of C[t].
-        1 '$IRR' +  @ Calculates (1+r).
-        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
-        +          @ Add to the accumulator.
+        "+" + C t GET "/(1+$IRR)^(" + t + "-1)" + +
       NEXT
-
-      0 =
-      + " ª" + STRç
+      "=0'" + STRç
 
       @ Solve the equation where NPV = 0.
       @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
@@ -847,7 +840,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" EDITB }
+      { "EDIT" ´ EDITB ª }
       { "VIEW" ´ DUP SCROLL ª }
       !
       COMB
@@ -875,17 +868,17 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" EDITB }
+      { "EDIT" ´ EDITB ª }
       { "VIEW" ´ DUP SCROLL ª }
-      PLOT
-      SIMPLIFY
-      FACTOR
+      { "PLOT" ´ PLOT ª }
+      { "SIMPL" ´ SIMPLIFY ª }
+      { "FACTO" ´ FACTOR ª }
       { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
-      PARTFRAC
-      ISOL
-      SOLVEVX
-      FROOTS
+      { "PARTF" ´ PARTFRAC ª }
+      { "SOLVE" ´ SOLVEVX ª }
+      { "FROOT" ´ FROOTS ª }
+      { "ISOL" ISOL }
       { }
       { "MENUÜ" ´ ChooseCustomMenus ª }
     }
@@ -903,7 +896,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" EDITB }
+      { "EDIT" ´ EDITB ª }
       { "VIEW" ´ DUP SCROLL ª }
       %T
       %CH
@@ -931,44 +924,16 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" EDITB }
+      { "EDIT" ´ EDITB ª }
       { "VIEW" ´ DUP SCROLL ª }
-      TRAN
-      DET
-      RREF
+      { "TRAN" ´ TRAN ª }
+      { "DET" ´ DET ª }
+      { "RREF" ´ RREF ª }
       { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
-      EGV
-      { }
-      { }
-      { }
-      { }
-      { "MENUÜ" ´ ChooseCustomMenus ª }
-    }
-
-    @ Define and display the Custom Menu.
-    MENU
-  ª
-
-  AppMenuStatistics ´
-    @ #NOTE App: AppMenuStatistics
-    @ This function displays a custom menu with various mathematical functions
-    @ for statistics.
-
-    @ Put in the stack the "Custom Menu",
-    @ to be displayed and stored as 'CST' file in Home.
-    {
-      @ Options - Page 1.
-      { "EDIT" EDITB }
-      { "VIEW" ´ DUP SCROLL ª }
-      DSTAT
-      %TILE
-      { }
-      { "ab/c" ´ UtilConvertMixedFraction ª }
-      @ Options - Page 2.
-      { }
-      { }
-      { }
+      { "EGV" ´ EGV ª }
+      { "RANK" ´ RANK ª }
+      { "TRACE" ´ TRACE ª }
       { }
       { }
       { "MENUÜ" ´ ChooseCustomMenus ª }
@@ -1965,19 +1930,26 @@ DIR
   UtilConvertMixedFraction ´
     @#NOTE Function: UtilConvertMixedFraction
 
+    @ If the stack is empty, toggles exact/approximate mode.
     DEPTH 0 == IF THEN
+      -105 FS? IF THEN
+        -105 CF
+      ELSE
+        -105 SF
+      END
       KILL
     END
 
     ç v
     ´
       CASE
-        @ Real number (type 0).
-        v TYPE 0 == THEN
+        @ Type: Real number (type 0).
+        @ Type: Complex number (type 1).
+        v TYPE 0 == v TYPE 1 == OR THEN
           v XQ
         END
 
-        @ Algebraic object (type 9).
+        @ Type: Algebraic object (type 9).
         v TYPE 9 == THEN
           v LNAME SIZE 0 == IF THEN
             @ Only numbers.
@@ -1987,21 +1959,26 @@ DIR
           END
         END
 
-        @ List (type 5).
-        @ Real array (type 3)
-        @ Symbolic vector/matrix (type 29).
-        v TYPE 3 == v TYPE 5 == OR v TYPE 29 == OR THEN
+        @ Type: Real integer (type 28).
+        v TYPE 28 == THEN
+            XNUM
+        END
+
+        @ Type: Real array (type 3)
+        @ Type: Complex array (type 4)
+        @ Type: List (type 5).
+        @ Type: Symbolic vector/matrix (type 29).
+        v TYPE 3 == v TYPE 4 == OR v TYPE 5 == OR v TYPE 29 == OR THEN
           1
           @ Get the total size of the array/vector/list.
+          v SIZE
           v SIZE TYPE 5 == IF THEN
-            v SIZE 1 + úLIST
-          ELSE
-            v SIZE
+            1 + úLIST
           END
 
-          @ Check if there is a real element.
+          @ Check if there is a real or complex element.
           FOR k
-            v k GET TYPE 0 == IF THEN
+            v k GET TYPE 0 == v k GET TYPE 1 == OR IF THEN
               v XQ
               KILL
             END
@@ -2009,7 +1986,14 @@ DIR
           v XNUM
         END
 
-      v
+        @ Type: other types.
+        v
+        @ Toggles exact/approximate mode.
+        -105 FS? IF THEN
+          -105 CF
+        ELSE
+          -105 SF
+        END
       END
     ª
   ª
@@ -2250,12 +2234,6 @@ DIR
     @ #NOTE Function (Visible): DSTAT
 
     AppStatDescriptiveStatistics
-  ª
-
-  %TILE ´
-    @ #NOTE Function (Visible): %TILE
-
-    AppStatPercentile
   ª
 
 END
