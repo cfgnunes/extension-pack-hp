@@ -140,6 +140,7 @@ DIR
     UtilArrayListToDAT
     UtilArrayListToList
     UtilConvertMixedFraction
+    UtilConvertMixedFractionValue
     UtilDateAddDate
     UtilDateAddYear
     UtilDateFromStack
@@ -151,6 +152,7 @@ DIR
     UtilResetSystemFlags
     UtilResetSystemFlagsDefault
     UtilResetSystemFlagsRpn
+    UtilToggleExactApproximate
     UtilValidateLessEqual
     UtilValidateRange
   }
@@ -1932,13 +1934,31 @@ DIR
 
     @ If the stack is empty, toggles exact/approximate mode.
     DEPTH 0 == IF THEN
-      -105 FS? IF THEN
-        -105 CF
-      ELSE
-        -105 SF
-      END
-      KILL
+      UtilToggleExactApproximate
+    ELSE
+      ç v
+      ´
+        CASE
+
+          @ Type: Tagged object (type 12).
+          v TYPE 12 == THEN
+            v OBJç SWAP UtilConvertMixedFractionValue SWAP çTAG
+          END
+
+          @ Type: Unit object (type 12).
+          v TYPE 13 == THEN
+            v OBJç SWAP UtilConvertMixedFractionValue SWAP *
+          END
+
+          @ Other types.
+          v UtilConvertMixedFractionValue
+        END
+      ª
     END
+  ª
+
+  UtilConvertMixedFractionValue ´
+    @#NOTE Function: UtilConvertMixedFractionValue
 
     ç v
     ´
@@ -1961,7 +1981,7 @@ DIR
 
         @ Type: Real integer (type 28).
         v TYPE 28 == THEN
-            XNUM
+          v XNUM
         END
 
         @ Type: Real array (type 3)
@@ -1989,11 +2009,7 @@ DIR
         @ Type: other types.
         v
         @ Toggles exact/approximate mode.
-        -105 FS? IF THEN
-          -105 CF
-        ELSE
-          -105 SF
-        END
+        UtilToggleExactApproximate
       END
     ª
   ª
@@ -2187,6 +2203,16 @@ DIR
 
     @ Set the FONT6.
     FONT6 çFONT
+  ª
+
+  UtilToggleExactApproximate ´
+    @ #NOTE Function: UtilToggleExactApproximate
+
+    -105 FS? IF THEN
+      -105 CF
+    ELSE
+      -105 SF
+    END
   ª
 
   UtilValidateLessEqual ´
