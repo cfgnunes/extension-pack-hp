@@ -18,7 +18,7 @@
   :2:1723 DUP DETACH PURGE
 
   @ Attach the development library.
-  256 ATTACH
+  @256 ATTACH
 
   @ Attempt to load the source code from the stack as a string:
   @ Check if the stack is not empty.
@@ -54,4 +54,7 @@
 
   @ Attach the final version of the library for use.
   :0:1723 ATTACH
+
+  @ Back to the HOME directory.
+  HOME
 »
