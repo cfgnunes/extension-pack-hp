@@ -101,7 +101,7 @@ DIR
     AppMenuCombinatorics
     AppMenuEquations
     AppMenuFinance
-    AppMenuLinearAlgebra
+    AppMenuMatrix
     AppMenuStatistics
     AppSolveNonLinearSystem
     AppStatDescriptiveStatistics
@@ -140,6 +140,7 @@ DIR
     UtilArrayListDecompose
     UtilArrayListToDAT
     UtilArrayListToList
+    UtilConvertMixedFraction
     UtilDateAddDate
     UtilDateAddYear
     UtilDateFromStack
@@ -332,7 +333,7 @@ DIR
     "Custom menus"
     {
       { "1.Equations" 1 }
-      { "2.Linear algebra" 2 }
+      { "2.Matrix" 2 }
       { "3.Combinatorics" 3 }
       { "4.Statistics" 4 }
       { "5.Finance" 5 }
@@ -343,7 +344,7 @@ DIR
     ´
       CASE
         Opt 1 == THEN AppMenuEquations END
-        Opt 2 == THEN AppMenuLinearAlgebra END
+        Opt 2 == THEN AppMenuMatrix END
         Opt 3 == THEN AppMenuCombinatorics END
         Opt 4 == THEN AppMenuStatistics END
         Opt 5 == THEN AppMenuFinance END
@@ -356,9 +357,9 @@ DIR
 
     "Depreciation methods"
     {
-      { "1.Straight-Line" 1 }
-      { "2.Sum-of-Years-Digits" 2 }
-      { "3.Declining-Balance" 3 }
+      { "1.Straight line" 1 }
+      { "2.Sum-of-years digits" 2 }
+      { "3.Declining balance" 3 }
     }
     UtilGuiChoose
 
@@ -562,11 +563,11 @@ DIR
   AppFinanceDepreciationDB ´
     @ #NOTE App: AppFinanceDepreciationDB
 
-    "DECLINING-BALANCE (DB)"
+    "DECLINING BALANCE (DB)"
     {
-      { "SBV:" "Starting book value" }
-      { "SAL:" "Salvage value" }
-      { "L:" "Asset's useful life expectancy" }
+      { "Cost:" "Enter asset cost value" }
+      { "Salvage:" "Enter asset salvage value" }
+      { "Life:" "Enter end of asset life" }
     }
     { 1 0 }
     { }
@@ -580,13 +581,13 @@ DIR
       @ - 2 Depreciation expense during period j ($DPN)
       @ - 3 Remaining depreciable value at end of period j ($RDV)
 
-      'èj' 'èDepr' 'èValue'
+      'è' 'èDepr.' 'èValue'
       0 0 SBV
       { 2 3 } çARRY
 
       SBV '$RDV' STO
 
-      @ Calculates the declining-balance rate (double declining balance).
+      @ Calculates the declining balance rate (double declining balance).
       2 L /
 
       ç RATE
@@ -620,11 +621,11 @@ DIR
   AppFinanceDepreciationSL ´
     @ #NOTE App: AppFinanceDepreciationSL
 
-    "STRAIGHT-LINE (SL)"
+    "STRAIGHT LINE (SL)"
     {
-      { "SBV:" "Starting book value" }
-      { "SAL:" "Salvage value" }
-      { "L:" "Asset's useful life expectancy" }
+      { "Cost:" "Enter asset cost value" }
+      { "Salvage:" "Enter asset salvage value" }
+      { "Life:" "Enter end of asset life" }
     }
     { 1 0 }
     { }
@@ -638,7 +639,7 @@ DIR
       @ - 2 Depreciation expense during period j ($DPN)
       @ - 3 Remaining depreciable value at end of period j ($RDV)
 
-      'èj' 'èDepr' 'èValue'
+      'è' 'èDepr.' 'èValue'
       0 0 SBV
       { 2 3 } çARRY
 
@@ -665,11 +666,11 @@ DIR
   AppFinanceDepreciationSOYD ´
     @ #NOTE App: AppFinanceDepreciationSOYD
 
-    "SUM-OF-THE-YEARS-DIGITS"
+    "SUM-OF-THE-YEARS DIGITS"
     {
-      { "SBV:" "Starting book value" }
-      { "SAL:" "Salvage value" }
-      { "L:" "Asset's useful life expectancy" }
+      { "Cost:" "Enter asset cost value" }
+      { "Salvage:" "Enter asset salvage value" }
+      { "Life:" "Enter end of asset life" }
     }
     { 1 0 }
     { }
@@ -683,13 +684,13 @@ DIR
       @ - 2 Depreciation expense during period j ($DPN)
       @ - 3 Remaining depreciable value at end of period j ($RDV)
 
-      'èj' 'èDepr' 'èValue'
+      'è' 'èDepr.' 'èValue'
       0 0 SBV
       { 2 3 } çARRY
 
       SBV '$RDV' STO
 
-      @ Calculates the sum-of-years-digits.
+      @ Calculates the sum-of-years digits.
       L FLOOR 1 + L FLOOR L FP 2 * + * 2 /
 
       @ Total depreciation.
@@ -847,12 +848,12 @@ DIR
       @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
+      !
       COMB
       PERM
-      !
-      CLEAR
+      { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
-      çQ
+      { }
       { }
       { }
       { }
@@ -876,15 +877,15 @@ DIR
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
       PLOT
-      FACTOR
       SIMPLIFY
-      CLEAR
+      FACTOR
+      { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
       PARTFRAC
       ISOL
       SOLVEVX
       FROOTS
-      çQ
+      { }
       { "MENUÜ" ´ ChooseCustomMenus ª }
     }
 
@@ -906,7 +907,7 @@ DIR
       %T
       %CH
       %
-      CLEAR
+      { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
       { }
       { }
@@ -920,8 +921,8 @@ DIR
     MENU
   ª
 
-  AppMenuLinearAlgebra ´
-    @ #NOTE App: AppMenuLinearAlgebra
+  AppMenuMatrix ´
+    @ #NOTE App: AppMenuMatrix
     @ This function displays a custom menu with various mathematical functions
     @ for algebra.
 
@@ -931,14 +932,14 @@ DIR
       @ Options - Page 1.
       { "EDIT" EDITB }
       { "VIEW" ´ DUP SCROLL ª }
-      DET
       TRAN
+      DET
       RREF
-      CLEAR
+      { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
-      INV
       EGV
-      çQ
+      { }
+      { }
       { }
       { }
       { "MENUÜ" ´ ChooseCustomMenus ª }
@@ -961,8 +962,8 @@ DIR
       { "VIEW" ´ DUP SCROLL ª }
       DSTAT
       %TILE
-      çQ
-      CLEAR
+      { }
+      { "ab/c" ´ UtilConvertMixedFraction ª }
       @ Options - Page 2.
       { }
       { }
@@ -1069,20 +1070,19 @@ DIR
     ´
       v UtilArrayListToDAT
 
-      MEAN "µ" çTAG
-      PSDEV "ò" çTAG
-      PVAR "ò≤" çTAG
-      SDEV "s" çTAG
-      VAR "s≤" çTAG
-      NÖ çQ "N" çTAG
+      NÖ çQ "n" çTAG
+      MINÖ "Min" çTAG
+      v 25 AppStatPercentile "Q1" çTAG
+      v 50 AppStatPercentile "Med" çTAG
+      v 75 AppStatPercentile "Q3" çTAG
+      MAXÖ "Max" çTAG
       ÖX "ÖX" çTAG
       ÖX2 "ÖX≤" çTAG
-      MINÖ "Min" çTAG
-      MAXÖ "Max" çTAG
-
-      v 25 AppStatPercentile "Q1" çTAG
-      v 50 AppStatPercentile "Median" çTAG
-      v 75 AppStatPercentile "Q3" çTAG
+      MEAN "Å" çTAG
+      SDEV "sX" çTAG
+      VAR "s≤X" çTAG
+      PSDEV "òX" çTAG
+      PVAR "ò≤X" çTAG
     ª
   ª
 
@@ -1954,6 +1954,58 @@ DIR
     çLIST
   ª
 
+  UtilConvertMixedFraction ´
+    @#NOTE Function: UtilConvertMixedFraction
+
+    DEPTH 0 == IF THEN
+      KILL
+    END
+
+    ç v
+    ´
+      CASE
+        @ Real number (type 0).
+        v TYPE 0 == THEN
+          v XQ
+        END
+
+        @ Algebraic object (type 9).
+        v TYPE 9 == THEN
+          v LNAME SIZE 0 == IF THEN
+            @ Only numbers.
+            XNUM
+          ELSE
+            XQ
+          END
+        END
+
+        @ List (type 5).
+        @ Real array (type 3)
+        @ Symbolic vector/matrix (type 29).
+        v TYPE 3 == v TYPE 5 == OR v TYPE 29 == OR THEN
+          1
+          @ Get the total size of the array/vector/list.
+          v SIZE TYPE 5 == IF THEN
+            v SIZE 1 + úLIST
+          ELSE
+            v SIZE
+          END
+
+          @ Check if there is a real element.
+          FOR k
+            v k GET TYPE 0 == IF THEN
+              v XQ
+              KILL
+            END
+          NEXT
+          v XNUM
+        END
+
+      v
+      END
+    ª
+  ª
+
   UtilDateAddDate ´
     @#NOTE Function: UtilDateAddDate
 
@@ -2102,7 +2154,7 @@ DIR
 
   UtilResetSystemFlags ´
     @ #NOTE Function: UtilResetSystemFlags
-    @ This function restores the calculator to its factory settings.
+    @ This function restores the calculator flags to its factory settings.
 
     HOME
 
@@ -2118,7 +2170,7 @@ DIR
 
   UtilResetSystemFlagsDefault ´
     @ #NOTE Function: UtilResetSystemFlagsDefault
-    @ This function restores the calculator to its factory settings.
+    @ This function restores the calculator flags to its factory settings.
 
     UtilResetSystemFlags
 
@@ -2131,8 +2183,7 @@ DIR
 
   UtilResetSystemFlagsRpn ´
     @ #NOTE Function: UtilResetSystemFlagsRpn
-    @ This function restores the calculator to its factory settings in RPN
-    @ mode.
+    @ This function restores the calculator flags to use with RPN mode.
 
     UtilResetSystemFlags
 

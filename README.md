@@ -21,9 +21,9 @@ Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
 - **Net Present Value (NPV)**
 - **Internal Rate of Return (IRR)**
 - **Depreciation methods**
-    - Straight-Line (SL)
-    - Sum-of-the-Years Digits (SOYD)
-    - Declining-Balance (DB)
+    - Straight line (SL)
+    - Sum-of-the-years digits (SOYD)
+    - Declining balance (DB)
 
 ### Time Menu
 
@@ -74,7 +74,7 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Reset system flags for RPN mode
 - **Custom menus**
     - Equations
-    - Linear algebra
+    - Matrix
     - Combinatorics
     - Statistics
     - Finance
