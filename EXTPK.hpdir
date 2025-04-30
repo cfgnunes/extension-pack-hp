@@ -1027,7 +1027,9 @@ DIR
       1.0 +
     NEXT
     @ INFORM Section (End) ----------------------------------------------------
-    UtilGuiInform
+    INFORM
+    NOT IF THEN '$N' PURGE '$NAMES' PURGE KILL END
+    EVAL
 
     @ Store the user's initial guesses in an array '$GUESS'.
     $N çARRY '$GUESS' STO
@@ -1035,32 +1037,37 @@ DIR
     @ Purge the variables to allow symbolic computation.
     $NAMES OBJç EVAL çLIST PURGE
 
-    @ Call 'MSLV' to solve the nonlinear system:
-    @ - Pass the system of equations.
-    @ - Pass the variable names.
-    @ - Pass the user's initial guesses.
     EQN OBJç çARRY
     $NAMES
     $GUESS
-    MSLV
-
-    @ Store the resulting solutions in '$RESULTS'.
-    SWAP DROP SWAP DROP
-    '$RESULTS' STO
-
-    @ Push each solution onto the stack tagged with the
-    @  corresponding variable name.
-    1 $N FOR k
-      $RESULTS k GET
-      $NAMES k GET
-      çTAG
-    NEXT
+    $N
 
     @ Remove the temporary variables.
+    '$NAMES' PURGE
     '$GUESS' PURGE
     '$N' PURGE
-    '$NAMES' PURGE
+
+    ç eqn names guess n
+    ´
+      @ Call 'MSLV' to solve the nonlinear system:
+      @ - Pass the system of equations.
+      @ - Pass the variable names.
+      @ - Pass the user's initial guesses.
+      eqn names guess MSLV
+
+      @ Store the resulting solutions in '$RESULTS'.
+      SWAP DROP SWAP DROP
+      '$RESULTS' STO
+
+      @ Push each solution onto the stack tagged with the
+      @  corresponding variable name.
+      1 n FOR k
+        $RESULTS k GET
+        names k GET
+        çTAG
+      NEXT
     '$RESULTS' PURGE
+    ª
   ª
 
   AppStatDescriptiveStatistics ´
