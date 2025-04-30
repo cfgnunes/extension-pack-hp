@@ -250,9 +250,7 @@ DIR
           CHOOSE
 
           @ Exit if the user presses "Cancel".
-          NOT IF THEN
-            2 DROPN KILL
-          END
+          NOT IF THEN 2 DROPN KILL END
 
           DUP
           TYPE 28 == IF THEN
@@ -996,7 +994,11 @@ DIR
     NEXT
     @ INFORM Section (End) ----------------------------------------------------
     INFORM
+
+    @ Exit if the user presses "Cancel".
     NOT IF THEN '$N' PURGE '$NAMES' PURGE KILL END
+
+    @ Extract the values from the list.
     EVAL
 
     @ Store the user's initial guesses in an array '$GUESS'.
