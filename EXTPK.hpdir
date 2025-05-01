@@ -507,9 +507,11 @@ DIR
 
     "System tools"
     {
-      { "1.Reset system flags" 1 }
-      { "2.Reset flags for RPN" 2 }
+      { "1.Reset sys flags" 1 }
+      { "2.Reset sys flags RPN" 2 }
       { "3.Purge all HOME files" 3 }
+      { "4.Reset and purge" 4 }
+      { "5.Reset and purge RPN" 5 }
     }
     UtilGuiChoose
 
@@ -519,6 +521,8 @@ DIR
         Opt 1 == THEN UtilResetSystemFlagsDefault END
         Opt 2 == THEN UtilResetSystemFlagsRpn END
         Opt 3 == THEN UtilPurgeHomeFiles END
+        Opt 4 == THEN UtilResetSystemFlagsDefault UtilPurgeHomeFiles END
+        Opt 5 == THEN UtilResetSystemFlagsRpn UtilPurgeHomeFiles END
       END
     »
   »
@@ -2217,6 +2221,7 @@ DIR
     @ #NOTE Function (Visible): RESET
 
     UtilResetSystemFlagsRpn
+    UtilPurgeHomeFiles
   »
 
   DSTAT «

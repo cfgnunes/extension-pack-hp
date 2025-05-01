@@ -76,15 +76,17 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Finance
 - **System tools**
     - Reset system flags
-    - Reset system flags for RPN mode
+    - Reset system flags (RPN mode)
     - Purge all HOME files
+    - Reset and purge
+    - Reset and purge (RPN mode)
 
 ### Other commands
 
 Adds new global commands, allowing access from anywhere in the calculator:
 
 - `EXTPK` - Extension Pack HP Command Menu: Opens a centralized menu listing all features from the Extension Pack HP, providing a quick and convenient shortcut for easy access.
-- `RESET` - Reset Command: Reset system flags and reinitializes the calculator for best use in RPN (Reverse Polish Notation) mode.
+- `RESET` - Reset Command: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also purges all files stored in the `HOME` directory and restores the default `CAS` directory.
 - `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
 - `XFRAC` - Converts numbers or decimal-formatted objects to rational (quotient) form and vice versa. This function is similar to the `ab/c` key found on some other calculators.
 
