@@ -89,7 +89,7 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `RESET` - Reset Command: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also purges all files stored in the `HOME` directory and restores the default `CAS` directory.
 - `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
 - `XFRAC` - Converts numbers or decimal-formatted objects to rational (quotient) form and vice versa. This function is similar to the `ab/c` key found on some other calculators.
-- `NSOLVE` - Numerical Solver Command: Functions like the `ROOT` command but uses the predefined variable `VX` from the `CASDIR` directory to streamline the process. You only need to provide the equation and an initial guess, making the call simpler and more concise.
+- `NSOLVE` - Numerical Solver Command: This function call the `ROOT` command but uses the predefined variable `VX` from the `CASDIR` directory to streamline the process. You only need to provide the equation and an initial guess, making the call simpler and more concise.
 
 ## Contributing
 
