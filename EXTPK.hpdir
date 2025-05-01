@@ -197,11 +197,11 @@ DIR
         Opt 0 == THEN
           SWAP
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".Custom menus" + ´ ChooseCustomMenus ª
           2 çLIST 1 çLIST +
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".System tools" + ´ ChooseSystemTools ª
           2 çLIST 1 çLIST +
 
@@ -212,11 +212,11 @@ DIR
         Opt 1 == THEN
           SWAP
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".Prob. distributions" + ´ ChooseStatDist ª
           2 çLIST 1 çLIST +
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".DSTAT" + ´ DSTAT ª
           2 çLIST 1 çLIST +
 
@@ -256,7 +256,7 @@ DIR
         Opt 5 == THEN
           SWAP
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".Solve nonlinear sys" + ´ AppSolveNonLinearSystem ª
           2 çLIST 1 çLIST +
 
@@ -267,11 +267,11 @@ DIR
         Opt 6 == THEN
           SWAP
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".Date add/subtract" + ´ AppTimeDateAdd ª
           2 çLIST 1 çLIST +
 
-          DUP { "" } + SIZE çQ
+          DUP { "" } + SIZE XQ
           ".Date difference" + ´ AppTimeDateDifference ª
           2 çLIST 1 çLIST +
 
