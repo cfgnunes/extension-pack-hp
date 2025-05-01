@@ -871,7 +871,7 @@ DIR
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
       { "CSOLV" « CSOLVE » }
-      { "NSOLV" « NSOLVE » }
+      { "NSOLV" NSOLVE }
       { "ISOL" ISOL }
       { "MENU†" « CMENU » }
     }
