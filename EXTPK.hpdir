@@ -1766,7 +1766,7 @@ DIR
     ROT ROT   @ Moves the list to level 1.
     CEIL      @ Rounds the position to the upper integer.
     1 MAX OVER SIZE MIN @Ensures it is between 1 and the size of the list.
-    GET       @ Gets the corresponding number.
+    çNUM GET @ Gets the corresponding number.
     + 2 /     @ Calculates the average of the two numbers.
 
     çNUM
