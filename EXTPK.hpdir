@@ -142,7 +142,6 @@ DIR
     UtilArrayListToDAT
     UtilArrayListToList
     UtilConvertMixedFraction
-    UtilConvertMixedFractionValue
     UtilDateAddDate
     UtilDateAddYear
     UtilDateFromStack
@@ -193,15 +192,6 @@ DIR
     @ 4 Finance menu
     @ 5 Numeric solver menu
     @ 6 Time menu
-
-    @ These commented commands bellow dump the stack to help debug.
-    @DUP
-    @'ExNum' STO
-    @SWAP
-    @DUP
-    @'ExLst' STO
-    @SWAP
-    @KILL
 
     DUP R~SB
 
@@ -611,8 +601,7 @@ DIR
 
           @ If the $RDV is equal to SAL, stop the loop.
           $RDV SAL 0.001 + < IF THEN
-            @ Workaround to break the FOR loop.
-            L 'j' STO
+            L 'j' STO @ Workaround to break the FOR loop.
           END
         NEXT
       »
@@ -1882,21 +1871,25 @@ DIR
 
      v
     «
-      CASE
+      v TYPE  vType
+      «
+        CASE
 
-        @ Type: List (type 5).
-        v TYPE 5 == THEN
-          v OBJ EVAL
+          @ Type: List (type 5).
+          vType 5 == THEN
+            v OBJ EVAL
+          END
+
+          @ Type: Real array (type 3)
+          @ Type: Symbolic vector/matrix (type 29).
+          vType 3 == vType 29 == OR THEN
+            v OBJ 1 + œLIST
+          END
+
+          v
+          "Error: The argument must be an array or a list!" DOERR
         END
-
-        @ Type: Real array (type 3)
-        @ Type: Symbolic vector/matrix (type 29).
-        v TYPE 3 == v TYPE 29 == OR THEN
-          v OBJ 1 + œLIST
-        END
-
-        "Error: The argument must be an array or a list!" DOERR
-    END
+      »
     »
   »
 
@@ -1930,85 +1923,73 @@ DIR
   UtilConvertMixedFraction «
     @#NOTE Function: UtilConvertMixedFraction
 
-    @ If the stack is empty, toggles exact/approximate mode.
-    DEPTH 0 == IF THEN
-      UtilToggleExactApproximate
-    ELSE
-       v
+     v
+    «
+      v TYPE  vType
       «
         CASE
+          @ Type: Real number (type 0).
+          @ Type: Complex number (type 1).
+          vType 0 == vType 1 == OR THEN
+            v XQ
+          END
+
+          @ Type: Real integer (type 28).
+          vType 28 == THEN
+            v XNUM
+          END
+
+          @ Type: Algebraic object (type 9).
+          vType 9 == THEN
+            v LNAME SIZE 0 == IF THEN
+              @ Only numbers.
+              XNUM
+            ELSE
+              XQ
+            END
+          END
+
+          @ Type: Real array (type 3)
+          @ Type: Complex array (type 4)
+          @ Type: List (type 5).
+          @ Type: Symbolic vector/matrix (type 29).
+          vType 3 == vType 4 == OR vType 5 == OR vType 29 == OR THEN
+            1
+            @ Get the total size of the array/vector/list.
+            v SIZE
+            v SIZE TYPE 5 == IF THEN
+              1 + œLIST
+            END
+
+            @ Check if there is a real or complex element.
+             vSize
+            «
+              vSize FOR k
+                v k GET TYPE DUP 0 == SWAP 1 == OR IF THEN
+                  v XQ
+                  KILL
+                END
+              NEXT
+            »
+            v XNUM
+          END
 
           @ Type: Tagged object (type 12).
-          v TYPE 12 == THEN
-            v OBJ SWAP UtilConvertMixedFractionValue SWAP TAG
+          vType 12 == THEN
+            v OBJ SWAP UtilConvertMixedFraction SWAP TAG
           END
 
           @ Type: Unit object (type 12).
-          v TYPE 13 == THEN
-            v OBJ SWAP UtilConvertMixedFractionValue SWAP *
+          vType 13 == THEN
+            v OBJ SWAP UtilConvertMixedFraction SWAP *
           END
 
-          @ Other types.
-          v UtilConvertMixedFractionValue
+          @ Type: other types.
+          v
+          @ Toggles exact/approximate mode.
+          UtilToggleExactApproximate
         END
       »
-    END
-  »
-
-  UtilConvertMixedFractionValue «
-    @#NOTE Function: UtilConvertMixedFractionValue
-
-     v
-    «
-      CASE
-        @ Type: Real number (type 0).
-        @ Type: Complex number (type 1).
-        v TYPE 0 == v TYPE 1 == OR THEN
-          v XQ
-        END
-
-        @ Type: Algebraic object (type 9).
-        v TYPE 9 == THEN
-          v LNAME SIZE 0 == IF THEN
-            @ Only numbers.
-            XNUM
-          ELSE
-            XQ
-          END
-        END
-
-        @ Type: Real integer (type 28).
-        v TYPE 28 == THEN
-          v XNUM
-        END
-
-        @ Type: Real array (type 3)
-        @ Type: Complex array (type 4)
-        @ Type: List (type 5).
-        @ Type: Symbolic vector/matrix (type 29).
-        v TYPE 3 == v TYPE 4 == OR v TYPE 5 == OR v TYPE 29 == OR THEN
-          1
-          @ Get the total size of the array/vector/list.
-          v SIZE
-          v SIZE TYPE 5 == IF THEN
-            1 + œLIST
-          END
-
-          @ Check if there is a real or complex element.
-          FOR k
-            v k GET TYPE 0 == v k GET TYPE 1 == OR IF THEN
-              v XQ
-              KILL
-            END
-          NEXT
-          v XNUM
-        END
-
-        @ Type: other types.
-        v
-        @ Toggles exact/approximate mode.
-        UtilToggleExactApproximate
-      END
     »
   »
 
