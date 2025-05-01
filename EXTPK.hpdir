@@ -65,8 +65,8 @@ DIR
     EXTPK
     RESET
     XFRAC
-    NSOLVE
     CSOLVE
+    NSOLVE
     DSTAT
     CMENU
   }
@@ -869,10 +869,10 @@ DIR
       { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
-      { "SOLVE" « SOLVEVX » }
-      { "NSOLV" « NSOLVE » }
-      { "CSOLV" « CSOLVE » }
       { "ISOL" ISOL }
+      { "SOLVE" « SOLVEVX » }
+      { "CSOLV" « CSOLVE » }
+      { "NSOLV" « NSOLVE » }
       { "MENU†" « CMENU » }
     }
 
@@ -2251,16 +2251,16 @@ DIR
     UtilConvertMixedFraction
   »
 
-  NSOLVE «
-    @ #NOTE Function (Visible): NSOLVE
-
-    AppSolveNumerical
-  »
-
   CSOLVE «
     @ #NOTE Function (Visible): CSOLVE
 
     AppSolveComplex
+  »
+
+  NSOLVE «
+    @ #NOTE Function (Visible): NSOLVE
+
+    AppSolveNumerical
   »
 
   DSTAT «
