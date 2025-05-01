@@ -1758,17 +1758,20 @@ DIR
 
     SORT      @ Brings the list to level 1 and sorts it.
     DUP SIZE  @ Copies the list, then finds its size.
-    1 + ROT % @Calculates the position of the specified percentile.
-    DUP2      @Makes a copy of the list and the percentile.
-    FLOOR     @Rounds the position to the lower integer.
-    1 MAX OVER SIZE MIN @Ensures it is between 1 and the size of the list.
-    GET       @ Gets the corresponding number.
-    ROT ROT   @ Moves the list to level 1.
-    CEIL      @ Rounds the position to the upper integer.
-    1 MAX OVER SIZE MIN @Ensures it is between 1 and the size of the list.
-    çNUM GET @ Gets the corresponding number.
-    + 2 /     @ Calculates the average of the two numbers.
+    1 + ROT % @ Calculates the position of the specified percentile.
+    DUP2      @ Makes a copy of the list and the percentile.
 
+    FLOOR     @ Rounds the position to the lower integer.
+    1 MAX OVER SIZE MIN @ Ensures it is between 1 and the size of the list.
+    çNUM GET @ Gets the corresponding number.
+
+    ROT ROT   @ Moves the list to level 1.
+
+    CEIL      @ Rounds the position to the upper integer.
+    1 MAX OVER SIZE MIN @ Ensures it is between 1 and the size of the list.
+    çNUM GET @ Gets the corresponding number.
+
+    + 2 /     @ Calculates the average of the two numbers.
     çNUM
   ª
 
