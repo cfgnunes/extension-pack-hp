@@ -67,6 +67,7 @@ DIR
     DSTAT
     XFRAC
     CMENU
+    NSOLVE
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -100,6 +101,7 @@ DIR
     AppMenuFinance
     AppMenuMatrix
     AppSolveNonLinearSystem
+    AppSolveNumerical
     AppStatDescriptiveStatistics
     AppStatDistContBeta
     AppStatDistContCauchy
@@ -510,8 +512,8 @@ DIR
       { "1.Reset sys flags" 1 }
       { "2.Reset sys flags RPN" 2 }
       { "3.Purge all HOME files" 3 }
-      { "4.Reset and purge" 4 }
-      { "5.Reset and purge RPN" 5 }
+      { "4.Purge and reset" 4 }
+      { "5.Purge and reset RPN" 5 }
     }
     UtilGuiChoose
 
@@ -521,8 +523,8 @@ DIR
         Opt 1 == THEN UtilResetSystemFlagsDefault END
         Opt 2 == THEN UtilResetSystemFlagsRpn END
         Opt 3 == THEN UtilPurgeHomeFiles END
-        Opt 4 == THEN UtilResetSystemFlagsDefault UtilPurgeHomeFiles END
-        Opt 5 == THEN UtilResetSystemFlagsRpn UtilPurgeHomeFiles END
+        Opt 4 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsDefault END
+        Opt 5 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsRpn END
       END
     »
   »
@@ -866,7 +868,7 @@ DIR
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
-      { "FROOT" « FROOTS » }
+      { "NSOLV" « NSOLVE » }
       { "ISOL" ISOL }
       { }
       { "MENU†" « CMENU » }
@@ -1027,6 +1029,14 @@ DIR
       NEXT
     '$RESULTS' PURGE
     »
+  »
+
+  AppSolveNumerical «
+    @ # NOTE App: AppStatDescriptiveStatistics
+
+    RCLVX SWAP
+    ROOT
+    RCLVX SWAP =
   »
 
   AppStatDescriptiveStatistics «
@@ -2220,8 +2230,8 @@ DIR
   RESET «
     @ #NOTE Function (Visible): RESET
 
-    UtilResetSystemFlagsRpn
     UtilPurgeHomeFiles
+    UtilResetSystemFlagsRpn
   »
 
   DSTAT «
@@ -2240,6 +2250,12 @@ DIR
     @ #NOTE Function (Visible): CMENU
 
     ChooseCustomMenus
+  »
+
+  NSOLVE «
+    @ #NOTE Function (Visible): NSOLVE
+
+    AppSolveNumerical
   »
 
 END

@@ -78,8 +78,8 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Reset system flags
     - Reset system flags (RPN mode)
     - Purge all HOME files
-    - Reset and purge
-    - Reset and purge (RPN mode)
+    - Purge all files and reset system flags
+    - Purge all files and reset system flags (RPN mode)
 
 ### Other commands
 
