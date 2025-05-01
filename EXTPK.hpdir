@@ -70,6 +70,8 @@ DIR
     EXTPK
     RESET
     DSTAT
+    XFRAC
+    CMENU
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -845,14 +847,14 @@ DIR
       !
       COMB
       PERM
-      { "ab/c" « UtilConvertMixedFraction » }
+      { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { }
       { }
       { }
       { }
       { }
-      { "MENU†" « ChooseCustomMenus » }
+      { "MENU†" « CMENU » }
     }
 
     @ Define and display the Custom Menu.
@@ -873,14 +875,14 @@ DIR
       { "PLOT" « PLOT » }
       { "SIMPL" « SIMPLIFY » }
       { "FACTO" « FACTOR » }
-      { "ab/c" « UtilConvertMixedFraction » }
+      { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
       { "FROOT" « FROOTS » }
       { "ISOL" ISOL }
       { }
-      { "MENU†" « ChooseCustomMenus » }
+      { "MENU†" « CMENU » }
     }
 
     @ Define and display the Custom Menu.
@@ -901,14 +903,14 @@ DIR
       %T
       %CH
       %
-      { "ab/c" « UtilConvertMixedFraction » }
+      { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { }
       { }
       { }
       { }
       { }
-      { "MENU†" « ChooseCustomMenus » }
+      { "MENU†" « CMENU » }
     }
 
     @ Define and display the Custom Menu.
@@ -929,14 +931,14 @@ DIR
       { "TRAN" « TRAN » }
       { "DET" « DET » }
       { "RREF" « RREF » }
-      { "ab/c" « UtilConvertMixedFraction » }
+      { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { "EGV" « EGV » }
       { "RANK" « RANK » }
       { "TRACE" « TRACE » }
       { }
       { }
-      { "MENU†" « ChooseCustomMenus » }
+      { "MENU†" « CMENU » }
     }
 
     @ Define and display the Custom Menu.
@@ -2262,6 +2264,18 @@ DIR
     @ #NOTE Function (Visible): DSTAT
 
     AppStatDescriptiveStatistics
+  »
+
+  XFRAC «
+    @ #NOTE Function (Visible): XFRAC
+
+    UtilConvertMixedFraction
+  »
+
+  CMENU «
+    @ #NOTE Function (Visible): CMENU
+
+    ChooseCustomMenus
   »
 
 END
