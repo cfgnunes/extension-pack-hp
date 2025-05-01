@@ -869,10 +869,10 @@ DIR
       { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
-      { "ISOL" ISOL }
       { "SOLVE" « SOLVEVX » }
       { "CSOLV" « CSOLVE » }
       { "NSOLV" « NSOLVE » }
+      { "ISOL" ISOL }
       { "MENU†" « CMENU » }
     }
 
