@@ -1,18 +1,13 @@
 @ =============================================================================
 @ Library Name : Extension Pack HP
 @ Author       : Cristiano Fraga G. Nunes
+@ Repository   : https://github.com/cfgnunes/extension-pack-hp
 @ Language     : HP UserRPL (HP 49 series calculators)
 @ Encoding     : RPL character set (no translation)
 @ Description  : Extension Pack HP is a library developed for HP 49 series
 @ calculators, including the HP 50g, HP 49g+, HP 49g, and HP 48GII. It brings
 @ features commonly found in other calculators to the HP 49 series, helping to
 @ fill functional gaps left by the original firmware.
-@
-@ Version:
-@  0.1 - 16/04/2025
-@  1.0 - 27/04/2025
-@  2.0 - 28/04/2025
-@  2.1 - 01/05/2025
 @ =============================================================================
 
 @ -----------------------------------------------------------------------------
@@ -61,7 +56,7 @@ DIR
   @ five characters will be used for the name that is shown in the library
   @ menu.
   @ # NOTE Variable: $TITLE
-  $TITLE "Extension Pack HP v2.1"
+  $TITLE "Extension Pack HP v2.2"
 
   @ The $VISIBLE variable contains a list of all the variables in the current
   @ directory that you want to have visible in the library menu.
@@ -1932,21 +1927,21 @@ DIR
           @ Type: Real number (type 0).
           @ Type: Complex number (type 1).
           vType 0 == vType 1 == OR THEN
-            v çQ
+            v XQ
           END
 
           @ Type: Real integer (type 28).
           vType 28 == THEN
-            v çNUM
+            v XNUM
           END
 
           @ Type: Algebraic object (type 9).
           vType 9 == THEN
             v LNAME SIZE 0 == IF THEN
               @ Only numbers.
-              çNUM
+              XNUM
             ELSE
-              çQ
+              XQ
             END
           END
 
@@ -1967,12 +1962,12 @@ DIR
             ´
               vSize FOR k
                 v k GET TYPE DUP 0 == SWAP 1 == OR IF THEN
-                  v PUSH XQ POP
+                  v XQ
                   KILL
                 END
               NEXT
             ª
-            v PUSH XNUM POP
+            v XNUM
           END
 
           @ Type: Tagged object (type 12).
