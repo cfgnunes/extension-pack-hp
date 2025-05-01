@@ -153,7 +153,6 @@ DIR
     UtilResetSystemFlags
     UtilResetSystemFlagsDefault
     UtilResetSystemFlagsRpn
-    UtilToggleExactApproximate
     UtilValidateLessEqual
     UtilValidateRange
   }
@@ -1750,8 +1749,7 @@ DIR
 
   AppStatPercentile ´
     @#NOTE App: AppStatPercentile
-
-    SWAP UtilArrayListToList XNUM
+    SWAP UtilArrayListToList PUSH XNUM POP
 
     @ Inspired on the function "%TILE" from: "HP 50g / 49g+ / 48gII graphing
     @ calculator, advanced user's reference manual".
@@ -1934,21 +1932,21 @@ DIR
           @ Type: Real number (type 0).
           @ Type: Complex number (type 1).
           vType 0 == vType 1 == OR THEN
-            v XQ
+            v çQ
           END
 
           @ Type: Real integer (type 28).
           vType 28 == THEN
-            v XNUM
+            v çNUM
           END
 
           @ Type: Algebraic object (type 9).
           vType 9 == THEN
             v LNAME SIZE 0 == IF THEN
               @ Only numbers.
-              XNUM
+              çNUM
             ELSE
-              XQ
+              çQ
             END
           END
 
@@ -1969,12 +1967,12 @@ DIR
             ´
               vSize FOR k
                 v k GET TYPE DUP 0 == SWAP 1 == OR IF THEN
-                  v XQ
+                  v PUSH XQ POP
                   KILL
                 END
               NEXT
             ª
-            v XNUM
+            v PUSH XNUM POP
           END
 
           @ Type: Tagged object (type 12).
@@ -1989,8 +1987,6 @@ DIR
 
           @ Type: other types.
           v
-          @ Toggles exact/approximate mode.
-          UtilToggleExactApproximate
         END
       ª
     ª
@@ -2185,16 +2181,6 @@ DIR
 
     @ Set the FONT6.
     FONT6 çFONT
-  ª
-
-  UtilToggleExactApproximate ´
-    @ #NOTE Function: UtilToggleExactApproximate
-
-    -105 FS? IF THEN
-      -105 CF
-    ELSE
-      -105 SF
-    END
   ª
 
   UtilValidateLessEqual ´
