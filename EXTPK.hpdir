@@ -64,10 +64,11 @@ DIR
   $VISIBLE {
     EXTPK
     RESET
-    DSTAT
     XFRAC
-    CMENU
+    CSOLVE
     NSOLVE
+    DSTAT
+    CMENU
   }
 
   @ The $HIDDEN variable contains a list of all the variables in the current
@@ -100,6 +101,7 @@ DIR
     AppMenuEquations
     AppMenuFinance
     AppMenuMatrix
+    AppSolveComplex
     AppSolveNonLinearSystem
     AppSolveNumerical
     AppStatDescriptiveStatistics
@@ -867,10 +869,10 @@ DIR
       { "ab/c" « XFRAC » }
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
-      { "SOLVE" « SOLVEVX » }
-      { "NSOLV" « NSOLVE » }
       { "ISOL" ISOL }
-      { }
+      { "SOLVE" « SOLVEVX » }
+      { "CSOLV" « CSOLVE » }
+      { "NSOLV" « NSOLVE » }
       { "MENU†" « CMENU » }
     }
 
@@ -932,6 +934,15 @@ DIR
 
     @ Define and display the Custom Menu.
     MENU
+  »
+
+  AppSolveComplex «
+    @ # NOTE App: AppSolveComplex
+
+    PUSH
+    -103 SF
+    SOLVEVX
+    POP
   »
 
   AppSolveNonLinearSystem «
@@ -2234,28 +2245,34 @@ DIR
     UtilResetSystemFlagsRpn
   »
 
-  DSTAT «
-    @ #NOTE Function (Visible): DSTAT
-
-    AppStatDescriptiveStatistics
-  »
-
   XFRAC «
     @ #NOTE Function (Visible): XFRAC
 
     UtilConvertMixedFraction
   »
 
-  CMENU «
-    @ #NOTE Function (Visible): CMENU
+  CSOLVE «
+    @ #NOTE Function (Visible): CSOLVE
 
-    ChooseCustomMenus
+    AppSolveComplex
   »
 
   NSOLVE «
     @ #NOTE Function (Visible): NSOLVE
 
     AppSolveNumerical
+  »
+
+  DSTAT «
+    @ #NOTE Function (Visible): DSTAT
+
+    AppStatDescriptiveStatistics
+  »
+
+  CMENU «
+    @ #NOTE Function (Visible): CMENU
+
+    ChooseCustomMenus
   »
 
 END
