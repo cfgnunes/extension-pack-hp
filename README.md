@@ -85,11 +85,17 @@ Adds new features under the APPS menu (key: `APPS`) with:
 
 Adds new global commands, allowing access from anywhere in the calculator:
 
-- `EXTPK` - Extension Pack HP Command Menu: Opens a centralized menu listing all features from the Extension Pack HP, providing a quick and convenient shortcut for easy access.
-- `RESET` - Reset Command: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also purges all files stored in the `HOME` directory and restores the default `CAS` directory.
-- `DSTAT` - Descriptive Statistics Command: Calculates all descriptive statistics (such as mean, standard deviation, median, and more) for a given array or list.
-- `XFRAC` - Converts numbers or decimal-formatted objects to rational (quotient) form and vice versa. This function is similar to the `ab/c` key found on some other calculators.
-- `NSOLVE` - Numerical Solver Command: This function call the `ROOT` command but uses the predefined variable `VX` from the `CASDIR` directory to streamline the process. You only need to provide the equation and an initial guess, making the call simpler and more concise.
+- `EXTPK` - **Extension Pack HP Command Menu**: Opens a centralized menu that lists all features included in the Extension Pack HP, offering a quick and convenient way to access its tools.
+
+- `RESET` - **System Reset Command**: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also removes all files from the `HOME` directory and restores the default contents of the `CASDIR` directory.
+
+- `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
+
+- `CSOLVE` - **Complex Mode Solver**: Automatically sets the calculator to complex mode and then calls the `SOLVEVX` command, simplifying the process of solving equations.
+
+- `NSOLVE` - **Numerical Solver Command**: Calls the `ROOT` command using the predefined variable `VX` from the `CASDIR` directory. Simply provide an equation and an initial guess. This command makes the process faster and more streamlined.
+
+- `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
 
 ## Contributing
 
