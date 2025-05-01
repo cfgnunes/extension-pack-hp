@@ -314,8 +314,8 @@ DIR
       { "2.Finance" 2 }
       { "3.Time" 3 }
       { "4.Prob. distributions" 4 }
-      { "5.System tools" 5 }
-      { "6.Custom menus" 6 }
+      { "5.Custom menus" 5 }
+      { "6.System tools" 6 }
     }
     UtilGuiChoose
 
@@ -326,8 +326,8 @@ DIR
         Opt 2 == THEN ChooseFinanceMenu END
         Opt 3 == THEN ChooseTimeMenu END
         Opt 4 == THEN ChooseStatDist END
-        Opt 5 == THEN ChooseSystemTools END
-        Opt 6 == THEN ChooseCustomMenus END
+        Opt 5 == THEN ChooseCustomMenus END
+        Opt 6 == THEN ChooseSystemTools END
       END
     »
   »
