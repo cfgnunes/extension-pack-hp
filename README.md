@@ -92,14 +92,14 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
 ```
 Input:
- - Argument 1: a number, or a list/array/matrix of numbers
+ - Argument 1: a number or a list/array/matrix of numbers
 ```
 
 - `NSOLVE` - **Numerical Solver Command**: Calls the `ROOT` command using the predefined variable `VX` from the `CASDIR` directory. This command makes the process faster and more streamlined.
 ```
 Input:
  - Argument 1: 'symb' or «program»
- - Argument 2 (optional): guess
+ - Argument 2: guess
 ```
 
 - `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
