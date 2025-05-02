@@ -1089,7 +1089,10 @@ DIR
     @ Extract the values from the list.
     EVAL
 
-    ç a A b B c C
+    @ 180 degrees.
+    -1 ACOS
+
+    ç a A b B c C angTotal
     ´
       @ Input validations.
       a NOVAL == b NOVAL == AND c NOVAL == AND IF THEN
@@ -1098,7 +1101,6 @@ DIR
       END
 
       PUSH
-      DEG       @ Sets Degrees mode.
       -105 SF   @ System flag: enable approximate mode.
 
       CASE
@@ -1108,7 +1110,7 @@ DIR
         a NOVAL ã b NOVAL ã AND c NOVAL ã AND THEN
           b c a UtilTriangleLawOfCossineAngle 'A' STO
           a c b UtilTriangleLawOfCossineAngle 'B' STO
-          180 A - B - 'C' STO
+          angTotal A - B - 'C' STO
         END
 
         @ Cases: SAS (Side-Angle-Side)
@@ -1116,25 +1118,25 @@ DIR
         a NOVAL ã b NOVAL ã AND C NOVAL ã AND THEN
           a b C UtilTriangleLawOfCossineSide 'c' STO
           b c a UtilTriangleLawOfCossineAngle 'A' STO
-          180 A - C - 'B' STO
+          angTotal A - C - 'B' STO
         END
 
         a NOVAL ã c NOVAL ã AND B NOVAL ã AND THEN
           a c B UtilTriangleLawOfCossineSide 'b' STO
           c b a UtilTriangleLawOfCossineAngle 'A' STO
-          180 A - B - 'C' STO
+          angTotal A - B - 'C' STO
         END
 
         b NOVAL ã c NOVAL ã AND A NOVAL ã AND THEN
           b c A UtilTriangleLawOfCossineSide 'a' STO
           c a b UtilTriangleLawOfCossineAngle 'B' STO
-          180 A - B - 'C' STO
+          angTotal A - B - 'C' STO
         END
 
         @ Cases: ASA (Angle-Side-Angle) and AAS (Angle-Angle-Side).
 
         A NOVAL ã B NOVAL ã AND THEN
-          180 A - B - 'C' STO
+          angTotal A - B - 'C' STO
           CASE
             a NOVAL ã THEN
               a A B UtilTriangleLawOfSinesSide 'b' STO
@@ -1152,7 +1154,7 @@ DIR
         END
 
         A NOVAL ã C NOVAL ã AND THEN
-          180 A - C - 'B' STO
+          angTotal A - C - 'B' STO
           CASE
             a NOVAL ã THEN
               a A C UtilTriangleLawOfSinesSide 'c' STO
@@ -1170,7 +1172,7 @@ DIR
         END
 
         B NOVAL ã C NOVAL ã AND THEN
-          180 B - C - 'A' STO
+          angTotal B - C - 'A' STO
           CASE
             a NOVAL ã THEN
               a A B UtilTriangleLawOfSinesSide 'b' STO
@@ -1198,7 +1200,7 @@ DIR
               b B a UtilTriangleLawOfSinesAngle 'A' STO
             END
           END
-          180 A - B - 'C' STO
+          angTotal A - B - 'C' STO
           a A C UtilTriangleLawOfSinesSide 'c' STO
         END
 
@@ -1211,7 +1213,7 @@ DIR
               c C a UtilTriangleLawOfSinesAngle 'A' STO
             END
           END
-          180 A - C - 'B' STO
+          angTotal A - C - 'B' STO
           a A B UtilTriangleLawOfSinesSide 'b' STO
         END
 
@@ -1224,19 +1226,20 @@ DIR
               c C b UtilTriangleLawOfSinesAngle 'B' STO
             END
           END
-          180 B - C - 'A' STO
+          angTotal B - C - 'A' STO
           b B A UtilTriangleLawOfSinesSide 'a' STO
         END
       END
 
+      POP
+
       @ Check the final solution.
       A B + C + TYPE 1 ==
       IF THEN
-        POP
         "Error: No solution with given data!" DOERR
       END
 
-      A B + C + 180 >
+      A B + C + angTotal >
       A 0 > NOT OR
       B 0 > NOT OR
       C 0 > NOT OR
@@ -1244,19 +1247,16 @@ DIR
       b 0 > NOT OR
       c 0 > NOT OR
       IF THEN
-        POP
         "Error: No solution with given data!" DOERR
       END
 
-      a "a" çTAG
-      b "b" çTAG
-      c "c" çTAG
-      A "A" çTAG
-      B "B" çTAG
-      C "C" çTAG
-      a b c UtilTriangleHeronArea "Area" çTAG
-
-      POP
+      a EVAL çNUM "a" çTAG
+      b EVAL çNUM "b" çTAG
+      c EVAL çNUM "c" çTAG
+      A EVAL çNUM "A" çTAG
+      B EVAL çNUM "B" çTAG
+      C EVAL çNUM "C" çTAG
+      a b c UtilTriangleHeronArea EVAL çNUM "Area" çTAG
     ª
   ª
 
@@ -2422,35 +2422,34 @@ DIR
       ç s
       '(s*(s-a)*(s-b)*(s-c))^(1/2)'
     ª
-    çNUM
   ª
 
   UtilTriangleLawOfCossineAngle ´
     @ #NOTE Function: UtilTriangleLawOfCossineAngle
 
     ç a b c
-    'ACOS((a^2 + b^2 - c^2) / (2*a*b))' çNUM
+    'ACOS((a^2 + b^2 - c^2) / (2*a*b))'
   ª
 
   UtilTriangleLawOfCossineSide ´
     @ #NOTE Function: UtilTriangleLawOfCossineSide
 
     ç a b C
-    '(a^2 + b^2 - 2*a*b*COS(C)) ^ (1/2)' çNUM
+    '(a^2 + b^2 - 2*a*b*COS(C)) ^ (1/2)'
   ª
 
   UtilTriangleLawOfSinesAngle ´
     @ #NOTE Function: UtilTriangleLawOfSinesAngle
 
     ç a A b
-    'ASIN((b * SIN(A)) / a)' çNUM
+    'ASIN((b * SIN(A)) / a)'
   ª
 
   UtilTriangleLawOfSinesSide ´
     @ #NOTE Function: UtilTriangleLawOfSinesSide
 
     ç a A B
-    '(a * SIN(B)) / SIN(A)' çNUM
+    '(a * SIN(B)) / SIN(A)'
   ª
 
   UtilValidateLessEqual ´
