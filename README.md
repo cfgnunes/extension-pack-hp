@@ -90,12 +90,23 @@ Adds new global commands, allowing access from anywhere in the calculator:
 - `RESET` - **System Reset Command**: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also removes all files from the `HOME` directory and restores the default contents of the `CASDIR` directory.
 
 - `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
+```
+Input:
+ - Argument 1: a number, or a list/array/matrix of numbers
+```
 
-- `CSOLVE` - **Complex Mode Solver**: Automatically sets the calculator to complex mode and then calls the `SOLVEVX` command, simplifying the process of solving equations.
-
-- `NSOLVE` - **Numerical Solver Command**: Calls the `ROOT` command using the predefined variable `VX` from the `CASDIR` directory. Simply provide an equation and an initial guess. This command makes the process faster and more streamlined.
+- `NSOLVE` - **Numerical Solver Command**: Calls the `ROOT` command using the predefined variable `VX` from the `CASDIR` directory. This command makes the process faster and more streamlined.
+```
+Input:
+ - Argument 1: 'symb' or «program»
+ - Argument 2 (optional): guess
+```
 
 - `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
+```
+Input:
+ - Argument 1: list, array or matrix
+```
 
 ## Contributing
 
