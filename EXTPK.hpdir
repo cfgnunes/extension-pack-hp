@@ -2099,27 +2099,24 @@ DIR
     @#NOTE Function: UtilArrayListDecompose
     @ This function decomposes (squash) an array or list.
 
-    ç v
+    DUP TYPE ç v vType
     ´
-      v TYPE ç vType
-      ´
-        CASE
+      CASE
 
-          @ Type: List (type 5).
-          vType 5 == THEN
-            v OBJç EVAL
-          END
-
-          @ Type: Real array (type 3)
-          @ Type: Symbolic vector/matrix (type 29).
-          vType 3 == vType 29 == OR THEN
-            v OBJç 1 + úLIST
-          END
-
-          v
-          "Error: The argument must be an array or a list!" DOERR
+        @ Type: List (type 5).
+        vType 5 == THEN
+          v OBJç EVAL
         END
-      ª
+
+        @ Type: Real array (type 3)
+        @ Type: Symbolic vector/matrix (type 29).
+        vType 3 == vType 29 == OR THEN
+          v OBJç 1 + úLIST
+        END
+
+        v
+        "Error: The argument must be an array or a list!" DOERR
+      END
     ª
   ª
 
@@ -2153,71 +2150,68 @@ DIR
   UtilConvertMixedFraction ´
     @#NOTE Function: UtilConvertMixedFraction
 
-    ç v
+    DUP TYPE ç v vType
     ´
-      v TYPE ç vType
-      ´
-        CASE
-          @ Type: Real number (type 0).
-          @ Type: Complex number (type 1).
-          vType 0 == vType 1 == OR THEN
-            v XQ
-          END
-
-          @ Type: Real integer (type 28).
-          vType 28 == THEN
-            v XNUM
-          END
-
-          @ Type: Algebraic object (type 9).
-          vType 9 == THEN
-            v LNAME SIZE 0 == IF THEN
-              @ Only numbers.
-              XNUM
-            ELSE
-              XQ
-            END
-          END
-
-          @ Type: Real array (type 3)
-          @ Type: Complex array (type 4)
-          @ Type: List (type 5).
-          @ Type: Symbolic vector/matrix (type 29).
-          vType 3 == vType 4 == OR vType 5 == OR vType 29 == OR THEN
-            1
-            @ Get the total size of the array/vector/list.
-            v SIZE
-            v SIZE TYPE 5 == IF THEN
-              1 + úLIST
-            END
-
-            @ Check if there is a real or complex element.
-            ç vSize
-            ´
-              vSize FOR k
-                v k GET TYPE DUP 0 == SWAP 1 == OR IF THEN
-                  v XQ
-                  KILL
-                END
-              NEXT
-            ª
-            v XNUM
-          END
-
-          @ Type: Tagged object (type 12).
-          vType 12 == THEN
-            v OBJç SWAP UtilConvertMixedFraction SWAP çTAG
-          END
-
-          @ Type: Unit object (type 12).
-          vType 13 == THEN
-            v OBJç SWAP UtilConvertMixedFraction SWAP *
-          END
-
-          @ Type: other types.
-          v
+      CASE
+        @ Type: Real number (type 0).
+        @ Type: Complex number (type 1).
+        vType 0 == vType 1 == OR THEN
+          v XQ
         END
-      ª
+
+        @ Type: Real integer (type 28).
+        vType 28 == THEN
+          v XNUM
+        END
+
+        @ Type: Algebraic object (type 9).
+        vType 9 == THEN
+          v LNAME SIZE 0 == IF THEN
+            @ Only numbers.
+            XNUM
+          ELSE
+            XQ
+          END
+        END
+
+        @ Type: Real array (type 3)
+        @ Type: Complex array (type 4)
+        @ Type: List (type 5).
+        @ Type: Symbolic vector/matrix (type 29).
+        vType 3 == vType 4 == OR vType 5 == OR vType 29 == OR THEN
+          1
+          @ Get the total size of the array/vector/list.
+          v SIZE
+          v SIZE TYPE 5 == IF THEN
+            1 + úLIST
+          END
+
+          @ Check if there is a real or complex element.
+          ç vSize
+          ´
+            vSize FOR k
+              v k GET TYPE DUP 0 == SWAP 1 == OR IF THEN
+                v XQ
+                KILL
+              END
+            NEXT
+          ª
+          v XNUM
+        END
+
+        @ Type: Tagged object (type 12).
+        vType 12 == THEN
+          v OBJç SWAP UtilConvertMixedFraction SWAP çTAG
+        END
+
+        @ Type: Unit object (type 12).
+        vType 13 == THEN
+          v OBJç SWAP UtilConvertMixedFraction SWAP *
+        END
+
+        @ Type: other types.
+        v
+      END
     ª
   ª
 
