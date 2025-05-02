@@ -65,7 +65,6 @@ DIR
     EXTPK
     RESET
     XFRAC
-    CSOLVE
     NSOLVE
     DSTAT
     CMENU
@@ -870,7 +869,6 @@ DIR
       @ Options - Page 2.
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
-      { "CSOLV" « CSOLVE » }
       { "NSOLV" NSOLVE }
       { "ISOL" ISOL }
       { "MENU†" « CMENU » }
@@ -934,15 +932,6 @@ DIR
 
     @ Define and display the Custom Menu.
     MENU
-  »
-
-  AppSolveComplex «
-    @ # NOTE App: AppSolveComplex
-
-    PUSH
-    -103 SF
-    SOLVEVX
-    POP
   »
 
   AppSolveNonLinearSystem «
@@ -2249,12 +2238,6 @@ DIR
     @ #NOTE Function (Visible): XFRAC
 
     UtilConvertMixedFraction
-  »
-
-  CSOLVE «
-    @ #NOTE Function (Visible): CSOLVE
-
-    AppSolveComplex
   »
 
   NSOLVE «
