@@ -88,7 +88,7 @@ Adds new global commands, allowing access from anywhere in the calculator:
 
 - `EXTPK` - **Extension Pack HP Command Menu**: Opens a centralized menu that lists all features included in the Extension Pack HP, offering a quick and convenient way to access its tools.
 
-- `RESET` - **System Reset Command**: Resets system flags and reinitializes the calculator for optimal use in RPN (Reverse Polish Notation) mode. This command also removes all files from the `HOME` directory and restores the default contents of the `CASDIR` directory.
+- `RESET` - **System Reset Command**: Reinitializes the calculator by resetting system flags for optimal use in RPN (Reverse Polish Notation) mode, removes all files and directories from the `HOME` directory (excluding program files), and restores the default contents of the `CASDIR` directory.
 
 - `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
 ```

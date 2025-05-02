@@ -2353,17 +2353,31 @@ DIR
 
   UtilPurgeHomeFiles ´
     @ #NOTE Function: UtilPurgeHomeFiles
-    @ This function purges all files in the HOME directory.
+    @  Purges all files and directories from the HOME directory, excluding
+    @  program files (type 8).
 
     HOME
 
-    @ Purge all directories.
-    15 TVARS PGDIR
+    @ Loop through each item in HOME and process based on its type.
+    VARS 1
+    ´
+      DUP VTYPE ç v vType
+      ´
+        CASE
+           @ If item is a directory (type 15), delete it using PGDIR.
+          vType 15 == THEN v PGDIR END
 
-    @ Purge all variables.
-    VARS PURGE
+           @ If item is a program (type 8), skip it.
+          vType 8 == THEN END
 
-    @ Restore CAS variables from the "CASDIR".
+          @ For all other types, purge the item.
+          v PURGE
+        END
+      ª
+    ª
+    DOLIST
+
+    @ Restore CAS variables from "CASDIR" directory.
     CASCFG
   ª
 
