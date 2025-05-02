@@ -56,7 +56,7 @@ DIR
   @ five characters will be used for the name that is shown in the library
   @ menu.
   @ # NOTE Variable: $TITLE
-  $TITLE "Extension Pack HP v2.2"
+  $TITLE "Extension Pack HP v2.3"
 
   @ The $VISIBLE variable contains a list of all the variables in the current
   @ directory that you want to have visible in the library menu.
