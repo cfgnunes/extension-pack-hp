@@ -1055,11 +1055,11 @@ DIR
 
     "TRIANGLE SOLVER"
     {
-      { "a:" "Enter side a" }
+      { "a:" "Enter length of side a" }
       { "A:" "Enter angle A (opposite side a)" }
-      { "b:" "Enter side b" }
+      { "b:" "Enter length of side b" }
       { "B:" "Enter angle B (opposite side b)" }
-      { "c:" "Enter side c" }
+      { "c:" "Enter length of side c" }
       { "C:" "Enter angle C (opposite side c)" }
     }
     { 2 0 }
@@ -1170,7 +1170,7 @@ DIR
             a A B UtilTriangleLawOfSinesSide 'b' STO
             a A C UtilTriangleLawOfSinesSide 'c' STO
           ELSE
-            "Error: Invalid triangle (no solution)!" DOERR
+            "Error: No solution with given data!" DOERR
           END
         END
 
@@ -1181,7 +1181,7 @@ DIR
             b B C UtilTriangleLawOfSinesSide 'c' STO
             b B A UtilTriangleLawOfSinesSide 'a' STO
           ELSE
-            "Error: Invalid triangle (no solution)!" DOERR
+            "Error: No solution with given data!" DOERR
           END
         END
 
@@ -1192,7 +1192,7 @@ DIR
             c C A UtilTriangleLawOfSinesSide 'a' STO
             c C B UtilTriangleLawOfSinesSide 'b' STO
           ELSE
-            "Error: Invalid triangle (no solution)!" DOERR
+            "Error: No solution with given data!" DOERR
           END
         END
 
