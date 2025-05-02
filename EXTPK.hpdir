@@ -197,12 +197,12 @@ DIR
 
     DUP R~SB
 
-    ç Opt
+    ç opt
     ´
       CASE
 
         @ Add a new menu entry if the "APPS menu" is active.
-        Opt 0 == THEN
+        opt 0 == THEN
           SWAP
 
           DUP { "" } + SIZE XQ
@@ -217,7 +217,7 @@ DIR
         END
 
         @ Add a new menu entry if the "Main Statistics menu" is active.
-        Opt 1 == THEN
+        opt 1 == THEN
           SWAP
 
           DUP { "" } + SIZE XQ
@@ -232,7 +232,7 @@ DIR
         END
 
         @ Add Finance functions if "Finance menu" is active.
-        Opt 4 == THEN
+        opt 4 == THEN
           ""
           {
             { "1.Time Value of Money" 1 }
@@ -261,7 +261,7 @@ DIR
         END
 
         @ Add a new menu entry if the "Numeric solver menu" is active.
-        Opt 5 == THEN
+        opt 5 == THEN
           SWAP
 
           DUP { "" } + SIZE XQ
@@ -276,7 +276,7 @@ DIR
         END
 
         @ Add a new menu entry if the "Time menu" is active.
-        Opt 6 == THEN
+        opt 6 == THEN
           SWAP
 
           DUP { "" } + SIZE XQ
@@ -316,16 +316,16 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppSolveNonLinearSystem END
-        Opt 2 == THEN AppSolveTriangle END
-        Opt 3 == THEN ChooseFinanceMenu END
-        Opt 4 == THEN ChooseTimeMenu END
-        Opt 5 == THEN ChooseStatDist END
-        Opt 6 == THEN ChooseCustomMenus END
-        Opt 7 == THEN ChooseSystemTools END
+        opt 1 == THEN AppSolveNonLinearSystem END
+        opt 2 == THEN AppSolveTriangle END
+        opt 3 == THEN ChooseFinanceMenu END
+        opt 4 == THEN ChooseTimeMenu END
+        opt 5 == THEN ChooseStatDist END
+        opt 6 == THEN ChooseCustomMenus END
+        opt 7 == THEN ChooseSystemTools END
       END
     ª
   ª
@@ -342,13 +342,13 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppMenuEquations END
-        Opt 2 == THEN AppMenuMatrix END
-        Opt 3 == THEN AppMenuCombinatorics END
-        Opt 4 == THEN AppMenuFinance END
+        opt 1 == THEN AppMenuEquations END
+        opt 2 == THEN AppMenuMatrix END
+        opt 3 == THEN AppMenuCombinatorics END
+        opt 4 == THEN AppMenuFinance END
       END
     ª
   ª
@@ -364,12 +364,12 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppFinanceDepreciationSL END
-        Opt 2 == THEN AppFinanceDepreciationSOYD END
-        Opt 3 == THEN AppFinanceDepreciationDB END
+        opt 1 == THEN AppFinanceDepreciationSL END
+        opt 2 == THEN AppFinanceDepreciationSOYD END
+        opt 3 == THEN AppFinanceDepreciationDB END
       END
     ª
   ª
@@ -385,12 +385,12 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppFinanceNPV END
-        Opt 2 == THEN AppFinanceIRR END
-        Opt 3 == THEN ChooseFinanceDepreciation END
+        opt 1 == THEN AppFinanceNPV END
+        opt 2 == THEN AppFinanceIRR END
+        opt 3 == THEN ChooseFinanceDepreciation END
       END
     ª
   ª
@@ -406,12 +406,12 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN ChooseStatDistDisc END
-        Opt 2 == THEN ChooseStatDistCont END
-        Opt 3 == THEN ChooseStatDistInv END
+        opt 1 == THEN ChooseStatDistDisc END
+        opt 2 == THEN ChooseStatDistCont END
+        opt 3 == THEN ChooseStatDistInv END
       END
     ª
   ª
@@ -434,19 +434,19 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppStatDistContNormal END
-        Opt 2 == THEN AppStatDistContTStudent END
-        Opt 3 == THEN AppStatDistContChi END
-        Opt 4 == THEN AppStatDistContExponential END
-        Opt 5 == THEN AppStatDistContUniform END
-        Opt 6 == THEN AppStatDistContGamma END
-        Opt 7 == THEN AppStatDistContBeta END
-        Opt 8 == THEN AppStatDistContWeibull END
-        Opt 9 == THEN AppStatDistContCauchy END
-        Opt 10 == THEN AppStatDistContFDistribution END
+        opt 1 == THEN AppStatDistContNormal END
+        opt 2 == THEN AppStatDistContTStudent END
+        opt 3 == THEN AppStatDistContChi END
+        opt 4 == THEN AppStatDistContExponential END
+        opt 5 == THEN AppStatDistContUniform END
+        opt 6 == THEN AppStatDistContGamma END
+        opt 7 == THEN AppStatDistContBeta END
+        opt 8 == THEN AppStatDistContWeibull END
+        opt 9 == THEN AppStatDistContCauchy END
+        opt 10 == THEN AppStatDistContFDistribution END
       END
     ª
   ª
@@ -466,16 +466,16 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppStatDistDiscBinomial END
-        Opt 2 == THEN AppStatDistDiscPoisson END
-        Opt 3 == THEN AppStatDistDiscBernoulli END
-        Opt 4 == THEN AppStatDistDiscUniform END
-        Opt 5 == THEN AppStatDistDiscBinomialNeg END
-        Opt 6 == THEN AppStatDistDiscGeometric END
-        Opt 7 == THEN AppStatDistDiscHipergeometric END
+        opt 1 == THEN AppStatDistDiscBinomial END
+        opt 2 == THEN AppStatDistDiscPoisson END
+        opt 3 == THEN AppStatDistDiscBernoulli END
+        opt 4 == THEN AppStatDistDiscUniform END
+        opt 5 == THEN AppStatDistDiscBinomialNeg END
+        opt 6 == THEN AppStatDistDiscGeometric END
+        opt 7 == THEN AppStatDistDiscHipergeometric END
       END
     ª
   ª
@@ -498,19 +498,19 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppStatDistInvBinomial END
-        Opt 2 == THEN AppStatDistInvPoisson END
-        Opt 3 == THEN AppStatDistInvNormal END
-        Opt 4 == THEN AppStatDistInvTStudent END
-        Opt 5 == THEN AppStatDistInvChi END
-        Opt 6 == THEN AppStatDistInvExponential END
-        Opt 7 == THEN AppStatDistInvUniform END
-        Opt 8 == THEN AppStatDistInvWeibull END
-        Opt 9 == THEN AppStatDistInvCauchy END
-        Opt 10 == THEN AppStatDistInvFDistribution END
+        opt 1 == THEN AppStatDistInvBinomial END
+        opt 2 == THEN AppStatDistInvPoisson END
+        opt 3 == THEN AppStatDistInvNormal END
+        opt 4 == THEN AppStatDistInvTStudent END
+        opt 5 == THEN AppStatDistInvChi END
+        opt 6 == THEN AppStatDistInvExponential END
+        opt 7 == THEN AppStatDistInvUniform END
+        opt 8 == THEN AppStatDistInvWeibull END
+        opt 9 == THEN AppStatDistInvCauchy END
+        opt 10 == THEN AppStatDistInvFDistribution END
       END
     ª
   ª
@@ -529,14 +529,14 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN UtilResetSystemFlagsDefault END
-        Opt 2 == THEN UtilResetSystemFlagsRpn END
-        Opt 3 == THEN UtilPurgeHomeFiles END
-        Opt 4 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsDefault END
-        Opt 5 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsRpn END
+        opt 1 == THEN UtilResetSystemFlagsDefault END
+        opt 2 == THEN UtilResetSystemFlagsRpn END
+        opt 3 == THEN UtilPurgeHomeFiles END
+        opt 4 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsDefault END
+        opt 5 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsRpn END
       END
     ª
   ª
@@ -551,11 +551,11 @@ DIR
     }
     UtilGuiChoose
 
-    ç Opt
+    ç opt
     ´
       CASE
-        Opt 1 == THEN AppTimeDateAdd END
-        Opt 2 == THEN AppTimeDateDifference END
+        opt 1 == THEN AppTimeDateAdd END
+        opt 2 == THEN AppTimeDateDifference END
       END
     ª
   ª
