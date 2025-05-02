@@ -2311,15 +2311,11 @@ DIR
     @#NOTE Function: UtilDateToStr
     @ This function converts the date into string format "DOW DD/MM/YYYY".
 
-    ç dt
+    DUP UtilDateToStack ç dt d m y
     ´
-      dt UtilDateToStack
-      ç d m y
-      ´
-        dt 0 TSTR 1 6 SUB "/" +
-        dt 0 TSTR 8 9 SUB "/" + +
-        y +
-      ª
+      dt 0 TSTR 1 6 SUB "/" +
+      dt 0 TSTR 8 9 SUB "/" + +
+      y +
     ª
   ª
 
