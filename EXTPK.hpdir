@@ -151,6 +151,7 @@ DIR
     UtilResetSystemFlags
     UtilResetSystemFlagsDefault
     UtilResetSystemFlagsRpn
+    UtilTriangleHeronArea
     UtilTriangleLawOfCossineAngle
     UtilTriangleLawOfCossineSide
     UtilTriangleLawOfSinesAngle
@@ -1253,6 +1254,7 @@ DIR
       A "A" çTAG
       B "B" çTAG
       C "C" çTAG
+      a b c UtilTriangleHeronArea "Area" çTAG
     ª
   ª
 
@@ -2407,6 +2409,18 @@ DIR
 
     @ Set the FONT6.
     FONT6 çFONT
+  ª
+
+  UtilTriangleHeronArea ´
+    @ #NOTE Function: UtilTriangleHeronArea
+
+    ç a b c
+    ´
+      a b + c + 2 /
+      ç s
+      '(s*(s-a)*(s-b)*(s-c))^(1/2)'
+    ª
+    çNUM
   ª
 
   UtilTriangleLawOfCossineAngle ´
