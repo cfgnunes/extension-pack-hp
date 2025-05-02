@@ -1065,7 +1065,28 @@ DIR
     { 2 0 }
     { }
     { NOVAL NOVAL NOVAL NOVAL NOVAL NOVAL }
-    UtilGuiInform
+    INFORM
+
+    @ Exit if the user presses "Cancel".
+    NOT IF THEN KILL END
+
+    @ Check if the input has at least three values.
+    DUP ç lst
+    ´
+      0
+      1 lst SIZE FOR k
+        lst k GET NOVAL == IF THEN
+          1 +
+        END
+      NEXT
+      3 > IF THEN
+        DROP
+        "Error: Enter at least three values!" DOERR
+      END
+    ª
+
+    @ Extract the values from the list.
+    EVAL
 
     ç a A b B c C
     ´
