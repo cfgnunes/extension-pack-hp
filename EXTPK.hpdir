@@ -1229,11 +1229,10 @@ DIR
         END
       END
 
-      POP
-
       @ Check the final solution.
       A B + C + TYPE 1 ==
       IF THEN
+        POP
         "Error: No solution with given data!" DOERR
       END
 
@@ -1245,6 +1244,7 @@ DIR
       b 0 > NOT OR
       c 0 > NOT OR
       IF THEN
+        POP
         "Error: No solution with given data!" DOERR
       END
 
@@ -1255,6 +1255,8 @@ DIR
       B "B" çTAG
       C "C" çTAG
       a b c UtilTriangleHeronArea "Area" çTAG
+
+      POP
     ª
   ª
 
