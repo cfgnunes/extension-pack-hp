@@ -306,11 +306,12 @@ DIR
     "Extension Pack HP"
     {
       { "1.Solve nonlinear sys" 1 }
-      { "2.Finance" 2 }
-      { "3.Time" 3 }
-      { "4.Prob. distributions" 4 }
-      { "5.Custom menus" 5 }
-      { "6.System tools" 6 }
+      { "2.Triangle solver" 2 }
+      { "3.Finance" 3 }
+      { "4.Time" 4 }
+      { "5.Prob. distributions" 5 }
+      { "6.Custom menus" 6 }
+      { "7.System tools" 7 }
     }
     UtilGuiChoose
 
@@ -318,11 +319,12 @@ DIR
     «
       CASE
         Opt 1 == THEN AppSolveNonLinearSystem END
-        Opt 2 == THEN ChooseFinanceMenu END
-        Opt 3 == THEN ChooseTimeMenu END
-        Opt 4 == THEN ChooseStatDist END
-        Opt 5 == THEN ChooseCustomMenus END
-        Opt 6 == THEN ChooseSystemTools END
+        Opt 2 == THEN AppSolveTriangle END
+        Opt 3 == THEN ChooseFinanceMenu END
+        Opt 4 == THEN ChooseTimeMenu END
+        Opt 5 == THEN ChooseStatDist END
+        Opt 6 == THEN ChooseCustomMenus END
+        Opt 7 == THEN ChooseSystemTools END
       END
     »
   »
