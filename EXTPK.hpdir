@@ -102,6 +102,7 @@ DIR
     AppMenuMatrix
     AppSolveNonLinearSystem
     AppSolveNumerical
+    AppSolveTriangle
     AppStatDescriptiveStatistics
     AppStatDistContBeta
     AppStatDistContCauchy
@@ -150,6 +151,10 @@ DIR
     UtilResetSystemFlags
     UtilResetSystemFlagsDefault
     UtilResetSystemFlagsRpn
+    UtilTriangleLawOfCossineAngle
+    UtilTriangleLawOfCossineSide
+    UtilTriangleLawOfSinesAngle
+    UtilTriangleLawOfSinesSide
     UtilValidateLessEqual
     UtilValidateRange
   }
@@ -260,6 +265,10 @@ DIR
 
           DUP { "" } + SIZE XQ
           ".Solve nonlinear sys" + ´ AppSolveNonLinearSystem ª
+          2 çLIST 1 çLIST +
+
+          DUP { "" } + SIZE XQ
+          ".Triangle solver" + ´ AppSolveTriangle ª
           2 çLIST 1 çLIST +
 
           SWAP
@@ -1032,11 +1041,173 @@ DIR
   ª
 
   AppSolveNumerical ´
-    @ # NOTE App: AppStatDescriptiveStatistics
+    @ # NOTE App: AppSolveNumerical
 
     RCLVX SWAP
     ROOT
     RCLVX SWAP =
+  ª
+
+  AppSolveTriangle ´
+    @ # NOTE App: AppSolveTriangle
+
+    "TRIANGLE SOLVER"
+    {
+      { "a:" "Enter side a" }
+      { "A:" "Enter angle A (opposite side a)" }
+      { "b:" "Enter side b" }
+      { "B:" "Enter angle B (opposite side b)" }
+      { "c:" "Enter side c" }
+      { "C:" "Enter angle C (opposite side c)" }
+    }
+    { 2 0 }
+    { }
+    { NOVAL NOVAL NOVAL NOVAL NOVAL NOVAL }
+    UtilGuiInform
+
+    ç a A b B c C
+    ´
+      PUSH
+      DEG       @ Sets Degrees mode.
+      -105 SF   @ System flag: enable approximate mode.
+
+      CASE
+
+        @ Case: SSS (Side-Side-Side).
+
+        a NOVAL ã b NOVAL ã AND c NOVAL ã AND THEN
+          b c a UtilTriangleLawOfCossineAngle 'A' STO
+          a c b UtilTriangleLawOfCossineAngle 'B' STO
+          180 A - B - 'C' STO
+        END
+
+        @ Cases: SAS (Side-Angle-Side)
+
+        a NOVAL ã b NOVAL ã AND C NOVAL ã AND THEN
+          a b C UtilTriangleLawOfCossineSide 'c' STO
+          b c a UtilTriangleLawOfCossineAngle 'A' STO
+          180 A - C - 'B' STO
+        END
+
+        a NOVAL ã c NOVAL ã AND B NOVAL ã AND THEN
+          a c B UtilTriangleLawOfCossineSide 'b' STO
+          c b a UtilTriangleLawOfCossineAngle 'A' STO
+          180 A - B - 'C' STO
+        END
+
+        b NOVAL ã c NOVAL ã AND A NOVAL ã AND THEN
+          b c A UtilTriangleLawOfCossineSide 'a' STO
+          c a b UtilTriangleLawOfCossineAngle 'B' STO
+          180 B - A - 'C' STO
+        END
+
+        @ Cases: ASA (Angle-Side-Angle).
+
+        A NOVAL ã B NOVAL ã AND c NOVAL ã AND THEN
+          180 A - B - 'C' STO
+          c C A UtilTriangleLawOfSinesSide 'a' STO
+          c C B UtilTriangleLawOfSinesSide 'b' STO
+        END
+
+        A NOVAL ã C NOVAL ã AND b NOVAL ã AND THEN
+          180 A - C - 'B' STO
+          b B A UtilTriangleLawOfSinesSide 'a' STO
+          b B C UtilTriangleLawOfSinesSide 'c' STO
+        END
+
+        B NOVAL ã C NOVAL ã AND a NOVAL ã AND THEN
+          180 B - C - 'A' STO
+          a A B UtilTriangleLawOfSinesSide 'b' STO
+          a A C UtilTriangleLawOfSinesSide 'c' STO
+        END
+
+        @ Cases: AAS (Angle-Angle-Side).
+
+        A NOVAL ã B NOVAL ã AND a NOVAL ã AND THEN
+          180 A - B - 'C' STO
+          a A B UtilTriangleLawOfSinesSide 'b' STO
+          a A C UtilTriangleLawOfSinesSide 'c' STO
+        END
+
+        A NOVAL ã C NOVAL ã AND a NOVAL ã AND THEN
+          180 A - C - 'B' STO
+          a A C UtilTriangleLawOfSinesSide 'c' STO
+          a A B UtilTriangleLawOfSinesSide 'b' STO
+        END
+
+        B NOVAL ã C NOVAL ã AND b NOVAL ã AND THEN
+          180 B - C - 'A' STO
+          b B C UtilTriangleLawOfSinesSide 'c' STO
+          b B A UtilTriangleLawOfSinesSide 'a' STO
+        END
+
+        B NOVAL ã A NOVAL ã AND b NOVAL ã AND THEN
+          180 B - A - 'C' STO
+          b B A UtilTriangleLawOfSinesSide 'a' STO
+          b B C UtilTriangleLawOfSinesSide 'c' STO
+        END
+
+        C NOVAL ã A NOVAL ã AND c NOVAL ã AND THEN
+          180 C - A - 'B' STO
+          c C A UtilTriangleLawOfSinesSide 'a' STO
+          c C B UtilTriangleLawOfSinesSide 'b' STO
+        END
+
+        C NOVAL ã B NOVAL ã AND c NOVAL ã AND THEN
+          180 C - B - 'A' STO
+          c C B UtilTriangleLawOfSinesSide 'b' STO
+          c C A UtilTriangleLawOfSinesSide 'a' STO
+        END
+
+        @ Cases: SSA (Side-Side-Angle) - ambiguous, using only one solution.
+
+        a NOVAL ã b NOVAL ã AND A NOVAL ã AND THEN
+          b A a UtilTriangleLawOfSinesAngle 'B' STO
+          A B - 180 < IF THEN
+            180 A - B - 'C' STO
+            a A B UtilTriangleLawOfSinesSide 'b' STO
+            a A C UtilTriangleLawOfSinesSide 'c' STO
+          ELSE
+            "Error: Invalid triangle (no solution)!" DOERR
+          END
+        END
+
+        b NOVAL ã c NOVAL ã AND B NOVAL ã AND THEN
+          c B b UtilTriangleLawOfSinesAngle 'C' STO
+          B C - 180 < IF THEN
+            180 B - C - 'A' STO
+            b B C UtilTriangleLawOfSinesSide 'c' STO
+            b B A UtilTriangleLawOfSinesSide 'a' STO
+          ELSE
+            "Error: Invalid triangle (no solution)!" DOERR
+          END
+        END
+
+        c NOVAL ã a NOVAL ã AND C NOVAL ã AND THEN
+          a C c UtilTriangleLawOfSinesAngle 'A' STO
+          C A - 180 < IF THEN
+            180 C - A - 'B' STO
+            c C A UtilTriangleLawOfSinesSide 'a' STO
+            c C B UtilTriangleLawOfSinesSide 'b' STO
+          ELSE
+            "Error: Invalid triangle (no solution)!" DOERR
+          END
+        END
+
+        POP
+        "Error: Enter at least three values, including at least one side!" DOERR
+
+      END
+
+      POP
+
+      a "a" çTAG
+      b "b" çTAG
+      c "c" çTAG
+      A "A" çTAG
+      B "B" çTAG
+      C "C" çTAG
+    ª
   ª
 
   AppStatDescriptiveStatistics ´
@@ -2190,6 +2361,34 @@ DIR
 
     @ Set the FONT6.
     FONT6 çFONT
+  ª
+
+  UtilTriangleLawOfCossineAngle ´
+    @ #NOTE Function: UtilTriangleLawOfCossineAngle
+
+    ç a b c
+    'ACOS((a^2 + b^2 - c^2) / (2*a*b))' çNUM
+  ª
+
+  UtilTriangleLawOfCossineSide ´
+    @ #NOTE Function: UtilTriangleLawOfCossineSide
+
+    ç a b C
+    '(a^2 + b^2 - 2*a*b*COS(C)) ^ (1/2)' çNUM
+  ª
+
+  UtilTriangleLawOfSinesAngle ´
+    @ #NOTE Function: UtilTriangleLawOfSinesAngle
+
+    ç a A b
+    'ASIN((b * SIN(A)) / a)' çNUM
+  ª
+
+  UtilTriangleLawOfSinesSide ´
+    @ #NOTE Function: UtilTriangleLawOfSinesSide
+
+    ç a A B
+    '(a * SIN(B)) / SIN(A)' çNUM
   ª
 
   UtilValidateLessEqual ´
