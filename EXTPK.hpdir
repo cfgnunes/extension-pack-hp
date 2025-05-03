@@ -841,7 +841,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" « EDITB » }
+      { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
       !
       COMB
@@ -869,7 +869,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" « EDITB » }
+      { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
       { "PLOT" « PLOT » }
       { "SIMPL" « SIMPLIFY » }
@@ -897,7 +897,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" « EDITB » }
+      { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
       %T
       %CH
@@ -925,7 +925,7 @@ DIR
     @ to be displayed and stored as 'CST' file in Home.
     {
       @ Options - Page 1.
-      { "EDIT" « EDITB » }
+      { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
       { "TRAN" « TRAN » }
       { "DET" « DET » }
