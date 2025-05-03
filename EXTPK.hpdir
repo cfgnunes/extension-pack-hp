@@ -2252,6 +2252,12 @@ DIR
 
     HOME
 
+    @ Clear the user keys.
+    { } STOKEYS
+
+    @ Clear the user alarms.
+    0 DELALARM
+
     @ Loop through each item in HOME and process based on its type.
     VARS 1
     «
@@ -2279,9 +2285,6 @@ DIR
     @ #NOTE Function: UtilResetSystemFlagsAlgebraic
     @ This function restores the calculator flags to its factory settings.
 
-    @ Clear the user keys.
-    { } STOKEYS
-
     @ Restore default flags.
     {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
 
@@ -2292,9 +2295,6 @@ DIR
   UtilResetSystemFlagsRpn «
     @ #NOTE Function: UtilResetSystemFlagsRpn
     @ This function restores the calculator flags to use with RPN mode.
-
-    @ Clear the user keys.
-    { } STOKEYS
 
     @ Restore my custom flags.
     @-56 SF Disable Error Beep.
