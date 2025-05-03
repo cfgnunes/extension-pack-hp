@@ -280,28 +280,16 @@ DIR
 
     "Extension Pack HP"
     {
-      { "1.Solve nonlinear sys" 1 }
-      { "2.Triangle solver" 2 }
-      { "3.Finance" 3 }
-      { "4.Time" 4 }
-      { "5.Prob. distributions" 5 }
-      { "6.Custom menus" 6 }
-      { "7.System tools" 7 }
+      { "1.Solve nonlinear sys" ´ AppSolveNLSystem ª }
+      { "2.Triangle solver" ´ AppSolveTriangle ª }
+      { "3.Finance" ´ ChooseFinanceMenu ª }
+      { "4.Time" ´ ChooseTimeMenu ª }
+      { "5.Prob. distributions" ´ ChooseStatDist ª }
+      { "6.Custom menus" ´ ChooseCustomMenus ª }
+      { "7.System tools" ´ ChooseSystemTools ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppSolveNLSystem END
-        opt 2 == THEN AppSolveTriangle END
-        opt 3 == THEN ChooseFinanceMenu END
-        opt 4 == THEN ChooseTimeMenu END
-        opt 5 == THEN ChooseStatDist END
-        opt 6 == THEN ChooseCustomMenus END
-        opt 7 == THEN ChooseSystemTools END
-      END
-    ª
+    EVAL
   ª
 
   ChooseCustomMenus ´
@@ -309,22 +297,13 @@ DIR
 
     "Custom menus"
     {
-      { "1.Equations" 1 }
-      { "2.Matrix" 2 }
-      { "3.Combinatorics" 3 }
-      { "4.Finance" 4 }
+      { "1.Equations" ´ AppMenuEquations ª }
+      { "2.Matrix" ´ AppMenuMatrix ª }
+      { "3.Combinatorics" ´ AppMenuCombinatorics ª }
+      { "4.Finance" ´ AppMenuFinance ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppMenuEquations END
-        opt 2 == THEN AppMenuMatrix END
-        opt 3 == THEN AppMenuCombinatorics END
-        opt 4 == THEN AppMenuFinance END
-      END
-    ª
+    EVAL
   ª
 
   ChooseFinanceDepr ´
@@ -332,20 +311,12 @@ DIR
 
     "Depreciation methods"
     {
-      { "1.Straight line" 1 }
-      { "2.Sum-of-years digits" 2 }
-      { "3.Declining balance" 3 }
+      { "1.Straight line" ´ AppFinanceDepreciationSL ª }
+      { "2.Sum-of-years digits" ´ AppFinanceDepreciationSOYD ª }
+      { "3.Declining balance" ´ AppFinanceDepreciationDB ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppFinanceDepreciationSL END
-        opt 2 == THEN AppFinanceDepreciationSOYD END
-        opt 3 == THEN AppFinanceDepreciationDB END
-      END
-    ª
+    EVAL
   ª
 
   ChooseFinanceMenu ´
@@ -353,20 +324,12 @@ DIR
 
     "Finance"
     {
-      { "1.Net Present Value" 1 }
-      { "2.Int. Rate of Return" 2 }
-      { "3.Depreciation methods" 3 }
+      { "1.Net Present Value" ´ AppFinanceNPV ª }
+      { "2.Int. Rate of Return" ´ AppFinanceIRR ª }
+      { "3.Depreciation methods" ´ ChooseFinanceDepr ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppFinanceNPV END
-        opt 2 == THEN AppFinanceIRR END
-        opt 3 == THEN ChooseFinanceDepr END
-      END
-    ª
+    EVAL
   ª
 
   ChooseStatDist ´
@@ -374,20 +337,12 @@ DIR
 
     "Prob. distributions"
     {
-      { "1.Discrete" 1 }
-      { "2.Continuous" 2 }
-      { "3.Inverse" 3 }
+      { "1.Discrete" ´ ChooseStatDistDisc ª }
+      { "2.Continuous" ´ ChooseStatDistCont ª }
+      { "3.Inverse" ´ ChooseStatDistInv ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN ChooseStatDistDisc END
-        opt 2 == THEN ChooseStatDistCont END
-        opt 3 == THEN ChooseStatDistInv END
-      END
-    ª
+    EVAL
   ª
 
   ChooseStatDistCont ´
@@ -395,34 +350,19 @@ DIR
 
     "Continuous distributions"
     {
-      { "1.Normal" 1 }
-      { "2.T-Student" 2 }
-      { "3.Chi≤ (Pearson)" 3 }
-      { "4.Exponential" 4 }
-      { "5.Uniform" 5 }
-      { "6.Gamma" 6 }
-      { "7.Beta" 7 }
-      { "8.Weibull" 8 }
-      { "9.Cauchy-Lorentz" 9 }
-      { "10.F-distribution" 10 }
+      { "1.Normal" ´ AppStatDistContNormal ª }
+      { "2.T-Student" ´ AppStatDistContTStudent ª }
+      { "3.Chi≤ (Pearson)" ´ AppStatDistContChi ª }
+      { "4.Exponential" ´ AppStatDistContExponential ª }
+      { "5.Uniform" ´ AppStatDistContUniform ª }
+      { "6.Gamma" ´ AppStatDistContGamma ª }
+      { "7.Beta" ´ AppStatDistContBeta ª }
+      { "8.Weibull" ´ AppStatDistContWeibull ª }
+      { "9.Cauchy-Lorentz" ´ AppStatDistContCauchy ª }
+      { "10.F-distribution" ´ AppStatDistContFDistribution ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppStatDistContNormal END
-        opt 2 == THEN AppStatDistContTStudent END
-        opt 3 == THEN AppStatDistContChi END
-        opt 4 == THEN AppStatDistContExponential END
-        opt 5 == THEN AppStatDistContUniform END
-        opt 6 == THEN AppStatDistContGamma END
-        opt 7 == THEN AppStatDistContBeta END
-        opt 8 == THEN AppStatDistContWeibull END
-        opt 9 == THEN AppStatDistContCauchy END
-        opt 10 == THEN AppStatDistContFDistribution END
-      END
-    ª
+    EVAL
   ª
 
   ChooseStatDistDisc ´
@@ -430,28 +370,16 @@ DIR
 
     "Discrete distributions"
     {
-      { "1.Binomial" 1 }
-      { "2.Poisson" 2 }
-      { "3.Bernoulli" 3 }
-      { "4.Uniform" 4 }
-      { "5.Neg. Binomial" 5 }
-      { "6.Geometric" 6 }
-      { "7.Hipergeometric" 7 }
+      { "1.Binomial" ´ AppStatDistDiscBinomial ª }
+      { "2.Poisson" ´ AppStatDistDiscPoisson ª }
+      { "3.Bernoulli" ´ AppStatDistDiscBernoulli ª }
+      { "4.Uniform" ´ AppStatDistDiscUniform ª }
+      { "5.Neg. Binomial" ´ AppStatDistDiscBinomialNeg ª }
+      { "6.Geometric" ´ AppStatDistDiscGeometric ª }
+      { "7.Hipergeometric" ´ AppStatDistDiscHipergeometric ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppStatDistDiscBinomial END
-        opt 2 == THEN AppStatDistDiscPoisson END
-        opt 3 == THEN AppStatDistDiscBernoulli END
-        opt 4 == THEN AppStatDistDiscUniform END
-        opt 5 == THEN AppStatDistDiscBinomialNeg END
-        opt 6 == THEN AppStatDistDiscGeometric END
-        opt 7 == THEN AppStatDistDiscHipergeometric END
-      END
-    ª
+    EVAL
   ª
 
   ChooseStatDistInv ´
@@ -459,34 +387,19 @@ DIR
 
     "Inverse"
     {
-      { "1.Binomial" 1 }
-      { "2.Poisson" 2 }
-      { "3.Normal" 3 }
-      { "4.T-Student" 4 }
-      { "5.Chi≤ (Pearson)" 5 }
-      { "6.Exponential" 6 }
-      { "7.Uniform (continous)" 7 }
-      { "8.Weibull" 8 }
-      { "9.Cauchy-Lorentz" 9 }
-      { "10.F-distribution" 10 }
+      { "1.Binomial" ´ AppStatDistInvBinomial ª }
+      { "2.Poisson" ´ AppStatDistInvPoisson ª }
+      { "3.Normal" ´ AppStatDistInvNormal ª }
+      { "4.T-Student" ´ AppStatDistInvTStudent ª }
+      { "5.Chi≤ (Pearson)" ´ AppStatDistInvChi ª }
+      { "6.Exponential" ´ AppStatDistInvExponential ª }
+      { "7.Uniform (continous)" ´ AppStatDistInvUniform ª }
+      { "8.Weibull" ´ AppStatDistInvWeibull ª }
+      { "9.Cauchy-Lorentz" ´ AppStatDistInvCauchy ª }
+      { "10.F-distribution" ´ AppStatDistInvFDistribution ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppStatDistInvBinomial END
-        opt 2 == THEN AppStatDistInvPoisson END
-        opt 3 == THEN AppStatDistInvNormal END
-        opt 4 == THEN AppStatDistInvTStudent END
-        opt 5 == THEN AppStatDistInvChi END
-        opt 6 == THEN AppStatDistInvExponential END
-        opt 7 == THEN AppStatDistInvUniform END
-        opt 8 == THEN AppStatDistInvWeibull END
-        opt 9 == THEN AppStatDistInvCauchy END
-        opt 10 == THEN AppStatDistInvFDistribution END
-      END
-    ª
+    EVAL
   ª
 
   ChooseSystemTools ´
@@ -495,22 +408,13 @@ DIR
 
     "System tools"
     {
-      { "1.Reset system flags" 1 }
-      { "2.Purge all HOME files" 2 }
-      { "3.Factory reset ALG" 3 }
-      { "4.Factory reset RPN" 4 }
+      { "1.Reset system flags" ´ UtilResetSystemFlagsAlgebraic ª }
+      { "2.Purge all HOME files" ´ UtilPurgeHomeFiles ª }
+      { "3.Factory reset ALG" ´ RSALG ª }
+      { "4.Factory reset RPN" ´ RSRPN ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN UtilResetSystemFlagsAlgebraic END
-        opt 2 == THEN UtilPurgeHomeFiles END
-        opt 3 == THEN RSALG END
-        opt 4 == THEN RSRPN END
-      END
-    ª
+    EVAL
   ª
 
   ChooseTimeMenu ´
@@ -518,18 +422,11 @@ DIR
 
     "Time"
     {
-      { "1.Date add/subtract" 1 }
-      { "2.Date difference" 2 }
+      { "1.Date add/subtract" ´ AppTimeDateAdd ª }
+      { "2.Date difference" ´ AppTimeDateDifference ª }
     }
     UtilGuiChoose
-
-    ç opt
-    ´
-      CASE
-        opt 1 == THEN AppTimeDateAdd END
-        opt 2 == THEN AppTimeDateDifference END
-      END
-    ª
+    EVAL
   ª
 
   @ ---------------------------------------------------------------------------
