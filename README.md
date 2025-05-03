@@ -75,12 +75,12 @@ Adds new features under the APPS menu (key: `APPS`) with:
     - Matrix
     - Combinatorics
     - Finance
+    - Complex
 - **System tools**
     - Reset system flags
-    - Reset system flags (RPN mode)
     - Purge all HOME files
-    - Purge all files and reset system flags
-    - Purge all files and reset system flags (RPN mode)
+    - Factory reset (Algebraic mode)
+    - Factory reset (RPN mode)
 
 ### Other commands
 
@@ -98,14 +98,15 @@ Input:
  - Argument 1: a number or a list/array/matrix of numbers
 ```
 
-- `RECPOL` - **Rectangular/Polar Toggle Command**: Switches between Rectangular and Polar coordinate modes. If the calculator is currently set to Rectangular mode, it will switch to Cylindrical (Polar), and vice versa. Useful for quickly changing the coordinate system.
-
 - `NSOLVE` - **Numerical Solver Command**: Calls the ROOT command using the predefined variable VX from the CASDIR directory. This command makes the process faster and more streamlined.
 ```
 Input:
  - Argument 1: 'symb' or «program»
  - Argument 2: guess
 ```
+
+- `RECPOL` - **Rectangular/Polar Toggle Command**: Switches between Rectangular and Polar coordinate modes. If the calculator is currently set to Rectangular mode, it will switch to Cylindrical (Polar), and vice versa. Useful for quickly changing the coordinate system.
+
 
 - `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
 ```
