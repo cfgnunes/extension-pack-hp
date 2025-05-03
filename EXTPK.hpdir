@@ -205,12 +205,12 @@ DIR
         opt 0 == THEN
           SWAP
 
-          DUP { "" } + SIZE XQ
-          ".Custom menus" + « ChooseCustomMenus »
+          DUP { "" } + SIZE Q
+          ".Custom menus" 30 CHR + + « ChooseCustomMenus »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE XQ
-          ".System tools" + « ChooseSystemTools »
+          DUP { "" } + SIZE Q
+          ".System tools" 30 CHR + + « ChooseSystemTools »
           2 LIST 1 LIST +
 
           SWAP
@@ -220,11 +220,11 @@ DIR
         opt 1 == THEN
           SWAP
 
-          DUP { "" } + SIZE XQ
-          ".Prob. distributions" + « ChooseStatDist »
+          DUP { "" } + SIZE Q
+          ".Prob. distributions" 30 CHR + + « ChooseStatDist »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE XQ
+          DUP { "" } + SIZE Q
           ".DSTAT" + « DSTAT »
           2 LIST 1 LIST +
 
@@ -234,12 +234,24 @@ DIR
         @ Add Finance functions if "Finance menu" is active.
         opt 4 == THEN
           ""
-          {
-            { "1.Time Value of Money" 1 }
-            { "2.Net Present Value" « AppFinanceNPV » }
-            { "3.Int. Rate of Return" « AppFinanceIRR » }
-            { "4.Depreciation methods" « ChooseFinanceDepreciation » }
-          }
+          { }
+
+          DUP { "" } + SIZE Q
+          ".Time Value of Money" 30 CHR + + 1
+          2 LIST 1 LIST +
+
+          DUP { "" } + SIZE Q
+          ".Net Present Value" 30 CHR + + « AppFinanceNPV »
+          2 LIST 1 LIST +
+
+          DUP { "" } + SIZE Q
+          ".Int. Rate of Return" 30 CHR + + « AppFinanceIRR »
+          2 LIST 1 LIST +
+
+          DUP { "" } + SIZE Q
+          ".Depreciation methods" 30 CHR + + « ChooseFinanceDepreciation »
+          2 LIST 1 LIST +
+
           1
           CHOOSE
 
@@ -264,12 +276,12 @@ DIR
         opt 5 == THEN
           SWAP
 
-          DUP { "" } + SIZE XQ
-          ".Solve nonlinear sys" + « AppSolveNonLinearSystem »
+          DUP { "" } + SIZE Q
+          ".Solve nonlinear sys" 30 CHR + + « AppSolveNonLinearSystem »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE XQ
-          ".Triangle solver" + « AppSolveTriangle »
+          DUP { "" } + SIZE Q
+          ".Triangle solver" 30 CHR + + « AppSolveTriangle »
           2 LIST 1 LIST +
 
           SWAP
@@ -279,12 +291,12 @@ DIR
         opt 6 == THEN
           SWAP
 
-          DUP { "" } + SIZE XQ
-          ".Date add/subtract" + « AppTimeDateAdd »
+          DUP { "" } + SIZE Q
+          ".Date add/subtract" 30 CHR + + « AppTimeDateAdd »
           2 LIST 1 LIST +
 
-          DUP { "" } + SIZE XQ
-          ".Date difference" + « AppTimeDateDifference »
+          DUP { "" } + SIZE Q
+          ".Date difference" 30 CHR + + « AppTimeDateDifference »
           2 LIST 1 LIST +
 
           SWAP
