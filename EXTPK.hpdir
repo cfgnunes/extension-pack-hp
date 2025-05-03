@@ -67,8 +67,8 @@ DIR
     RSRPN
     XFRAC
     NSOLVE
-    RECPOL
     DSTAT
+    RECPOL
     CMENU
   }
 
@@ -2410,6 +2410,12 @@ DIR
     AppSolveNumerical
   »
 
+  DSTAT «
+    @ #NOTE Function (Visible): DSTAT
+
+    AppStatDescriptiveStatistics
+  »
+
   RECPOL «
     @ #NOTE Function: RECPOL
     @ This function toggles between Rectangular, Polar modes.
@@ -2420,12 +2426,6 @@ DIR
     ELSE
       RECT
     END
-  »
-
-  DSTAT «
-    @ #NOTE Function (Visible): DSTAT
-
-    AppStatDescriptiveStatistics
   »
 
   CMENU «
