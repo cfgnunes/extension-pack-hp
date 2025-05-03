@@ -1228,9 +1228,18 @@ DIR
 
     ç å ﬂ x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
-      EVAL çNUM
+      çNUM
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1250,8 +1259,17 @@ DIR
 
     ç X0 ë x
     ´
-      '1/á*ATAN((x-X0)/ë)+1/2' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      '1/á*ATAN((x-X0)/ë)+1/2' çNUM
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1270,8 +1288,17 @@ DIR
 
     ç v x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       v x UTPC 1. SWAP -
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1290,8 +1317,17 @@ DIR
 
     ç ﬂ x
     ´
-      '1-EXP(-x/ﬂ)' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      '1-EXP(-x/ﬂ)' çNUM
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1311,8 +1347,17 @@ DIR
 
     ç n d x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       n d x UTPF 1. SWAP -
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1332,8 +1377,17 @@ DIR
 
     ç å ﬂ x
     ´
-      'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' çNUM
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1353,8 +1407,17 @@ DIR
 
     ç µ ò x
     ´
-      µ ò 2. ^ EVAL çNUM x UTPN 1. SWAP -
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      µ ò 2. ^ çNUM x UTPN 1. SWAP -
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1373,8 +1436,17 @@ DIR
 
     ç v x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       v x UTPT 1. SWAP -
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1394,8 +1466,15 @@ DIR
 
     ç a b x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       a x â x b < AND IF THEN
-        '(x-a)/(b-a)' EVAL çNUM
+        '(x-a)/(b-a)' çNUM
         "P(Xâ" x + ")" + çTAG
       ELSE
         x a < IF THEN
@@ -1406,6 +1485,8 @@ DIR
           "P(Xâ" x + ")" + çTAG
         END
       END
+
+      POP
     ª
   ª
 
@@ -1425,8 +1506,17 @@ DIR
 
     ç a b x
     ´
-      '1-EXP(-(x/b)^a)' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      '1-EXP(-(x/b)^a)' çNUM
       "P(Xâ" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1445,8 +1535,17 @@ DIR
 
     ç p x
     ´
-      'p^x*(1-p)^(1-x)' EVAL çNUM
-      "P(x=" x + ")" + çTAG
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      'p^x*(1-p)^(1-x)' çNUM
+      "P(x=" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1466,15 +1565,24 @@ DIR
 
     ç n p x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Input validations.
       x n "x" "n" UtilValidateLessEqual
 
-      'COMB(n,x)*p^x*(1.-p)^(n-x)' EVAL çNUM
+      'COMB(n,x)*p^x*(1.-p)^(n-x)' çNUM
       "P(x=" x çQ + ")" + çTAG
 
       @ Additionally calculate the CDF value.
-      'Ö(j=0,x,COMB(n,j)*p^j*(1.-p)^(n-j))' EVAL çNUM
+      'Ö(j=0,x,COMB(n,j)*p^j*(1.-p)^(n-j))' çNUM
       "P(xâ" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1494,8 +1602,17 @@ DIR
 
     ç r p x
     ´
-      'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' çNUM
       "P(x=" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1514,8 +1631,17 @@ DIR
 
     ç p x
     ´
-      'p*(1-p)^(x-1)' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      'p*(1-p)^(x-1)' çNUM
       "P(x=" x + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1536,16 +1662,25 @@ DIR
 
     ç N K n x
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Input validations.
       n N "n" "N" UtilValidateLessEqual
       x K "x" "K" UtilValidateLessEqual
 
-      'COMB(K,x)*COMB(N-K,n-x)/COMB(N,n)' EVAL çNUM
+      'COMB(K,x)*COMB(N-K,n-x)/COMB(N,n)' çNUM
       "P(x=" x çQ + ")" + çTAG
 
       @ Additionally calculate the CDF value.
-      'Ö(j=0,x,COMB(K,j)*COMB(N-K,n-j)/COMB(N,n))' EVAL çNUM
+      'Ö(j=0,x,COMB(K,j)*COMB(N-K,n-j)/COMB(N,n))' çNUM
       "P(xâ" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1564,12 +1699,21 @@ DIR
 
     ç ñ x
     ´
-      'EXP(-ñ)*ñ^x/x!' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      'EXP(-ñ)*ñ^x/x!' çNUM
       "P(x=" x çQ + ")" + çTAG
 
       @ Additionally calculate the CDF value.
-      'Ö(j=0,x,EXP(-ñ)*ñ^j/j!)' EVAL çNUM
+      'Ö(j=0,x,EXP(-ñ)*ñ^j/j!)' çNUM
       "P(xâ" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1588,8 +1732,17 @@ DIR
 
     ç n x
     ´
-      '(1/n)^x' EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      '(1/n)^x' çNUM
       "P(x=" x çQ + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1613,16 +1766,25 @@ DIR
       @ Input validations.
       b 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
 
       '(p/(1-p))^$x/($x!*(n-$x)!)=b/((1-p)^n*n!)' EVAL
       '$x' 1. ROOT
-      EVAL çNUM 0 RND
+      çNUM 0 RND
 
       "B(" n çQ + "," + p + ";" + b + ")" + çTAG
 
       '$x' PURGE
+
+      POP
     ª
   ª
 
@@ -1645,8 +1807,17 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      x g á p 1 2 / - * TAN * + EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      x g á p 1 2 / - * TAN * + çNUM
       "C(" x + "," + g + ";" + p + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1672,6 +1843,13 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$chi' in case it already exists, to allow symbolic computation.
       '$chi' PURGE
 
@@ -1685,6 +1863,8 @@ DIR
       END
 
       '$chi' PURGE
+
+      POP
     ª
   ª
 
@@ -1706,8 +1886,17 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      b 1 p - LN * NEG EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      b 1 p - LN * NEG çNUM
       "Exp(" b + ";" + p + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1734,10 +1923,17 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$f' in case it already exists, to allow symbolic computation.
       '$f' PURGE
 
-      "´ " n + " " + d EVAL çNUM + " $f UTPF " + p + " - ª" + STRç
+      "´ " n + " " + d çNUM + " $f UTPF " + p + " - ª" + STRç
       '$f' 2. ROOT
 
       tail 0 == IF THEN
@@ -1747,6 +1943,8 @@ DIR
       END
 
       '$f' PURGE
+
+      POP
     ª
   ª
 
@@ -1773,10 +1971,17 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
 
-      "´ " µ + " " + ò 2 ^ EVAL çNUM + " $x UTPN " + p + " - ª" + STRç
+      "´ " µ + " " + ò 2 ^ çNUM + " $x UTPN " + p + " - ª" + STRç
       '$x' 2. ROOT
 
       tail 0 == IF THEN
@@ -1786,6 +1991,8 @@ DIR
       END
 
       '$x' PURGE
+
+      POP
     ª
   ª
 
@@ -1807,16 +2014,25 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
 
       'EXP(ñ)*p=ñ^$x/$x!' EVAL
       '$x' 1. ROOT
-      EVAL çNUM 0 RND
+      çNUM 0 RND
 
       "ó(" ñ + ";" + p + ")" + çTAG
 
       '$x' PURGE
+
+      POP
     ª
   ª
 
@@ -1842,6 +2058,13 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       @ Purge '$t' in case it already exists, to allow symbolic computation.
       '$t' PURGE
 
@@ -1855,6 +2078,8 @@ DIR
       END
 
       '$t' PURGE
+
+      POP
     ª
   ª
 
@@ -1877,8 +2102,17 @@ DIR
       @ Input validations.
       b 0 1 "p(x)" UtilValidateRange
 
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
       a p b a - * +
       "U(" a + "," + b + ";" + p + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1901,8 +2135,17 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      1 p - LN NEG LN a / EXP b / EVAL çNUM
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -105 SF @ Changes system flag: enable approximate mode.
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      1 p - LN NEG LN a / EXP b / çNUM
       "W(" a + "," + b + ";" + p + ")" + çTAG
+
+      POP
     ª
   ª
 
@@ -1961,15 +2204,15 @@ DIR
 
     ç d m y ad am ay rep
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
-
       @ Input validations.
       d 1 31 "start day" UtilValidateRange
       m 1 12 "start month" UtilValidateRange
       y 1582 9999 "start year" UtilValidateRange
+
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       @ Print the start date.
       d m y UtilDateFromStack UtilDateToStr "D0" çTAG
@@ -2010,11 +2253,6 @@ DIR
 
     ç sd sm sy ed em ey
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
-
       @ Input validations.
       sd 1 31 "start day" UtilValidateRange
       sm 1 12 "start month" UtilValidateRange
@@ -2022,6 +2260,11 @@ DIR
       ed 1 31 "end day" UtilValidateRange
       em 1 12 "end month" UtilValidateRange
       ey 1582 9999 "end year" UtilValidateRange
+
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       sd sm sy UtilDateFromStack
       ed em ey UtilDateFromStack
