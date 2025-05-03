@@ -2021,7 +2021,7 @@ DIR
     1 2 çLIST çARRY
 
     @ Store it on the system variable 'ÖDAT'.
-    'ÖDAT' STO
+    STOÖ
 
     @ Set the independent-variable column of the 'ÖDAT'.
     1 XCOL
