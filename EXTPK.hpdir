@@ -82,7 +82,7 @@ DIR
     @ Choose menus.
     ChooseMainMenu
     ChooseCustomMenus
-    ChooseFinanceDepreciation
+    ChooseFinanceDepr
     ChooseFinanceMenu
     ChooseStatDist
     ChooseStatDistCont
@@ -101,7 +101,7 @@ DIR
     AppMenuEquations
     AppMenuFinance
     AppMenuMatrix
-    AppSolveNonLinearSystem
+    AppSolveNLSystem
     AppSolveNumerical
     AppSolveTriangle
     AppStatDescriptiveStatistics
@@ -148,6 +148,7 @@ DIR
     UtilDateToStr
     UtilGuiChoose
     UtilGuiInform
+    UtilMenuAddItem
     UtilPurgeHomeFiles
     UtilResetSystemFlagsAlgebraic
     UtilResetSystemFlagsRpn
@@ -204,30 +205,16 @@ DIR
         @ Add a new menu entry if the "APPS menu" is active.
         opt 0 == THEN
           SWAP
-
-          DUP { "" } + SIZE çQ
-          ".Custom menus" 30 CHR + + ´ ChooseCustomMenus ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".System tools" 30 CHR + + ´ ChooseSystemTools ª
-          2 çLIST 1 çLIST +
-
+          "Custom menus" ´ ChooseCustomMenus ª UtilMenuAddItem
+          "System tools" ´ ChooseSystemTools ª UtilMenuAddItem
           SWAP
         END
 
         @ Add a new menu entry if the "Main Statistics menu" is active.
         opt 1 == THEN
           SWAP
-
-          DUP { "" } + SIZE çQ
-          ".Prob. distributions" 30 CHR + + ´ ChooseStatDist ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".DSTAT" + ´ DSTAT ª
-          2 çLIST 1 çLIST +
-
+          "Prob. distributions" 30 CHR + ´ ChooseStatDist ª UtilMenuAddItem
+          "DSTAT" ´ DSTAT ª UtilMenuAddItem
           SWAP
         END
 
@@ -236,21 +223,10 @@ DIR
           ""
           { }
 
-          DUP { "" } + SIZE çQ
-          ".Time Value of Money" 30 CHR + + 1
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".Net Present Value" 30 CHR + + ´ AppFinanceNPV ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".Int. Rate of Return" 30 CHR + + ´ AppFinanceIRR ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".Depreciation methods" 30 CHR + + ´ ChooseFinanceDepreciation ª
-          2 çLIST 1 çLIST +
+          "Time Value of Money" 30 CHR + 1 UtilMenuAddItem
+          "Net Present Value" 30 CHR + ´ AppFinanceNPV ª UtilMenuAddItem
+          "Int. Rate of Return" 30 CHR + ´ AppFinanceIRR ª UtilMenuAddItem
+          "Depreciation methods" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
 
           1
           CHOOSE
@@ -275,30 +251,16 @@ DIR
         @ Add a new menu entry if the "Numeric solver menu" is active.
         opt 5 == THEN
           SWAP
-
-          DUP { "" } + SIZE çQ
-          ".Solve nonlinear sys" 30 CHR + + ´ AppSolveNonLinearSystem ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".Triangle solver" 30 CHR + + ´ AppSolveTriangle ª
-          2 çLIST 1 çLIST +
-
+          "Solve nonlinear sys" 30 CHR + ´ AppSolveNLSystem ª UtilMenuAddItem
+          "Triangle solver" 30 CHR + ´ AppSolveTriangle ª UtilMenuAddItem
           SWAP
         END
 
         @ Add a new menu entry if the "Time menu" is active.
         opt 6 == THEN
           SWAP
-
-          DUP { "" } + SIZE çQ
-          ".Date add/subtract" 30 CHR + + ´ AppTimeDateAdd ª
-          2 çLIST 1 çLIST +
-
-          DUP { "" } + SIZE çQ
-          ".Date difference" 30 CHR + + ´ AppTimeDateDifference ª
-          2 çLIST 1 çLIST +
-
+          "Date add/subtract" 30 CHR + ´ AppTimeDateAdd ª UtilMenuAddItem
+          "Date difference" 30 CHR + ´ AppTimeDateDifference ª UtilMenuAddItem
           SWAP
         END
 
@@ -331,7 +293,7 @@ DIR
     ç opt
     ´
       CASE
-        opt 1 == THEN AppSolveNonLinearSystem END
+        opt 1 == THEN AppSolveNLSystem END
         opt 2 == THEN AppSolveTriangle END
         opt 3 == THEN ChooseFinanceMenu END
         opt 4 == THEN ChooseTimeMenu END
@@ -365,8 +327,8 @@ DIR
     ª
   ª
 
-  ChooseFinanceDepreciation ´
-    @ #NOTE Choose: ChooseFinanceDepreciation
+  ChooseFinanceDepr ´
+    @ #NOTE Choose: ChooseFinanceDepr
 
     "Depreciation methods"
     {
@@ -402,7 +364,7 @@ DIR
       CASE
         opt 1 == THEN AppFinanceNPV END
         opt 2 == THEN AppFinanceIRR END
-        opt 3 == THEN ChooseFinanceDepreciation END
+        opt 3 == THEN ChooseFinanceDepr END
       END
     ª
   ª
@@ -956,8 +918,8 @@ DIR
     MENU
   ª
 
-  AppSolveNonLinearSystem ´
-    @ # NOTE App: AppSolveNonLinearSystem
+  AppSolveNLSystem ´
+    @ # NOTE App: AppSolveNLSystem
 
     @ INFORM Section (Begin) --------------------------------------------------
     @ INFORM 'Title'.
@@ -2349,6 +2311,17 @@ DIR
 
     @ Extract the values from the list.
     EVAL
+  ª
+
+  UtilMenuAddItem ´
+    @ #NOTE Function: UtilMenuAddItem
+
+    ç lbl act
+    ´
+      DUP { "" } + SIZE çQ
+      "." lbl + + act
+      2 çLIST 1 çLIST +
+    ª
   ª
 
   UtilPurgeHomeFiles ´
