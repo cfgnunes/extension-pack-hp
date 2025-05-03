@@ -11,12 +11,6 @@
   @ Remove the library from port 0 (IRAM), if present.
   :0:1723 DUP DETACH PURGE
 
-  @ Remove the library from port port 1 (ERAM), if present.
-  :1:1723 DUP DETACH PURGE
-
-  @ Remove the library from port port 2 (FLASH), if present.
-  :2:1723 DUP DETACH PURGE
-
   @ Attach the development library.
   @256 ATTACH
 
