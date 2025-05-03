@@ -68,6 +68,8 @@ DIR
     XFRAC
     NSOLVE
     DSTAT
+    MDRG
+    MREPO
     CMENU
   }
 
@@ -98,6 +100,7 @@ DIR
     AppFinanceIRR
     AppFinanceNPV
     AppMenuCombinatorics
+    AppMenuComplex
     AppMenuEquations
     AppMenuFinance
     AppMenuMatrix
@@ -300,6 +303,7 @@ DIR
       { "2.Matrix" ´ AppMenuMatrix ª }
       { "3.Combinatorics" ´ AppMenuCombinatorics ª }
       { "4.Finance" ´ AppMenuFinance ª }
+      { "5.Complex" ´ AppMenuComplex ª }
     }
     UtilGuiChoose
   ª
@@ -712,6 +716,34 @@ DIR
       { }
       { }
       { }
+      { }
+      { }
+      { "MENUÜ" ´ CMENU ª }
+    }
+
+    @ Define and display the Custom Menu.
+    MENU
+  ª
+
+  AppMenuComplex ´
+    @ #NOTE App: AppMenuComplex
+    @ This function displays a custom menu with various mathematical functions
+    @ for complex numbers.
+
+    @ Put in the stack the "Custom Menu",
+    @ to be displayed and stored as 'CST' file in Home.
+    {
+      @ Options - Page 1.
+      { "EDIT" ´ 35.1 KEYEVAL ª }
+      { "VIEW" ´ DUP SCROLL ª }
+      { "SIMPL" ´ SIMPLIFY ª }
+      { "D/R/G" ´ MDRG ª }
+      { "Re/Po" ´ MREPO ª }
+      { "ab/c" ´ XFRAC ª }
+      @ Options - Page 2.
+      { "ABS" ´ ABS ª }
+      { "ARG" ´ ARG ª }
+      { "CONJ" ´ CONJ ª }
       { }
       { }
       { "MENUÜ" ´ CMENU ª }
@@ -2208,7 +2240,7 @@ DIR
 
     ç lbl act
     ´
-      DUP { "" } + SIZE çQ
+      DUP { "" } + SIZE XQ
       "." lbl + + act
       2 çLIST 1 çLIST +
     ª
@@ -2383,6 +2415,36 @@ DIR
     @ #NOTE Function (Visible): DSTAT
 
     AppStatDescriptiveStatistics
+  ª
+
+  MDRG ´
+    @ #NOTE Function: TODRG
+    @ This function toggles between Degree, Radian, and Grads modes.
+
+    @ Is "Radians" mode?
+    IF -17 FS? THEN
+      GRAD
+    ELSE
+      @ Is "Grads" mode?
+      IF -18 FS? THEN
+        DEG
+      ELSE
+        RAD
+      END
+    END
+  ª
+
+  MREPO ´
+    @ #NOTE Function: TORCS
+    @ This function toggles between Rectangular, Polar/Cylindrical, and
+    @ Polar/Spherical modes.
+
+    @ Is "Rectangular" mode?
+    IF -16 FC? THEN
+      CYLIN
+    ELSE
+      RECT
+    END
   ª
 
   CMENU ´
