@@ -152,6 +152,7 @@ DIR
     UtilGuiInform
     UtilMenuAddItem
     UtilPurgeHomeFiles
+    UtilPushSystemFlagsApp
     UtilResetSystemFlagsAlgebraic
     UtilResetSystemFlagsRpn
     UtilTriangleHeronArea
@@ -443,9 +444,7 @@ DIR
 
     ç SBV SAL L
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       @ The columns of the output table are:
       @ - 1 Period number (j)
@@ -506,9 +505,7 @@ DIR
 
     ç SBV SAL L
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       @ The columns of the output table are:
       @ - 1 Period number (j)
@@ -558,9 +555,7 @@ DIR
 
     ç SBV SAL L
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       @ The columns of the output table are:
       @ - 1 Period number (j)
@@ -632,9 +627,7 @@ DIR
       @ Purge '$IRR' in case it already exists, to allow symbolic computation.
       '$IRR' PURGE
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -105 SF @ Changes system flag: enable approximate mode.
+      UtilPushSystemFlagsApp
 
       "'"
       @ Loop: for t = 1 to 'C.size'.
@@ -695,9 +688,7 @@ DIR
     @ Calculates the NPV.
     ç C r
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -105 SF @ Changes system flag: enable approximate mode.
+      UtilPushSystemFlagsApp
 
       @ Initialize the accumulator in the stack.
       0
@@ -935,9 +926,7 @@ DIR
 
     ç eqn names guess n
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       @ Call 'MSLV' to solve the nonlinear system:
       @ - Pass the system of equations.
@@ -1188,9 +1177,7 @@ DIR
 
     ç v
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       v UtilArrayListToDAT
 
@@ -1228,12 +1215,7 @@ DIR
 
     ç å ﬂ x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
       çNUM
@@ -1259,12 +1241,7 @@ DIR
 
     ç X0 ë x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       '1/á*ATAN((x-X0)/ë)+1/2' çNUM
       "P(Xâ" x + ")" + çTAG
@@ -1288,12 +1265,7 @@ DIR
 
     ç v x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       v x UTPC 1. SWAP -
       "P(Xâ" x + ")" + çTAG
@@ -1317,12 +1289,7 @@ DIR
 
     ç ﬂ x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       '1-EXP(-x/ﬂ)' çNUM
       "P(Xâ" x + ")" + çTAG
@@ -1347,12 +1314,7 @@ DIR
 
     ç n d x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       n d x UTPF 1. SWAP -
       "P(Xâ" x + ")" + çTAG
@@ -1377,12 +1339,7 @@ DIR
 
     ç å ﬂ x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'Ñ(0,x,a^(å-1)*EXP(-a/ﬂ)/(ﬂ^å*GAMMA(å)),a)' çNUM
       "P(Xâ" x + ")" + çTAG
@@ -1407,12 +1364,7 @@ DIR
 
     ç µ ò x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       µ ò 2. ^ çNUM x UTPN 1. SWAP -
       "P(Xâ" x + ")" + çTAG
@@ -1436,12 +1388,7 @@ DIR
 
     ç v x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       v x UTPT 1. SWAP -
       "P(Xâ" x + ")" + çTAG
@@ -1466,12 +1413,7 @@ DIR
 
     ç a b x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       a x â x b < AND IF THEN
         '(x-a)/(b-a)' çNUM
@@ -1506,12 +1448,7 @@ DIR
 
     ç a b x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       '1-EXP(-(x/b)^a)' çNUM
       "P(Xâ" x + ")" + çTAG
@@ -1535,12 +1472,7 @@ DIR
 
     ç p x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'p^x*(1-p)^(1-x)' çNUM
       "P(x=" x çQ + ")" + çTAG
@@ -1565,12 +1497,7 @@ DIR
 
     ç n p x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       @ Input validations.
       x n "x" "n" UtilValidateLessEqual
@@ -1602,12 +1529,7 @@ DIR
 
     ç r p x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'COMB(x-1,r-1)*p^r*(1-p)^(x-r)' çNUM
       "P(x=" x çQ + ")" + çTAG
@@ -1631,12 +1553,7 @@ DIR
 
     ç p x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'p*(1-p)^(x-1)' çNUM
       "P(x=" x + ")" + çTAG
@@ -1662,12 +1579,7 @@ DIR
 
     ç N K n x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       @ Input validations.
       n N "n" "N" UtilValidateLessEqual
@@ -1699,12 +1611,7 @@ DIR
 
     ç ñ x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       'EXP(-ñ)*ñ^x/x!' çNUM
       "P(x=" x çQ + ")" + çTAG
@@ -1732,12 +1639,7 @@ DIR
 
     ç n x
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      UtilPushSystemFlagsApp
 
       '(1/n)^x' çNUM
       "P(x=" x çQ + ")" + çTAG
@@ -1766,12 +1668,7 @@ DIR
       @ Input validations.
       b 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
@@ -1807,12 +1704,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       x g á p 1 2 / - * TAN * + çNUM
       "C(" x + "," + g + ";" + p + ")" + çTAG
@@ -1843,12 +1735,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$chi' in case it already exists, to allow symbolic computation.
       '$chi' PURGE
@@ -1886,12 +1773,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       b 1 p - LN * NEG çNUM
       "Exp(" b + ";" + p + ")" + çTAG
@@ -1923,12 +1805,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$f' in case it already exists, to allow symbolic computation.
       '$f' PURGE
@@ -1971,12 +1848,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
@@ -2014,12 +1886,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$x' in case it already exists, to allow symbolic computation.
       '$x' PURGE
@@ -2058,12 +1925,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       @ Purge '$t' in case it already exists, to allow symbolic computation.
       '$t' PURGE
@@ -2102,12 +1964,7 @@ DIR
       @ Input validations.
       b 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       a p b a - * +
       "U(" a + "," + b + ";" + p + ")" + çTAG
@@ -2135,12 +1992,7 @@ DIR
       @ Input validations.
       p 0 1 "p(x)" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
-      -105 SF @ Changes system flag: enable approximate mode.
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+  UtilPushSystemFlagsApp
 
       1 p - LN NEG LN a / EXP b / çNUM
       "W(" a + "," + b + ";" + p + ")" + çTAG
@@ -2209,9 +2061,7 @@ DIR
       m 1 12 "start month" UtilValidateRange
       y 1582 9999 "start year" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
       -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       @ Print the start date.
@@ -2261,9 +2111,7 @@ DIR
       em 1 12 "end month" UtilValidateRange
       ey 1582 9999 "end year" UtilValidateRange
 
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
       -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       sd sm sy UtilDateFromStack
@@ -2481,9 +2329,7 @@ DIR
 
     ç dt
     ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -17 SF  @ Changes system flag: enable radians mode.
+      UtilPushSystemFlagsApp
 
       @ Day.
       dt FLOOR çQ
@@ -2588,6 +2434,17 @@ DIR
 
     @ Restore CAS variables from "CASDIR" directory.
     CASCFG
+  ª
+
+  UtilPushSystemFlagsApp ´
+    @ #NOTE Function: UtilPushSystemFlagsApp
+
+    @ Saves the current system flags and the directory path.
+    PUSH
+    -17 SF  @ Changes system flag: enable radians mode.
+    -105 SF @ Changes system flag: enable approximate mode.
+    -49 CF  @ Changes system flag: Number Display Format to Standard.
+    -50 CF
   ª
 
   UtilResetSystemFlagsAlgebraic ´
