@@ -443,11 +443,14 @@ DIR
 
     ç SBV SAL L
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ The columns of the output table are:
       @ - 1 Period number (j)
       @ - 2 Depreciation expense during period j ($DPN)
       @ - 3 Remaining depreciable value at end of period j ($RDV)
-
       'è' 'èDepr.' 'èValue'
       0 0 SBV
       { 2 3 } çARRY
@@ -461,14 +464,14 @@ DIR
       ´
         1 L FOR j
           @ Calculate depreciation for the period.
-          $RDV RATE * EVAL çNUM '$DPN' STO
+          $RDV RATE * çNUM '$DPN' STO
 
           @ Ensure $RDV doesn't fall below SAL.
           $RDV $DPN - SAL < IF THEN
-            $RDV SAL - EVAL çNUM '$DPN' STO
+            $RDV SAL - çNUM '$DPN' STO
           END
 
-          $RDV $DPN - EVAL çNUM '$RDV' STO
+          $RDV $DPN - çNUM '$RDV' STO
 
           @ Add the line to the output table.
           j $DPN 2 RND $RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
@@ -479,9 +482,12 @@ DIR
           END
         NEXT
       ª
+
+      '$RDV' PURGE
+      '$DPN' PURGE
+
+      POP
     ª
-    '$RDV' PURGE
-    '$DPN' PURGE
   ª
 
   AppFinanceDepreciationSL ´
@@ -500,6 +506,10 @@ DIR
 
     ç SBV SAL L
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ The columns of the output table are:
       @ - 1 Period number (j)
       @ - 2 Depreciation expense during period j ($DPN)
@@ -512,21 +522,24 @@ DIR
       SBV '$RDV' STO
 
       @ Calculates the constant $DPN.
-      SBV SAL - L / EVAL çNUM
+      SBV SAL - L / çNUM
 
       ç $DPN
       ´
         1 L FOR j
           @ Calculates the $RDV.
-          $RDV $DPN - EVAL çNUM
+          $RDV $DPN - çNUM
           '$RDV' STO
 
           @ Add the line to the output table.
           j $DPN 2 RND $RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
         NEXT
       ª
+
+      '$RDV' PURGE
+
+      POP
     ª
-    '$RDV' PURGE
   ª
 
   AppFinanceDepreciationSOYD ´
@@ -545,6 +558,10 @@ DIR
 
     ç SBV SAL L
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ The columns of the output table are:
       @ - 1 Period number (j)
       @ - 2 Depreciation expense during period j ($DPN)
@@ -566,17 +583,20 @@ DIR
       ´
         1 L FOR j
           @ Depreciation for year j.
-          L j - 1 + SOYD / DEP * EVAL çNUM
+          L j - 1 + SOYD / DEP * çNUM
 
           @ Calculates the $RDV.
-          DUP $RDV SWAP - EVAL çNUM '$RDV' STO
+          DUP $RDV SWAP - çNUM '$RDV' STO
 
           @ Add the line to the output table.
           j SWAP  2 RND $RDV 2 RND { 1 3 } çARRY SWAP 1 ROW+
         NEXT
       ª
+
+      '$RDV' PURGE
+
+      POP
     ª
-    '$RDV' PURGE
   ª
 
   AppFinanceIRR ´
@@ -612,11 +632,9 @@ DIR
       @ Purge '$IRR' in case it already exists, to allow symbolic computation.
       '$IRR' PURGE
 
-      @ Saves the current status of the flags, and the current directory path.
+      @ Saves the current system flags and the directory path.
       PUSH
-
-      @ System flag: enable approximate mode.
-      -105 SF
+      -105 SF @ Changes system flag: enable approximate mode.
 
       "'"
       @ Loop: for t = 1 to 'C.size'.
@@ -631,12 +649,11 @@ DIR
       @ Initial guess is 0.5 (50%) for the root finder (numerical solver).
       '$IRR' .5 ROOT
 
-      @ Restores the flags and current directory
-      POP
-
       @ Convert the result to percentage.
-      100 * EVAL çNUM
+      100 * çNUM
       "IRR" çTAG
+
+      POP
 
       '$IRR' PURGE
     ª
@@ -678,6 +695,10 @@ DIR
     @ Calculates the NPV.
     ç C r
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -105 SF @ Changes system flag: enable approximate mode.
+
       @ Initialize the accumulator in the stack.
       0
 
@@ -691,8 +712,10 @@ DIR
         +          @ Add to the accumulator.
       NEXT
 
-      EVAL çNUM
+      çNUM
       "NPV" çTAG
+
+      POP
     ª
   ª
 
@@ -864,7 +887,7 @@ DIR
     EQN ÖLIST LNAME SWAP DROP '$NAMES' STO
 
     @ Determine the number of variable names and store it in '$N'.
-    $NAMES SIZE EVAL çQ '$N' STO
+    $NAMES SIZE EVAL '$N' STO
 
     @ INFORM Section (Begin) --------------------------------------------------
     @ INFORM 'Title'.
@@ -912,6 +935,10 @@ DIR
 
     ç eqn names guess n
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ Call 'MSLV' to solve the nonlinear system:
       @ - Pass the system of equations.
       @ - Pass the variable names.
@@ -922,14 +949,17 @@ DIR
       SWAP DROP SWAP DROP
       '$RESULTS' STO
 
-      @ Push each solution onto the stack tagged with the
-      @  corresponding variable name.
+      @ Put each solution onto the stack tagged with the
+      @ corresponding variable name.
       1 n FOR k
         $RESULTS k GET
         names k GET
         çTAG
       NEXT
-    '$RESULTS' PURGE
+
+      '$RESULTS' PURGE
+
+      POP
     ª
   ª
 
@@ -990,8 +1020,9 @@ DIR
         DOERR
       END
 
+      @ Saves the current system flags and the directory path.
       PUSH
-      -105 SF   @ System flag: enable approximate mode.
+      -105 SF @ Changes system flag: enable approximate mode.
 
       CASE
 
@@ -1121,11 +1152,10 @@ DIR
         END
       END
 
-      POP
-
       @ Check the final solution.
       A B + C + TYPE 1 ==
       IF THEN
+        POP
         "Error: No solution with given data!" DOERR
       END
 
@@ -1137,16 +1167,19 @@ DIR
       b 0 > NOT OR
       c 0 > NOT OR
       IF THEN
+        POP
         "Error: No solution with given data!" DOERR
       END
 
-      a EVAL çNUM "a" çTAG
-      b EVAL çNUM "b" çTAG
-      c EVAL çNUM "c" çTAG
-      A EVAL çNUM "A" çTAG
-      B EVAL çNUM "B" çTAG
-      C EVAL çNUM "C" çTAG
-      a b c UtilTriangleHeronArea EVAL çNUM "Area" çTAG
+      a çNUM "a" çTAG
+      b çNUM "b" çTAG
+      c çNUM "c" çTAG
+      A çNUM "A" çTAG
+      B çNUM "B" çTAG
+      C çNUM "C" çTAG
+      a b c UtilTriangleHeronArea çNUM "Area" çTAG
+
+      POP
     ª
   ª
 
@@ -1155,13 +1188,17 @@ DIR
 
     ç v
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       v UtilArrayListToDAT
 
       NÖ çQ "n" çTAG
       MINÖ "Min" çTAG
-      v 25 AppStatPercentile EVAL çNUM "Q1" çTAG
-      v 50 AppStatPercentile EVAL çNUM "Med" çTAG
-      v 75 AppStatPercentile EVAL çNUM "Q3" çTAG
+      v 25 AppStatPercentile çNUM "Q1" çTAG
+      v 50 AppStatPercentile çNUM "Med" çTAG
+      v 75 AppStatPercentile çNUM "Q3" çTAG
       MAXÖ "Max" çTAG
       ÖX "ÖX" çTAG
       ÖX2 "ÖX≤" çTAG
@@ -1170,6 +1207,8 @@ DIR
       VAR "s≤X" çTAG
       PSDEV "òX" çTAG
       PVAR "ò≤X" çTAG
+
+      POP
     ª
   ª
 
@@ -1869,7 +1908,12 @@ DIR
 
   AppStatPercentile ´
     @#NOTE App: AppStatPercentile
-    SWAP UtilArrayListToList PUSH XNUM POP
+
+    @ Saves the current system flags and the directory path.
+    PUSH
+    -105 SF @ Changes system flag: enable approximate mode.
+
+    SWAP UtilArrayListToList XNUM
 
     @ Inspired on the function "%TILE" from: "HP 50g / 49g+ / 48gII graphing
     @ calculator, advanced user's reference manual".
@@ -1881,23 +1925,21 @@ DIR
 
     FLOOR                 @ Rounds the position to the lower integer.
     1 MAX OVER SIZE MIN   @ Ensures it is between 1 and the size of the list.
-    EVAL çNUM GET         @ Gets the corresponding number.
+    EVAL GET              @ Gets the corresponding number.
 
     ROT ROT   @ Moves the list to level 1.
 
     CEIL                @ Rounds the position to the upper integer.
     1 MAX OVER SIZE MIN @ Ensures it is between 1 and the size of the list.
-    EVAL çNUM GET       @ Gets the corresponding number.
+    EVAL GET            @ Gets the corresponding number.
 
     + 2 /     @ Calculates the average of the two numbers.
+
+    POP
   ª
 
   AppTimeDateAdd ´
     @#NOTE App: AppTimeDateAdd
-
-    PUSH
-    @ System flag: date format to DD.MMYYYY.
-    -42 SF
 
     "DATE ADD/SUBTRACT"
     {
@@ -1911,11 +1953,18 @@ DIR
     }
     { 3 0 }
     { }
-    DATE UtilDateToStack 0 0 0 1 7 çLIST @ Retrieve the current date.
+    PUSH -42 SF
+    DATE
+    UtilDateToStack 0 0 0 1 7 çLIST @ Retrieve the current date.
+    POP
     UtilGuiInform
 
     ç d m y ad am ay rep
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -42 SF @ Changes system flag: date format to DD.MMYYYY.
+
       @ Input validations.
       d 1 31 "start day" UtilValidateRange
       m 1 12 "start month" UtilValidateRange
@@ -1932,17 +1981,13 @@ DIR
         UtilDateToStr
         "D" r + çTAG
       NEXT
-    ª
 
     POP
+    ª
   ª
 
   AppTimeDateDifference ´
     @#NOTE App: AppTimeDateDifference
-
-    PUSH
-    @ System flag: date format to DD.MMYYYY.
-    -42 SF
 
     "DATE DIFFERENCE"
     {
@@ -1955,13 +2000,20 @@ DIR
     }
     { 3 0 }
     { }
+    PUSH -42 SF
     DATE UtilDateToStack          @ Retrieve the current date.
     DATE 10 DATE+ UtilDateToStack @ Retrieve the current date (+ 10 days).
+    POP
     6 çLIST
     UtilGuiInform
 
     ç sd sm sy ed em ey
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -42 SF @ Changes system flag: date format to DD.MMYYYY.
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ Input validations.
       sd 1 31 "start day" UtilValidateRange
       sm 1 12 "start month" UtilValidateRange
@@ -1975,9 +2027,9 @@ DIR
 
       DDAYS çQ
       "Days" çTAG
-    ª
 
-    POP
+      POP
+    ª
   ª
 
   @ ---------------------------------------------------------------------------
@@ -2185,6 +2237,10 @@ DIR
 
     ç dt
     ´
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -17 SF  @ Changes system flag: enable radians mode.
+
       @ Day.
       dt FLOOR çQ
 
@@ -2194,6 +2250,8 @@ DIR
 
       @ Year.
       SWAP FP 10000  * çQ
+
+      POP
     ª
   ª
 
