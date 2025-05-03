@@ -225,7 +225,7 @@ DIR
           ""
           { }
 
-          "Time Value of Money" 30 CHR + 1 UtilMenuAddItem
+          "Time Value of Money" 30 CHR + { } UtilMenuAddItem
           "Net Present Value" 30 CHR + ´ AppFinanceNPV ª UtilMenuAddItem
           "Int. Rate of Return" 30 CHR + ´ AppFinanceIRR ª UtilMenuAddItem
           "Depreciation methods" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
@@ -237,7 +237,7 @@ DIR
           NOT IF THEN 2 DROPN KILL END
 
           DUP
-          TYPE 28 == IF THEN
+          TYPE 5 == IF THEN
             @ If is selected "1.Time Value of Money",
             @ clear temp data on the stack and continue.
             DROP
@@ -1963,7 +1963,8 @@ DIR
     ´
       @ Saves the current system flags and the directory path.
       PUSH
-      -42 SF @ Changes system flag: date format to DD.MMYYYY.
+      -17 SF  @ Changes system flag: enable radians mode.
+      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       @ Input validations.
       d 1 31 "start day" UtilValidateRange
@@ -1979,10 +1980,10 @@ DIR
 
         @ Print the 'r' date.
         UtilDateToStr
-        "D" r + çTAG
+        "D" r çQ + çTAG
       NEXT
 
-    POP
+      POP
     ª
   ª
 
@@ -2011,8 +2012,8 @@ DIR
     ´
       @ Saves the current system flags and the directory path.
       PUSH
-      -42 SF @ Changes system flag: date format to DD.MMYYYY.
       -17 SF  @ Changes system flag: enable radians mode.
+      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
 
       @ Input validations.
       sd 1 31 "start day" UtilValidateRange
@@ -2297,9 +2298,16 @@ DIR
 
     ç lbl act
     ´
-      DUP { "" } + SIZE XQ
-      "." lbl + + act
+      @ Saves the current system flags and the directory path.
+      PUSH
+      -49 CF  @ Changes system flag: Number Display Format to Standard.
+      -50 CF
+
+      DUP { "" } + SIZE
+      "" lbl + + act
       2 çLIST 1 çLIST +
+
+      POP
     ª
   ª
 
