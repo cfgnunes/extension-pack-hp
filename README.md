@@ -98,6 +98,8 @@ Input:
  - Argument 1: a number or a list/array/matrix of numbers
 ```
 
+- `RECPOL` - **Rectangular/Polar Toggle Command**: Switches between Rectangular and Polar coordinate modes. If the calculator is currently set to Rectangular mode, it will switch to Cylindrical (Polar), and vice versa. Useful for quickly changing the coordinate system.
+
 - `NSOLVE` - **Numerical Solver Command**: Calls the ROOT command using the predefined variable VX from the CASDIR directory. This command makes the process faster and more streamlined.
 ```
 Input:
