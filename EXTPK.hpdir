@@ -955,7 +955,7 @@ DIR
     }
     { 2 0 }
     { }
-    { NOVAL NOVAL NOVAL NOVAL NOVAL NOVAL }
+    NOVAL 6 NDUPN çLIST
     INFORM
 
     @ Exit if the user presses "Cancel".
