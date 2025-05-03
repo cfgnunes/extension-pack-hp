@@ -947,13 +947,13 @@ DIR
     "TRIANGLE SOLVER"
     {
       { "a:" "Enter length of side a" }
-      { "A:" "Enter angle A (opposite side a)" }
       { "b:" "Enter length of side b" }
-      { "B:" "Enter angle B (opposite side b)" }
       { "c:" "Enter length of side c" }
+      { "A:" "Enter angle A (opposite side a)" }
+      { "B:" "Enter angle B (opposite side b)" }
       { "C:" "Enter angle C (opposite side c)" }
     }
-    { 2 0 }
+    { 3 0 }
     { }
     NOVAL 6 NDUPN çLIST
     INFORM
@@ -982,7 +982,7 @@ DIR
     @ 180 degrees.
     -1 ACOS
 
-    ç a A b B c C angTotal
+    ç a b c A B C angTotal
     ´
       @ Input validations.
       a NOVAL == b NOVAL == AND c NOVAL == AND IF THEN
