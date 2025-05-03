@@ -67,9 +67,8 @@ DIR
     RSRPN
     XFRAC
     NSOLVE
+    RECPOL
     DSTAT
-    MDRG
-    MREPO
     CMENU
   }
 
@@ -736,14 +735,14 @@ DIR
       @ Options - Page 1.
       { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
-      { "SIMPL" « SIMPLIFY » }
-      { "D/R/G" « MDRG » }
-      { "Re/Po" « MREPO » }
-      { "ab/c" « XFRAC » }
-      @ Options - Page 2.
       { "ABS" « ABS » }
       { "ARG" « ARG » }
+      { "Re/Po" « RECPOL » }
+      { "ab/c" « XFRAC » }
+      @ Options - Page 2.
       { "CONJ" « CONJ » }
+      { }
+      { }
       { }
       { }
       { "MENU†" « CMENU » }
@@ -2411,33 +2410,9 @@ DIR
     AppSolveNumerical
   »
 
-  DSTAT «
-    @ #NOTE Function (Visible): DSTAT
-
-    AppStatDescriptiveStatistics
-  »
-
-  MDRG «
-    @ #NOTE Function: TODRG
-    @ This function toggles between Degree, Radian, and Grads modes.
-
-    @ Is "Radians" mode?
-    IF -17 FS? THEN
-      GRAD
-    ELSE
-      @ Is "Grads" mode?
-      IF -18 FS? THEN
-        DEG
-      ELSE
-        RAD
-      END
-    END
-  »
-
-  MREPO «
-    @ #NOTE Function: TORCS
-    @ This function toggles between Rectangular, Polar/Cylindrical, and
-    @ Polar/Spherical modes.
+  RECPOL «
+    @ #NOTE Function: RECPOL
+    @ This function toggles between Rectangular, Polar modes.
 
     @ Is "Rectangular" mode?
     IF -16 FC? THEN
@@ -2445,6 +2420,12 @@ DIR
     ELSE
       RECT
     END
+  »
+
+  DSTAT «
+    @ #NOTE Function (Visible): DSTAT
+
+    AppStatDescriptiveStatistics
   »
 
   CMENU «
