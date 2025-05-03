@@ -63,7 +63,8 @@ DIR
   @ # NOTE Variable: $VISIBLE
   $VISIBLE {
     EXTPK
-    RESET
+    RSALG
+    RSRPN
     XFRAC
     NSOLVE
     DSTAT
@@ -148,8 +149,7 @@ DIR
     UtilGuiChoose
     UtilGuiInform
     UtilPurgeHomeFiles
-    UtilResetSystemFlags
-    UtilResetSystemFlagsDefault
+    UtilResetSystemFlagsAlgebraic
     UtilResetSystemFlagsRpn
     UtilTriangleHeronArea
     UtilTriangleLawOfCossineAngle
@@ -521,22 +521,20 @@ DIR
 
     "System tools"
     {
-      { "1.Reset sys flags" 1 }
-      { "2.Reset sys flags RPN" 2 }
-      { "3.Purge all HOME files" 3 }
-      { "4.Purge and reset" 4 }
-      { "5.Purge and reset RPN" 5 }
+      { "1.Reset system flags" 1 }
+      { "2.Purge all HOME files" 2 }
+      { "3.Factory reset ALG" 3 }
+      { "4.Factory reset RPN" 4 }
     }
     UtilGuiChoose
 
     ç opt
     ´
       CASE
-        opt 1 == THEN UtilResetSystemFlagsDefault END
-        opt 2 == THEN UtilResetSystemFlagsRpn END
-        opt 3 == THEN UtilPurgeHomeFiles END
-        opt 4 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsDefault END
-        opt 5 == THEN UtilPurgeHomeFiles UtilResetSystemFlagsRpn END
+        opt 1 == THEN UtilResetSystemFlagsAlgebraic END
+        opt 2 == THEN UtilPurgeHomeFiles END
+        opt 3 == THEN RSALG END
+        opt 4 == THEN RSRPN END
       END
     ª
   ª
@@ -2371,27 +2369,12 @@ DIR
     CASCFG
   ª
 
-  UtilResetSystemFlags ´
-    @ #NOTE Function: UtilResetSystemFlags
+  UtilResetSystemFlagsAlgebraic ´
+    @ #NOTE Function: UtilResetSystemFlagsAlgebraic
     @ This function restores the calculator flags to its factory settings.
-
-    HOME
 
     @ Clear the user keys.
     { } STOKEYS
-
-    @ Restore CAS variables from the "CASDIR".
-    'CASDIR' PGDIR
-    CASCFG
-
-    AppMenuEquations
-  ª
-
-  UtilResetSystemFlagsDefault ´
-    @ #NOTE Function: UtilResetSystemFlagsDefault
-    @ This function restores the calculator flags to its factory settings.
-
-    UtilResetSystemFlags
 
     @ Restore default flags.
     {# 204010FF0h # 0h # 8000000042000000h # 0h} STOF
@@ -2404,7 +2387,8 @@ DIR
     @ #NOTE Function: UtilResetSystemFlagsRpn
     @ This function restores the calculator flags to use with RPN mode.
 
-    UtilResetSystemFlags
+    @ Clear the user keys.
+    { } STOKEYS
 
     @ Restore my custom flags.
     @-56 SF Disable Error Beep.
@@ -2490,11 +2474,22 @@ DIR
     ChooseMainMenu
   ª
 
-  RESET ´
-    @ #NOTE Function (Visible): RESET
+  RSALG ´
+    @ #NOTE Function (Visible): RSALG
+
+    UtilPurgeHomeFiles
+    UtilResetSystemFlagsAlgebraic
+    AppMenuEquations
+    CLEAR
+  ª
+
+  RSRPN ´
+    @ #NOTE Function (Visible): RSRPN
 
     UtilPurgeHomeFiles
     UtilResetSystemFlagsRpn
+    AppMenuEquations
+    CLEAR
   ª
 
   XFRAC ´

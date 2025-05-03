@@ -88,7 +88,9 @@ Adds new global commands, allowing access from anywhere in the calculator:
 
 - `EXTPK` - **Extension Pack HP Command Menu**: Opens a centralized menu that lists all features included in the Extension Pack HP, offering a quick and convenient way to access its tools.
 
-- `RESET` - **System Reset Command**: Reinitializes the calculator by resetting system flags for optimal use in RPN (Reverse Polish Notation) mode, removes all files and directories from the `HOME` directory (excluding program files), and restores the default contents of the `CASDIR` directory.
+- `RSALG` - **Factory Reset Command (Algebraic mode)**: Reinitializes the calculator by resetting system flags for optimal use in Algebraic mode, clears the stack, removes all files and directories from the HOME directory (excluding program files), and restores the default contents of the CASDIR directory. Objects stored in IRAM, ERAM, or FLASH memory remain unaffected.
+
+- `RSRPN` - **Factory Reset Command (RPN mode)**: Reinitializes the calculator by resetting system flags for optimal use in RPN (Reverse Polish Notation) mode, clears the stack, removes all files and directories from the HOME directory (excluding program files), and restores the default contents of the CASDIR directory. Objects stored in IRAM, ERAM, or FLASH memory remain unaffected.
 
 - `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
 ```
@@ -96,7 +98,7 @@ Input:
  - Argument 1: a number or a list/array/matrix of numbers
 ```
 
-- `NSOLVE` - **Numerical Solver Command**: Calls the `ROOT` command using the predefined variable `VX` from the `CASDIR` directory. This command makes the process faster and more streamlined.
+- `NSOLVE` - **Numerical Solver Command**: Calls the ROOT command using the predefined variable VX from the CASDIR directory. This command makes the process faster and more streamlined.
 ```
 Input:
  - Argument 1: 'symb' or «program»
