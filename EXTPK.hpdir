@@ -2410,7 +2410,7 @@ DIR
     HOME
 
     @ Clear the user keys.
-    { } STOKEYS
+    0 DELKEYS
 
     @ Clear the user alarms.
     0 DELALARM
