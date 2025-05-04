@@ -1011,7 +1011,7 @@ DIR
 
       @ Saves the current system flags and the directory path.
       PUSH
-      -105 SF @ Changes system flag: enable approximate mode.
+      -105 SF @ System flag: enable approximate mode.
 
       CASE
 
@@ -2006,7 +2006,7 @@ DIR
 
     @ Saves the current system flags and the directory path.
     PUSH
-    -105 SF @ Changes system flag: enable approximate mode.
+    -105 SF @ System flag: enable approximate mode.
 
     SWAP UtilArrayListToList XNUM
 
@@ -2062,7 +2062,7 @@ DIR
       y 1582 9999 "start year" UtilValidateRange
 
       UtilPushSystemFlagsApp
-      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
+      -42 SF  @ System flag: date format to DD.MMYYYY.
 
       @ Print the start date.
       d m y UtilDateFromStack UtilDateToStr "D0" çTAG
@@ -2112,7 +2112,7 @@ DIR
       ey 1582 9999 "end year" UtilValidateRange
 
       UtilPushSystemFlagsApp
-      -42 SF  @ Changes system flag: date format to DD.MMYYYY.
+      -42 SF  @ System flag: date format to DD.MMYYYY.
 
       sd sm sy UtilDateFromStack
       ed em ey UtilDateFromStack
@@ -2389,8 +2389,8 @@ DIR
     ´
       @ Saves the current system flags and the directory path.
       PUSH
-      -49 CF  @ Changes system flag: Number Display Format to Standard.
-      -50 CF
+      -51 CF @ System flag: Fraction mark is "." (period).
+      STD    @ System flag: number display format to Standard.
 
       DUP { "" } + SIZE
       "" lbl + + act
@@ -2441,10 +2441,13 @@ DIR
 
     @ Saves the current system flags and the directory path.
     PUSH
-    -17 SF  @ Changes system flag: enable radians mode.
-    -105 SF @ Changes system flag: enable approximate mode.
-    -49 CF  @ Changes system flag: Number Display Format to Standard.
-    -50 CF
+
+    @ Set optimal flags to use in almost all apps of this library.
+    -2 CF   @ System flag: symbolic constants retain their symbolic form
+    -3 CF   @ System flag: functions evaluate to symbolic results.
+    -17 SF  @ System flag: enable radians mode.
+    -105 SF @ System flag: enable approximate mode.
+    STD     @ System flag: number display format to Standard.
   ª
 
   UtilResetSystemFlagsAlgebraic ´
