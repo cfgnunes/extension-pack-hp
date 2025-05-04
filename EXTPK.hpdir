@@ -2320,7 +2320,7 @@ DIR
      d m y
     «
       @ Convert the input start date to DATE format (DD.MMYYYY).
-      d NUM + m 10 < IF THEN "0" + END m + y + OBJ
+      d NUM "" + m 10 < IF THEN "0" + END m + y + OBJ
     »
   »
 
