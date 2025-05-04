@@ -871,6 +871,8 @@ DIR
     @ INFORM Section (End) ----------------------------------------------------
     UtilGuiInform
 
+    UtilPushSystemFlagsApp
+
     @ Save the entered list of equations in a global variable 'EQN'.
     'EQN' STO
 
@@ -901,7 +903,7 @@ DIR
     NEXT
     @ INFORM Section (End) ----------------------------------------------------
     INFORM
-
+    POP
     @ Exit if the user presses "Cancel".
     NOT IF THEN '$N' PURGE '$NAMES' PURGE KILL END
 
