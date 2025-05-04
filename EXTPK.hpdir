@@ -1150,7 +1150,7 @@ DIR
         "Error: No solution with given data!" DOERR
       END
 
-      A B + C + angTotal >
+      A B + C + angTotal 0.001 + >
       A 0 > NOT OR
       B 0 > NOT OR
       C 0 > NOT OR
