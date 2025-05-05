@@ -749,14 +749,14 @@ DIR
       @ Options - Page 1.
       { "EDIT" « 35.1 KEYEVAL » }
       { "VIEW" « DUP SCROLL » }
-      { "ABS" « ABS » }
-      { "ARG" « ARG » }
+      { "RE" « RE » }
+      { "IM" « IM » }
       { "Re/Po" « RECPOL » }
       { "ab/c" « XFRAC » }
       @ Options - Page 2.
+      { "ABS" « ABS » }
+      { "ARG" « ARG » }
       { "CONJ" « CONJ » }
-      { }
-      { }
       { }
       { }
       { "MENU†" « CMENU » }
