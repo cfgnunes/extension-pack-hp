@@ -433,9 +433,9 @@ DIR
 
     "DECLINING BALANCE (DB)"
     {
-      { "Cost:" "Enter asset cost value" }
+      { "Cost:   " "Enter asset cost value" }
       { "Salvage:" "Enter asset salvage value" }
-      { "Life:" "Enter end of asset life" }
+      { "Life:   " "Enter end of asset life" }
     }
     { 1 0 }
     { }
@@ -494,9 +494,9 @@ DIR
 
     "STRAIGHT LINE (SL)"
     {
-      { "Cost:" "Enter asset cost value" }
+      { "Cost:   " "Enter asset cost value" }
       { "Salvage:" "Enter asset salvage value" }
-      { "Life:" "Enter end of asset life" }
+      { "Life:   " "Enter end of asset life" }
     }
     { 1 0 }
     { }
@@ -544,9 +544,9 @@ DIR
 
     "SUM-OF-THE-YEARS DIGITS"
     {
-      { "Cost:" "Enter asset cost value" }
+      { "Cost:   " "Enter asset cost value" }
       { "Salvage:" "Enter asset salvage value" }
-      { "Life:" "Enter end of asset life" }
+      { "Life:   " "Enter end of asset life" }
     }
     { 1 0 }
     { }
