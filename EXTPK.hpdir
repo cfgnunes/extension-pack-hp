@@ -96,7 +96,7 @@ DIR
     AppFinanceDepreciationDB
     AppFinanceDepreciationSL
     AppFinanceDepreciationSOYD
-    AppFinanceEquivalentRate
+    AppFinanceEqRate
     AppFinanceIRR
     AppFinanceNPV
     AppMenuCombinatorics
@@ -228,7 +228,7 @@ DIR
           { }
 
           "Time Value of Money" 30 CHR + { } UtilMenuAddItem
-          "Equivalent Int. Rate" 30 CHR + « AppFinanceEquivalentRate » UtilMenuAddItem
+          "Equivalent Int. Rate" 30 CHR + « AppFinanceEqRate » UtilMenuAddItem
           "Net Present Value" 30 CHR + « AppFinanceNPV » UtilMenuAddItem
           "Int. Rate of Return" 30 CHR + « AppFinanceIRR » UtilMenuAddItem
           "Depreciation methods" 30 CHR + « ChooseFinanceDepr » UtilMenuAddItem
@@ -327,9 +327,10 @@ DIR
 
     "Finance"
     {
-      { "1.Net Present Value" « AppFinanceNPV » }
-      { "2.Int. Rate of Return" « AppFinanceIRR » }
-      { "3.Depreciation methods" « ChooseFinanceDepr » }
+      { "1.Equivalent Int. Rate" « AppFinanceEqRate » }
+      { "2.Net Present Value" « AppFinanceNPV » }
+      { "3.Int. Rate of Return" « AppFinanceIRR » }
+      { "4.Depreciation methods" « ChooseFinanceDepr » }
     }
     UtilGuiChoose
   »
@@ -596,12 +597,12 @@ DIR
     »
   »
 
-  AppFinanceEquivalentRate «
-    @ #NOTE App: AppFinanceEquivalentRate
+  AppFinanceEqRate «
+    @ #NOTE App: AppFinanceEqRate
 
     "EQUIVALENT INTEREST RATE"
     {
-    { "Interest (%):   " "Enter the interest rate" }
+    { "Interest (%):   " "Enter interest rate (%)" }
     { "Compounding:    " "Enter compounding per period"  }
     { "New compounding:" "Enter new compounding per period"  }
     }
