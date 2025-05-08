@@ -676,8 +676,7 @@ DIR
       '$IRR' .5 ROOT
 
       @ Convert the result to percentage.
-      100 * çNUM
-      "IRR" çTAG
+      100 * çNUM "IRR" çTAG
 
       POP
 
@@ -736,8 +735,7 @@ DIR
         +          @ Add to the accumulator.
       NEXT
 
-      çNUM
-      "NPV" çTAG
+      çNUM "NPV" çTAG
 
       POP
     ª
@@ -1252,8 +1250,7 @@ DIR
     ´
       UtilPushSystemFlagsApp
 
-      'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)'
-      çNUM
+      'Ñ(0,x,a^(å-1)*(1-a)^(ﬂ-1)/(GAMMA(å)*GAMMA(ﬂ)/GAMMA(å+ﬂ)),a)' çNUM
       "P(Xâ" x + ")" + çTAG
 
       POP
