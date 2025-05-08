@@ -96,6 +96,7 @@ DIR
     AppFinanceDepreciationDB
     AppFinanceDepreciationSL
     AppFinanceDepreciationSOYD
+    AppFinanceEquivalentRate
     AppFinanceIRR
     AppFinanceNPV
     AppMenuCombinatorics
@@ -227,6 +228,7 @@ DIR
           { }
 
           "Time Value of Money" 30 CHR + { } UtilMenuAddItem
+          "Equivalent Int. Rate" 30 CHR + ´ AppFinanceEquivalentRate ª UtilMenuAddItem
           "Net Present Value" 30 CHR + ´ AppFinanceNPV ª UtilMenuAddItem
           "Int. Rate of Return" 30 CHR + ´ AppFinanceIRR ª UtilMenuAddItem
           "Depreciation methods" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
@@ -589,6 +591,37 @@ DIR
       ª
 
       '$RDV' PURGE
+
+      POP
+    ª
+  ª
+
+  AppFinanceEquivalentRate ´
+    @ #NOTE App: AppFinanceEquivalentRate
+
+    "EQUIVALENT INTEREST RATE"
+    {
+    { "Interest (%):   " "Enter the interest rate" }
+    { "Compounding:    " "Enter compounding per period"  }
+    { "New compounding:" "Enter new compounding per period"  }
+    }
+    { 1 0 }
+    { }
+    'I%YR' VTYPE IF 0 == THEN I%YR ELSE 0 END
+    12
+    1
+    3
+    çLIST
+    UtilGuiInform
+
+    ç r m q
+    ´
+      UtilPushSystemFlagsApp
+
+      'q * ((1+r/(m*100))^(m/q)-1)*100' EVAL
+
+      'I%YR' STO
+      I%YR çNUM 'I%YR' çTAG
 
       POP
     ª
