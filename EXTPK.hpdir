@@ -2081,7 +2081,8 @@ DIR
     }
     { 3 0 }
     { }
-    PUSH -42 SF
+    PUSH
+    -42 SF  @ System flag: date format to DD.MMYYYY.
     DATE
     UtilDateToStack 0 0 0 1 7 çLIST @ Retrieve the current date.
     POP
@@ -2127,7 +2128,8 @@ DIR
     }
     { 3 0 }
     { }
-    PUSH -42 SF
+    PUSH
+    -42 SF                        @ System flag: date format to DD.MMYYYY.
     DATE UtilDateToStack          @ Retrieve the current date.
     DATE 10 DATE+ UtilDateToStack @ Retrieve the current date (+ 10 days).
     POP
@@ -2343,7 +2345,8 @@ DIR
 
     ç dt y
     ´
-      dt y 1000000 / + çNUM
+      dt y 1000000 / +
+      çNUM
     ª
   ª
 
@@ -2353,7 +2356,10 @@ DIR
     ç d m y
     ´
       @ Convert the input start date to DATE format (DD.MMYYYY).
-      d çNUM "" + m 10 < IF THEN "0" + END m + y + OBJç
+      d
+      m 100 / +
+      y 1000000 / +
+      çNUM
     ª
   ª
 
