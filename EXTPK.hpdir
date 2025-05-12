@@ -2081,8 +2081,7 @@ DIR
     }
     { 3 0 }
     { }
-    PUSH
-    -42 SF  @ System flag: date format to DD.MMYYYY.
+    UtilPushSystemFlagsApp
     DATE
     UtilDateToStack 0 0 0 1 7 çLIST @ Retrieve the current date.
     POP
@@ -2096,7 +2095,6 @@ DIR
       y 1582 9999 "start year" UtilValidateRange
 
       UtilPushSystemFlagsApp
-      -42 SF  @ System flag: date format to DD.MMYYYY.
 
       @ Print the start date.
       d m y UtilDateFromStack UtilDateToStr "D0" çTAG
@@ -2128,8 +2126,7 @@ DIR
     }
     { 3 0 }
     { }
-    PUSH
-    -42 SF                        @ System flag: date format to DD.MMYYYY.
+    UtilPushSystemFlagsApp
     DATE UtilDateToStack          @ Retrieve the current date.
     DATE 10 DATE+ UtilDateToStack @ Retrieve the current date (+ 10 days).
     POP
@@ -2147,7 +2144,6 @@ DIR
       ey 1582 9999 "end year" UtilValidateRange
 
       UtilPushSystemFlagsApp
-      -42 SF  @ System flag: date format to DD.MMYYYY.
 
       sd sm sy UtilDateFromStack
       ed em ey UtilDateFromStack
@@ -2368,8 +2364,6 @@ DIR
 
     ç dt
     ´
-      UtilPushSystemFlagsApp
-
       @ Day.
       dt FLOOR çQ
 
@@ -2379,8 +2373,6 @@ DIR
 
       @ Year.
       SWAP FP 10000  * çQ
-
-      POP
     ª
   ª
 
@@ -2485,6 +2477,7 @@ DIR
     -2 CF   @ System flag: symbolic constants retain their symbolic form
     -3 CF   @ System flag: functions evaluate to symbolic results.
     -17 SF  @ System flag: enable radians mode.
+    -42 SF  @ System flag: date format to DD.MMYYYY.
     -105 SF @ System flag: enable approximate mode.
     STD     @ System flag: number display format to Standard.
   ª
