@@ -2037,10 +2037,6 @@ DIR
   AppStatPercentile «
     @#NOTE App: AppStatPercentile
 
-    @ Saves the current system flags and the directory path.
-    PUSH
-    -105 SF @ System flag: enable approximate mode.
-
     SWAP UtilArrayListToList XNUM
 
     @ Inspired on the function "%TILE" from: "HP 50g / 49g+ / 48gII graphing
@@ -2062,8 +2058,6 @@ DIR
     EVAL GET            @ Gets the corresponding number.
 
     + 2 /     @ Calculates the average of the two numbers.
-
-    POP
   »
 
   AppTimeDateAdd «
