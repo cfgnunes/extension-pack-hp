@@ -439,13 +439,14 @@ DIR
       { "Cost:   " "Enter asset cost value" }
       { "Salvage:" "Enter asset salvage value" }
       { "Life:   " "Enter end of asset life" }
+      { "Factor: " "Enter depreciation factor" }
     }
     { 1 0 }
     { }
-    { 10000 1000 4 }
+    { 10000 1000 4 200 }
     UtilGuiInform
 
-    ç SBV SAL L
+    ç SBV SAL L DBF
     ´
       UtilPushSystemFlagsApp
 
@@ -459,8 +460,8 @@ DIR
 
       SBV '$RDV' STO
 
-      @ Calculates the declining balance rate (double declining balance).
-      2 L /
+      @ Calculates the declining balance rate.
+      DBF 100 / L /
 
       ç RATE
       ´
@@ -602,9 +603,9 @@ DIR
 
     "EQUIVALENT INTEREST RATE"
     {
-    { "Interest (%): " "Enter interest rate (%)" }
-    { "Period:       " "Enter the period" }
-    { "New period:   " "Enter the new period" }
+    { "Interest (%):" "Enter interest rate (%)" }
+    { "Period:      " "Enter the period" }
+    { "New period:  " "Enter the new period" }
     }
     { 1 0 }
     { }
