@@ -602,15 +602,15 @@ DIR
 
     "EQUIVALENT INTEREST RATE"
     {
-    { "Interest (%):   " "Enter interest rate (%)" }
-    { "Compounding:    " "Enter compounding per period"  }
-    { "New compounding:" "Enter new compounding per period"  }
+    { "Interest (%): " "Enter interest rate (%)" }
+    { "Period:       " "Enter the period" }
+    { "New period:   " "Enter the new period" }
     }
     { 1 0 }
     { }
     'I%YR' VTYPE IF 0 == THEN I%YR ELSE 0 END
-    12
     1
+    12
     3
     çLIST
     UtilGuiInform
@@ -619,7 +619,7 @@ DIR
     ´
       UtilPushSystemFlagsApp
 
-      'q * ((1+r/(m*100))^(m/q)-1)*100' EVAL
+      '((1+r/100)^(q/m)-1)*100' EVAL
 
       'I%YR' STO
       I%YR çNUM 'I%YR' çTAG
