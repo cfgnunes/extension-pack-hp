@@ -639,14 +639,14 @@ DIR
     "INTERNAL RATE OF RETURN (IRR)"
     @ INFORM 'Field definitions'.
     {
-      { "C:" "Enter cash flow" 3 }
+      { "CFL:" "Enter cash flow" 3 }
     }
     @ INFORM 'Format' (col, tabs).
     { 1 0 }
     @ INFORM 'Default values'.
     { }
     @ INFORM 'Initial values'.
-    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
+    'CFL' VTYPE IF 29 == THEN CFL ELSE [ -20 10 15 ] END
     1
     çLIST
     @ INFORM Section (End) ----------------------------------------------------
@@ -654,10 +654,10 @@ DIR
 
     @ Store inputs in variables to allow re-use and editing by the user.
     DUP
-    'C' STO
+    'CFL' STO
 
     @ Calculates the IRR.
-    ç C
+    ç CFL
     ´
       @ Purge '$IRR' in case it already exists, to allow symbolic computation.
       '$IRR' PURGE
@@ -665,11 +665,11 @@ DIR
       UtilPushSystemFlagsApp
 
       "'"
-      @ Loop: for t = 1 to 'C.size'.
+      @ Loop: for t = 1 to 'CFL.size'.
       1
-      C SIZE OBJç DROP
+      CFL SIZE OBJç DROP
       FOR t
-        "+" + C t GET "/(1+$IRR)^(" + t + "-1)" + +
+        "+" + CFL t GET "/(1+$IRR)^(" + t + "-1)" + +
       NEXT
       "=0'" + STRç
 
@@ -678,7 +678,9 @@ DIR
       '$IRR' .5 ROOT
 
       @ Convert the result to percentage.
-      100 * çNUM "IRR" çTAG
+      100 * çNUM
+      'I%YR' STO
+      I%YR "IRR" çTAG
 
       POP
 
@@ -696,16 +698,16 @@ DIR
     "NET PRESENT VALUE (NPV)"
     @ INFORM 'Field definitions'.
     {
-      { "C:" "Enter cash flow" 3 }
-      { "r:" "Enter interest rate (%)" 0 }
+      { "CFL:" "Enter cash flow" 3 }
+      { "I%: " "Enter interest rate (%)" 0 }
     }
     @ INFORM 'Format' (col, tabs).
     { 1 0 }
     @ INFORM 'Default values'.
     { }
     @ INFORM 'Initial values'.
-    'C' VTYPE IF 29 == THEN C ELSE [ -20 10 15 ] END
-    'r' VTYPE IF 0 == THEN r ELSE 5 END
+    'CFL' VTYPE IF 29 == THEN CFL ELSE [ -20 10 15 ] END
+    'I%YR' VTYPE IF 0 == THEN I%YR ELSE 5 END
     2
     çLIST
     @ INFORM Section (End) ----------------------------------------------------
@@ -713,31 +715,33 @@ DIR
 
     @ Store inputs in variables to allow re-use and editing by the user.
     2 DUPN
-    'r' STO
-    'C' STO
+    'I%YR' STO
+    'CFL' STO
 
     @ Convert percentage rate to decimal
     100 /
 
     @ Calculates the NPV.
-    ç C r
+    ç CFL r
     ´
       UtilPushSystemFlagsApp
 
       @ Initialize the accumulator in the stack.
       0
 
-      @ Loop: for t = 1 to 'C.size'.
+      @ Loop: for t = 1 to 'CFL.size'.
       1
-      C SIZE OBJç DROP
+      CFL SIZE OBJç DROP
       FOR t
-        C t GET    @ Get value of C[t].
+        CFL t GET    @ Get value of CFL[t].
         1 r +      @ Calculates (1+r).
-        t 1 - ^ /  @ Calculates C[t] / (1+r)^(t-1).
+        t 1 - ^ /  @ Calculates CFL[t] / (1+r)^(t-1).
         +          @ Add to the accumulator.
       NEXT
 
-      çNUM "NPV" çTAG
+      çNUM
+      'PV' STO
+      PV  "NPV" çTAG
 
       POP
     ª
