@@ -733,7 +733,7 @@ DIR
       1
       CFL SIZE OBJç DROP
       FOR t
-        CFL t GET    @ Get value of CFL[t].
+        CFL t GET  @ Get value of CFL[t].
         1 r +      @ Calculates (1+r).
         t 1 - ^ /  @ Calculates CFL[t] / (1+r)^(t-1).
         +          @ Add to the accumulator.
@@ -741,7 +741,7 @@ DIR
 
       çNUM
       'PV' STO
-      PV  "NPV" çTAG
+      PV "NPV" çTAG
 
       POP
     ª
