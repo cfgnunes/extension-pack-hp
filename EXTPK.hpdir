@@ -83,6 +83,7 @@ DIR
     @ Choose menus.
     ChooseMainMenu
     ChooseCustomMenus
+    ChooseFinanceCashFlow
     ChooseFinanceDepr
     ChooseFinanceMenu
     ChooseStatDist
@@ -98,6 +99,7 @@ DIR
     AppFinanceDepreciationSOYD
     AppFinanceEqRate
     AppFinanceIRR
+    AppFinanceNFV
     AppFinanceNPV
     AppMenuCombinatorics
     AppMenuComplex
@@ -228,10 +230,9 @@ DIR
           { }
 
           "Time Value of Money" 30 CHR + { } UtilMenuAddItem
+          "Cash Flow" 30 CHR + ´ ChooseFinanceCashFlow ª UtilMenuAddItem
+          "Depreciation" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
           "Equivalent Int. Rate" 30 CHR + ´ AppFinanceEqRate ª UtilMenuAddItem
-          "Net Present Value" 30 CHR + ´ AppFinanceNPV ª UtilMenuAddItem
-          "Int. Rate of Return" 30 CHR + ´ AppFinanceIRR ª UtilMenuAddItem
-          "Depreciation methods" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
 
           1
           CHOOSE
@@ -310,10 +311,22 @@ DIR
     UtilGuiChoose
   ª
 
+  ChooseFinanceCashFlow ´
+    @ #NOTE Choose: ChooseFinanceCashFlow
+
+    "Cash Flow"
+    {
+      { "1.Int. Rate of Return" ´ AppFinanceIRR ª }
+      { "2.Net Present Value" ´ AppFinanceNPV ª }
+      { "3.Net Future Value" ´ AppFinanceNFV ª }
+    }
+    UtilGuiChoose
+  ª
+
   ChooseFinanceDepr ´
     @ #NOTE Choose: ChooseFinanceDepr
 
-    "Depreciation methods"
+    "Depreciation"
     {
       { "1.Straight line" ´ AppFinanceDepreciationSL ª }
       { "2.Sum-of-years digits" ´ AppFinanceDepreciationSOYD ª }
@@ -328,9 +341,8 @@ DIR
     "Finance"
     {
       { "1.Equivalent Int. Rate" ´ AppFinanceEqRate ª }
-      { "2.Net Present Value" ´ AppFinanceNPV ª }
-      { "3.Int. Rate of Return" ´ AppFinanceIRR ª }
-      { "4.Depreciation methods" ´ ChooseFinanceDepr ª }
+      { "2.Cash Flow" ´ ChooseFinanceCashFlow ª }
+      { "3.Depreciation" ´ ChooseFinanceDepr ª }
     }
     UtilGuiChoose
   ª
@@ -688,6 +700,70 @@ DIR
     ª
   ª
 
+  AppFinanceNFV ´
+    @ #NOTE App: AppFinanceNFV
+    @ This function calculates the Net Future Value (NFV) of a cash flow
+    @ series.
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "NET FUTURE VALUE (NFV)"
+    @ INFORM 'Field definitions'.
+    {
+      { "CFL:" "Enter cash flow" 3 }
+      { "I%: " "Enter interest rate (%)" 0 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'CFL' VTYPE IF 29 == THEN CFL ELSE [ -20 10 15 ] END
+    'I%YR' VTYPE IF 0 == THEN I%YR ELSE 5 END
+    2
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store inputs in variables to allow re-use and editing by the user.
+    2 DUPN
+    'I%YR' STO
+    'CFL' STO
+
+    @ Convert percentage rate to decimal
+    100 /
+
+    @ Calculates the NPV.
+    ç CFL r
+    ´
+      UtilPushSystemFlagsApp
+
+      @ Initialize the accumulator in the stack.
+      0
+
+      @ Loop: for t = 1 to 'CFL.size'.
+      1
+      CFL SIZE OBJç DROP
+      FOR t
+        CFL t GET  @ Get value of CFL[t].
+        1 r +      @ Calculates (1+r).
+        t 1 - ^ /  @ Calculates CFL[t] / (1+r)^(t-1).
+        +          @ Add to the accumulator.
+      NEXT
+
+      @ Calculates the NFV.
+      1 r +
+      CFL SIZE OBJç DROP 1 - ^ *
+
+      çNUM
+
+      'FV' STO
+      FV "NFV" çTAG
+
+      POP
+    ª
+  ª
+
   AppFinanceNPV ´
     @ #NOTE App: AppFinanceNPV
     @ This function calculates the Net Present Value (NPV) of a cash flow
@@ -842,9 +918,9 @@ DIR
       @ Options - Page 1.
       { "EDIT" ´ 35.1 KEYEVAL ª }
       { "VIEW" ´ DUP SCROLL ª }
-      %T
-      %CH
-      %
+      { "%T" ´ %T çNUM ª }
+      { "%CH" ´ %CH çNUM ª }
+      { "%" ´ % çNUM ª }
       { "ab/c" ´ XFRAC ª }
       @ Options - Page 2.
       { }

@@ -19,9 +19,11 @@ Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) w
 
 Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
 
-- **Net Present Value (NPV)**
-- **Internal Rate of Return (IRR)**
-- **Depreciation methods**
+- **Cash Flow**
+    - Internal Rate of Return (IRR)
+    - Net Present Value (NPV)
+    - Net Future Value (NFV)
+- **Depreciation**
     - Straight line (SL)
     - Sum-of-the-years digits (SOYD)
     - Declining balance (DB)
