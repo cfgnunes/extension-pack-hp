@@ -101,6 +101,7 @@ DIR
     AppFinanceIRR
     AppFinanceNFV
     AppFinanceNPV
+    AppFinanceNUS
     AppMenuCombinatorics
     AppMenuComplex
     AppMenuEquations
@@ -319,6 +320,7 @@ DIR
       { "1.Int. Rate of Return" ´ AppFinanceIRR ª }
       { "2.Net Present Value" ´ AppFinanceNPV ª }
       { "3.Net Future Value" ´ AppFinanceNFV ª }
+      { "4.Net Uniform Series" ´ AppFinanceNUS ª }
     }
     UtilGuiChoose
   ª
@@ -818,6 +820,70 @@ DIR
       çNUM
       'PV' STO
       PV "NPV" çTAG
+
+      POP
+    ª
+  ª
+
+  AppFinanceNUS ´
+    @ #NOTE App: AppFinanceNUS
+    @ This function calculates the Net Uniform Series (NUS) of a cash flow
+    @ series.
+
+    @ INFORM Section (Begin) --------------------------------------------------
+    @ INFORM 'Title'.
+    "NET UNIFORM SERIES (NUS)"
+    @ INFORM 'Field definitions'.
+    {
+      { "CFL:" "Enter cash flow" 3 }
+      { "I%: " "Enter interest rate (%)" 0 }
+    }
+    @ INFORM 'Format' (col, tabs).
+    { 1 0 }
+    @ INFORM 'Default values'.
+    { }
+    @ INFORM 'Initial values'.
+    'CFL' VTYPE IF 29 == THEN CFL ELSE [ -20 10 15 ] END
+    'I%YR' VTYPE IF 0 == THEN I%YR ELSE 5 END
+    2
+    çLIST
+    @ INFORM Section (End) ----------------------------------------------------
+    UtilGuiInform
+
+    @ Store inputs in variables to allow re-use and editing by the user.
+    2 DUPN
+    'I%YR' STO
+    'CFL' STO
+
+    @ Convert percentage rate to decimal
+    100 /
+
+    @ Calculates the NPV.
+    ç CFL r
+    ´
+      UtilPushSystemFlagsApp
+
+      @ Initialize the accumulator in the stack.
+      0
+
+      @ Loop: for t = 1 to 'CFL.size'.
+      1
+      CFL SIZE OBJç DROP
+      FOR t
+        CFL t GET  @ Get value of CFL[t].
+        1 r +      @ Calculates (1+r).
+        t 1 - ^ /  @ Calculates CFL[t] / (1+r)^(t-1).
+        +          @ Add to the accumulator.
+      NEXT
+
+      @ Calculates the NUS.
+      r *
+      1 1 r +
+      0 CFL SIZE OBJç DROP 1 - - ^ - /
+
+      çNUM
+      'PMT' STO
+      PMT "NUS" çTAG
 
       POP
     ª

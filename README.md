@@ -23,6 +23,7 @@ Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
     - Internal Rate of Return (IRR)
     - Net Present Value (NPV)
     - Net Future Value (NFV)
+    - Net Uniform Series (NUS)
 - **Depreciation**
     - Straight line (SL)
     - Sum-of-the-years digits (SOYD)
