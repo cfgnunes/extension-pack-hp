@@ -4,11 +4,13 @@ Extension Pack HP is a library developed in User RPL for HP 49 series calculator
 
 The library adds new features to the Finance, Time, and Statistics menus, including NPV, IRR, depreciation methods, probability distributions, and date operations. It also provides system tools, custom menus, and global commands for easier access and management.
 
-![screenshot](./screenshot.png)
+![screenshot](./docs/main.png)
 
 ## Features
 
 ### Numeric Solver Menu
+
+![screenshot](./docs/solver.png)
 
 Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) with:
 
@@ -16,6 +18,8 @@ Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) w
 - **Triangle solver**
 
 ### Finance Menu
+
+![screenshot](./docs/finance.png)
 
 Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
 
@@ -31,12 +35,16 @@ Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
 
 ### Time Menu
 
+![screenshot](./docs/time.png)
+
 Adds new applications to the Time menu (keys: `Right Shift` → `9`) with:
 
 - **Date add/subtract**
 - **Date difference**
 
 ### Statistics Menu
+
+![screenshot](./docs/statistics.png)
 
 Adds new applications to the Statistics menu (keys: `Right Shift` → `5`) with:
 - **Probability Distributions**
@@ -70,6 +78,8 @@ Adds new applications to the Statistics menu (keys: `Right Shift` → `5`) with:
 - **DSTAT**
 
 ### APPS Menu
+
+![screenshot](./docs/apps.png)
 
 Adds new features under the APPS menu (key: `APPS`) with:
 
