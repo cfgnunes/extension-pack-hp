@@ -13,7 +13,7 @@
 @ -----------------------------------------------------------------------------
 @ How to Compile and Test the Library
 @ -----------------------------------------------------------------------------
-@ 1. Enable RPL Mode.
+@ 1. Enable RPN Mode.
 @ 2. Attach the development library using the command: 256 ATTACH
 @ 3. Place this directory in the calculator.
 @ 4. Change to this new directory.
@@ -56,7 +56,7 @@ DIR
   @ five characters will be used for the name that is shown in the library
   @ menu.
   @ # NOTE Variable: $TITLE
-  $TITLE "Extension Pack HP v3.5"
+  $TITLE "Extension Pack HP v3.6"
 
   @ The $VISIBLE variable contains a list of all the variables in the current
   @ directory that you want to have visible in the library menu.
@@ -68,6 +68,8 @@ DIR
     XFRAC
     NSOLVE
     DSTAT
+    ANGLV
+    UNITV
     RECPOL
     CMENU
   }
@@ -166,6 +168,8 @@ DIR
     UtilTriangleLawOfSinesSide
     UtilValidateLessEqual
     UtilValidateRange
+    UtilVectorAngle
+    UtilVectorUnit
   }
 
   @ The $EXTPRG variable contains the name of the extension program of the
@@ -1020,8 +1024,8 @@ DIR
       { "EGV" ´ EGV ª }
       { "RANK" ´ RANK ª }
       { "TRACE" ´ TRACE ª }
-      { }
-      { }
+      { "ANGLV" ´ ANGLV ª }
+      { "UNITV" ´ UNITV ª }
       { "MENUÜ" ´ CMENU ª }
     }
 
@@ -2711,6 +2715,28 @@ DIR
     ª
   ª
 
+  UtilVectorAngle ´
+    @ #NOTE Function: UtilVectorAngle
+
+    ç A B
+    ´
+      A B DOT
+      A ABS B ABS * /
+      ACOS
+      çNUM
+    ª
+  ª
+
+  UtilVectorUnit ´
+    @ #NOTE Function: UtilVectorAngle
+
+    ç A
+    ´
+      A A ABS /
+      çNUM
+    ª
+  ª
+
   @ ---------------------------------------------------------------------------
   @ #XXX Visible functions
   @ These functions are visible in the library menu.
@@ -2756,6 +2782,18 @@ DIR
     @ #NOTE Function (Visible): DSTAT
 
     AppStatDescriptiveStatistics
+  ª
+
+  UNITV ´
+    @ #NOTE Function (Visible): UNITV
+
+    UtilVectorUnit
+  ª
+
+  ANGLV ´
+    @ #NOTE Function (Visible): ANGLV
+
+    UtilVectorAngle
   ª
 
   RECPOL ´
