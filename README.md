@@ -114,6 +114,21 @@ Input:
  - Argument 1: list, array or matrix
 ```
 
+* `ANGLV` - **Angle Between Vectors**: Computes the angle between two vectors using the dot product formula.
+
+```
+Input:
+ - Argument 1: array A
+ - Argument 2: array B
+```
+
+* `UNITV` - **Unit Vector Generator**: Returns the unit (normalized) vector in the direction of a given vector.
+
+```
+Input:
+ - Argument 1: array or matrix
+```
+
 - `RECPOL` - **Rectangular/Polar Toggle Command**: Switches between Rectangular and Polar coordinate modes. If the calculator is currently set to Rectangular mode, it will switch to Cylindrical (Polar), and vice versa. Useful for quickly changing the coordinate system.
 
 ## Contributing
