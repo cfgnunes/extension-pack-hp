@@ -32,6 +32,7 @@ Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
     - Straight line (SL)
     - Sum-of-the-years digits (SOYD)
     - Declining balance (DB)
+- **Equivalent Interest Rate**
 
 ### Time Menu
 
