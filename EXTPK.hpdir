@@ -802,7 +802,7 @@ DIR
       { }
       { }
       { }
-      { }
+      { "EXTPK" « EXTPK » }
       { "MENU†" « CMENU » }
     }
 
@@ -830,7 +830,7 @@ DIR
       { "ABS" « ABS » }
       { "ARG" « ARG » }
       { "CONJ" « CONJ » }
-      { "RREF" « RREF » }
+      { "EXTPK" « EXTPK » }
       { "MENU†" « CMENU » }
     }
 
@@ -858,7 +858,7 @@ DIR
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
       NSOLVE
-      ISOL
+      { "EXTPK" « EXTPK » }
       { "MENU†" « CMENU » }
     }
 
@@ -886,7 +886,7 @@ DIR
       { }
       { }
       { }
-      { }
+      { "EXTPK" « EXTPK » }
       { "MENU†" « CMENU » }
     }
 
@@ -913,8 +913,8 @@ DIR
       { "ab/c" « XFRAC » }
       { "EGV" « EGV » }
       { "RANK" « RANK » }
-      { "ANGLV" « ANGLV » }
       { "UNITV" « UNITV » }
+      { "EXTPK" « EXTPK » }
       { "MENU†" « CMENU » }
     }
 
