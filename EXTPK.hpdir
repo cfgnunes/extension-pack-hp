@@ -79,9 +79,6 @@ DIR
   @ generally subprograms of your application.
   @ # NOTE Variable: $HIDDEN
   $HIDDEN {
-    @ Special variables.
-    ExtProgram
-
     @ Choose menus.
     ChooseMainMenu
     ChooseCustomMenus
@@ -156,7 +153,6 @@ DIR
     UtilDateToStr
     UtilGuiChoose
     UtilGuiInform
-    UtilMenuAddItem
     UtilPurgeHomeFiles
     UtilPushSystemFlagsApp
     UtilResetSystemFlagsAlgebraic
@@ -171,113 +167,6 @@ DIR
     UtilVectorAngle
     UtilVectorUnit
   }
-
-  @ The $EXTPRG variable contains the name of the extension program of the
-  @ library. This program must be either a visible or an hidden object of the
-  @ library. This can be used to customize built-in menus with your own
-  @ functions, as if they were part of the system. The calculator does not
-  @ provide every possible function in every area, but they let you customize
-  @ the built in menu in order to add your functions as if they were built in.
-  @ # NOTE Variable: $EXTPRG
-  $EXTPRG 'ExtProgram'
-
-  ExtProgram ´
-    @ #NOTE Function: ExtProgram
-    @ This is the Extension Program of the library.
-
-    @ The Extension Program is executed automatically
-    @ each time a system menu (e.g., statistics, finance) is displayed.
-    @
-    @ Example:
-    @ When you call the "APPS menu", the calculator put on the stack the list
-    @ of this menu:
-    @ {
-    @   { "1. Plot functions..." ´ Action ª }
-    @   { "2. I/O functions..." ´ Action ª }
-    @    ...
-    @ } 0
-    @ The last number 0 is the "message number".
-    @
-    @ Each "message number" has a specific meaning as described below:
-    @ 0 APPS menu
-    @ 1 Main Statistics menu
-    @ 2 Hypothesis statistics menu
-    @ 3 Confidence interval statistics menu
-    @ 4 Finance menu
-    @ 5 Numeric solver menu
-    @ 6 Time menu
-
-    DUP R~SB
-
-    ç opt
-    ´
-      CASE
-
-        @ Add a new menu entry if the "APPS menu" is active.
-        opt 0 == THEN
-          SWAP
-          "Custom menus" ´ ChooseCustomMenus ª UtilMenuAddItem
-          "System tools" ´ ChooseSystemTools ª UtilMenuAddItem
-          SWAP
-        END
-
-        @ Add a new menu entry if the "Main Statistics menu" is active.
-        opt 1 == THEN
-          SWAP
-          "Prob. distributions" 30 CHR + ´ ChooseStatDist ª UtilMenuAddItem
-          "DSTAT" ´ DSTAT ª UtilMenuAddItem
-          SWAP
-        END
-
-        @ Add Finance functions if "Finance menu" is active.
-        opt 4 == THEN
-          ""
-          { }
-
-          "Time Value of Money" 30 CHR + { } UtilMenuAddItem
-          "Cash Flow" 30 CHR + ´ ChooseFinanceCashFlow ª UtilMenuAddItem
-          "Depreciation" 30 CHR + ´ ChooseFinanceDepr ª UtilMenuAddItem
-          "Equivalent Int. Rate" 30 CHR + ´ AppFinanceEqRate ª UtilMenuAddItem
-
-          1
-          CHOOSE
-
-          @ Exit if the user presses "Cancel".
-          NOT IF THEN 2 DROPN KILL END
-
-          DUP
-          TYPE 5 == IF THEN
-            @ If is selected "1.Time Value of Money",
-            @ clear temp data on the stack and continue.
-            DROP
-          ELSE
-            @ Otherwise, evaluate the selected program.
-            3 ROLLD 2 DROPN
-            EVAL
-            KILL
-          END
-
-        END
-
-        @ Add a new menu entry if the "Numeric solver menu" is active.
-        opt 5 == THEN
-          SWAP
-          "Solve nonlinear sys" 30 CHR + ´ AppSolveNLSystem ª UtilMenuAddItem
-          "Triangle solver" 30 CHR + ´ AppSolveTriangle ª UtilMenuAddItem
-          SWAP
-        END
-
-        @ Add a new menu entry if the "Time menu" is active.
-        opt 6 == THEN
-          SWAP
-          "Date add/subtract" 30 CHR + ´ AppTimeDateAdd ª UtilMenuAddItem
-          "Date difference" 30 CHR + ´ AppTimeDateDifference ª UtilMenuAddItem
-          SWAP
-        END
-
-      END
-    ª
-  ª
 
   @ ---------------------------------------------------------------------------
   @ #XXX Choose menus
@@ -2556,24 +2445,6 @@ DIR
 
     @ Extract the values from the list.
     EVAL
-  ª
-
-  UtilMenuAddItem ´
-    @ #NOTE Function: UtilMenuAddItem
-
-    ç lbl act
-    ´
-      @ Saves the current system flags and the directory path.
-      PUSH
-      -51 CF @ System flag: Fraction mark is "." (period).
-      STD    @ System flag: number display format to Standard.
-
-      DUP { "" } + SIZE
-      "" lbl + + act
-      2 çLIST 1 çLIST +
-
-      POP
-    ª
   ª
 
   UtilPurgeHomeFiles ´
