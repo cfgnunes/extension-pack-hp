@@ -106,6 +106,12 @@ Adds new global commands, allowing access from anywhere in the calculator:
 
 - `RSRPN` - **Factory Reset Command (RPN mode)**: Reinitializes the calculator by resetting system flags for optimal use in RPN (Reverse Polish Notation) mode, clears the stack, removes all files and directories from the HOME directory (excluding program files), and restores the default contents of the CASDIR directory. Objects stored in IRAM, ERAM, or FLASH memory remain unaffected.
 
+- `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
+```
+Input:
+ - Argument 1: list, array or matrix
+```
+
 - `XFRAC` - **Fraction Conversion Tool**: Converts numbers between decimal and rational (quotient) form, functioning similarly to the `ab/c` key on other calculators.
 ```
 Input:
@@ -117,12 +123,6 @@ Input:
 Input:
  - Argument 1: 'symb' or «program»
  - Argument 2: guess
-```
-
-- `DSTAT` - **Descriptive Statistics Command**: Computes key descriptive statistics (such as mean, median, standard deviation, and more) for a given list or array.
-```
-Input:
- - Argument 1: list, array or matrix
 ```
 
 * `ANGLV` - **Angle Between Vectors**: Computes the angle between two vectors using the dot product formula.
