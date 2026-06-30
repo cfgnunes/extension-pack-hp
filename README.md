@@ -2,99 +2,68 @@
 
 Extension Pack HP is a library developed in User RPL for HP 49 series calculators, including the HP 50g, HP 49g+, HP 49g, and HP 48GII. It brings features commonly found in other calculators, such as the HP 12c and modern Casio calculators, to the HP 49 series, helping to fill functional gaps left by the original firmware.
 
-The library adds new features to the Finance, Time, and Statistics menus, including NPV, IRR, depreciation methods, probability distributions, and date operations. It also provides system tools, custom menus, and global commands for easier access and management.
-
 ![screenshot](./docs/main.png)
 
-## Features
+## Menus
 
-### Numeric Solver Menu
-
-![screenshot](./docs/solver.png)
-
-Adds new applications to the Numeric Solver menu (keys: `Right Shift` → `7`) with:
-
-- **Solve nonlinear system**
-- **Triangle solver**
-
-### Finance Menu
-
-![screenshot](./docs/finance.png)
-
-Adds new applications to the Finance menu (keys: `Left Shift` → `9`) with:
-
-- **Cash Flow**
+- Solve nonlinear system
+- Triangle solver
+- Finance
+  - Equivalent Interest Rate
+  - Cash Flow
     - Internal Rate of Return (IRR)
     - Net Present Value (NPV)
     - Net Future Value (NFV)
     - Net Uniform Series (NUS)
-- **Depreciation**
+  - Depreciation
     - Straight line (SL)
     - Sum-of-the-years digits (SOYD)
     - Declining balance (DB)
-- **Equivalent Interest Rate**
-
-### Time Menu
-
-![screenshot](./docs/time.png)
-
-Adds new applications to the Time menu (keys: `Right Shift` → `9`) with:
-
-- **Date add/subtract**
-- **Date difference**
-
-### Statistics Menu
-
-![screenshot](./docs/statistics.png)
-
-Adds new applications to the Statistics menu (keys: `Right Shift` → `5`) with:
-- **Probability Distributions**
-    - Discrete: Binomial
-    - Discrete: Poisson
-    - Discrete: Bernoulli
-    - Discrete: Uniform
-    - Discrete: Neg. Binomial
-    - Discrete: Geometric
-    - Discrete: Hipergeometric
-    - Continuous: Normal
-    - Continuous: T-Student
-    - Continuous: Chi² (Pearson)
-    - Continuous: Exponential
-    - Continuous: Uniform
-    - Continuous: Gamma
-    - Continuous: Beta
-    - Continuous: Weibull
-    - Continuous: Cauchy-Lorentz
-    - Continuous: F-Distribution
-    - Inverse: Binomial
-    - Inverse: Poisson
-    - Inverse: Normal
-    - Inverse: T-Student
-    - Inverse: Chi² (Pearson)
-    - Inverse: Exponential
-    - Inverse: Uniform (continuous)
-    - Inverse: Weibull
-    - Inverse: Cauchy-Lorentz
-    - Inverse: F-Distribution
-- **DSTAT**
-
-### APPS Menu
-
-![screenshot](./docs/apps.png)
-
-Adds new features under the APPS menu (key: `APPS`) with:
-
-- **Custom menus**
-    - Equations
-    - Matrix
-    - Combinatorics
-    - Finance
-    - Complex
-- **System tools**
-    - Reset system flags
-    - Purge all HOME files
-    - Factory reset (Algebraic mode)
-    - Factory reset (RPN mode)
+- Time
+  - Date add/subtract
+  - Date difference
+- Probability Distributions
+  - Discrete
+    - Binomial
+    - Poisson
+    - Bernoulli
+    - Uniform
+    - Neg. Binomial
+    - Geometric
+    - Hipergeometric
+  - Continuous
+    - Normal
+    - T-Student
+    - Chi² (Pearson)
+    - Exponential
+    - Uniform
+    - Gamma
+    - Beta
+    - Weibull
+    - Cauchy-Lorentz
+    - F-Distribution
+  - Inverse
+    - Binomial
+    - Poisson
+    - Normal
+    - T-Student
+    - Chi² (Pearson)
+    - Exponential
+    - Uniform (continuous)
+    - Weibull
+    - Cauchy-Lorentz
+    - F-Distribution
+- Custom menus
+  - Equations
+  - Matrix
+  - Combinatorics
+  - Finance
+  - Complex
+- System tools
+  - Reset system flags
+  - Purge all HOME files
+  - Factory reset (Algebraic mode)
+  - Factory reset (RPN mode)
 
 ### Other commands
 
