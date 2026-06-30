@@ -796,9 +796,9 @@ DIR
       !
       COMB
       PERM
-      { "ab/c" « XFRAC » }
+      { "CLEAR" « CLEAR » }
       @ Options - Page 2.
-      { }
+      { "ab/c" « XFRAC » }
       { }
       { }
       { }
@@ -824,13 +824,13 @@ DIR
       { "RE" « RE » }
       { "IM" « IM » }
       { "Re/Po" « RECPOL » }
-      { "ab/c" « XFRAC » }
+      { "CLEAR" « CLEAR » }
       @ Options - Page 2.
+      { "ab/c" « XFRAC » }
       { "ABS" « ABS » }
       { "ARG" « ARG » }
       { "CONJ" « CONJ » }
       { "RREF" « RREF » }
-      { }
       { "MENU†" « CMENU » }
     }
 
@@ -852,13 +852,13 @@ DIR
       { "PLOT" « PLOT » }
       { "SIMPL" « SIMPLIFY » }
       { "FACTO" « FACTOR » }
-      { "ab/c" « XFRAC » }
+      { "CLEAR" « CLEAR » }
       @ Options - Page 2.
+      { "ab/c" « XFRAC » }
       { "PARTF" « PARTFRAC » }
       { "SOLVE" « SOLVEVX » }
-      { "NSOLV" NSOLVE }
-      { "ISOL" ISOL }
-      { }
+      NSOLVE
+      ISOL
       { "MENU†" « CMENU » }
     }
 
@@ -880,9 +880,9 @@ DIR
       { "%T" « %T NUM » }
       { "%CH" « %CH NUM » }
       { "%" « % NUM » }
-      { "ab/c" « XFRAC » }
+      { "CLEAR" « CLEAR » }
       @ Options - Page 2.
-      { }
+      { "ab/c" « XFRAC » }
       { }
       { }
       { }
@@ -908,11 +908,11 @@ DIR
       { "TRAN" « TRAN » }
       { "DET" « DET » }
       { "RREF" « RREF » }
-      { "ab/c" « XFRAC » }
+      { "CLEAR" « CLEAR » }
       @ Options - Page 2.
+      { "ab/c" « XFRAC » }
       { "EGV" « EGV » }
       { "RANK" « RANK » }
-      { "TRACE" « TRACE » }
       { "ANGLV" « ANGLV » }
       { "UNITV" « UNITV » }
       { "MENU†" « CMENU » }
